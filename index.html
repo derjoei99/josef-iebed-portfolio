@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Josef Iebed — Portfolio</title>
+<style>
+  :root{
+    --bg:#0f172a; --bg2:#111827; --card:#1e293b; --accent:#38bdf8; --accent2:#a78bfa;
+    --text:#e2e8f0; --muted:#94a3b8; --radius:16px; --danger:#f87171; --ok:#4ade80;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family:'Segoe UI', system-ui, -apple-system, sans-serif;
+    background:linear-gradient(160deg,var(--bg) 0%, var(--bg2) 100%);
+    color:var(--text); min-height:100vh; display:flex;
+  }
+  .sidebar{
+    width:230px; background:rgba(15,23,42,0.9); backdrop-filter:blur(10px);
+    border-right:1px solid rgba(148,163,184,0.15); padding:28px 18px;
+    display:flex; flex-direction:column; position:fixed; top:0; left:0; bottom:0; z-index:10;
+  }
+  .brand{font-size:1.15rem; font-weight:700; letter-spacing:.5px; margin-bottom:6px;}
+  .brand span{color:var(--accent);}
+  .brand-sub{font-size:.78rem; color:var(--muted); margin-bottom:22px;}
+  .lang-btn{
+    background:rgba(167,139,250,0.12); border:1px solid rgba(167,139,250,0.3); color:var(--accent2);
+    padding:8px 12px; border-radius:10px; font-size:.8rem; cursor:pointer; font-weight:600; margin-bottom:18px;
+  }
+  nav{display:flex; flex-direction:column; gap:6px; flex:1;}
+  .nav-btn{
+    background:none; border:none; color:var(--muted); text-align:left; padding:11px 14px;
+    border-radius:10px; font-size:.92rem; cursor:pointer; transition:.2s; display:flex; align-items:center; gap:10px;
+  }
+  .nav-btn:hover{background:rgba(56,189,248,0.08); color:var(--text);}
+  .nav-btn.active{background:linear-gradient(135deg, rgba(56,189,248,0.18), rgba(167,139,250,0.14)); color:var(--accent); font-weight:600;}
+  .sidebar-footer{border-top:1px solid rgba(148,163,184,0.15); padding-top:14px; display:flex; flex-direction:column; gap:8px;}
+  .login-btn{
+    background:rgba(56,189,248,0.12); border:1px solid rgba(56,189,248,0.3); color:var(--accent);
+    padding:9px 12px; border-radius:10px; font-size:.82rem; cursor:pointer; font-weight:600;
+  }
+  .login-status{font-size:.72rem; color:var(--muted);}
+  main{margin-left:230px; flex:1; padding:48px 56px; max-width:980px;}
+  .page{display:none; animation:fadeIn .35s ease;}
+  .page.active{display:block;}
+  @keyframes fadeIn{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);}}
+  h1{font-size:2rem; margin-bottom:6px;}
+  h2.page-title{font-size:1.6rem; margin-bottom:26px; border-bottom:1px solid rgba(148,163,184,0.2); padding-bottom:12px;}
+  .lead{color:var(--muted); font-size:1.02rem; line-height:1.6; margin-bottom:18px;}
+  .contact-row{display:flex; flex-wrap:wrap; gap:14px; margin-top:18px;}
+  .chip{background:var(--card); padding:8px 14px; border-radius:999px; font-size:.85rem; border:1px solid rgba(148,163,184,0.15);}
+  .chip a{color:var(--accent); text-decoration:none;}
+  .card{background:var(--card); border-radius:var(--radius); padding:22px 24px; margin-bottom:18px; border:1px solid rgba(148,163,184,0.1); box-shadow:0 4px 18px rgba(0,0,0,0.25); position:relative;}
+  .card h3{font-size:1.08rem; margin-bottom:2px;}
+  .card .meta{color:var(--accent2); font-size:.85rem; margin-bottom:10px; font-weight:500;}
+  .card ul{margin-left:18px; color:var(--muted); font-size:.92rem; line-height:1.55;}
+  .card ul li{margin-bottom:4px;}
+  .badges{display:flex; flex-wrap:wrap; gap:10px; margin-top:8px;}
+  .badge{background:rgba(56,189,248,0.1); color:var(--accent); padding:7px 14px; border-radius:10px; font-size:.85rem; font-weight:500; border:1px solid rgba(56,189,248,0.25);}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  @media (max-width:800px){
+    .sidebar{width:70px; padding:20px 8px;}
+    .brand, .brand-sub, .nav-btn span.label, .login-status, .lang-btn span.label{display:none;}
+    main{margin-left:70px; padding:32px 20px;}
+    .grid2{grid-template-columns:1fr;}
+  }
+
+  body.edit-mode [data-editable]{
+    outline:1.5px dashed rgba(56,189,248,0.5); border-radius:6px; padding:2px 4px;
+    cursor:text; transition:.15s;
+  }
+  body.edit-mode [data-editable]:hover{outline-color:var(--accent); background:rgba(56,189,248,0.06);}
+  body.edit-mode [data-editable]:focus{outline:1.5px solid var(--accent); background:rgba(56,189,248,0.1);}
+  .edit-toolbar{
+    position:fixed; bottom:0; left:230px; right:0; background:rgba(15,23,42,0.97);
+    border-top:1px solid rgba(148,163,184,0.2); padding:12px 24px; display:none;
+    gap:10px; align-items:center; z-index:20; backdrop-filter:blur(10px); flex-wrap:wrap;
+  }
+  body.edit-mode .edit-toolbar{display:flex;}
+  @media (max-width:800px){ .edit-toolbar{left:70px;} }
+  .tb-btn{border:none; border-radius:8px; padding:9px 16px; font-size:.85rem; font-weight:600; cursor:pointer;}
+  .tb-save{background:var(--ok); color:#052e16;}
+  .tb-export{background:var(--card); color:var(--text); border:1px solid rgba(148,163,184,0.25);}
+  .tb-import{background:var(--card); color:var(--text); border:1px solid rgba(148,163,184,0.25);}
+  .tb-logout{background:var(--danger); color:#450a0a; margin-left:auto;}
+  .tb-hint{font-size:.75rem; color:var(--muted);}
+
+  .modal-overlay{position:fixed; inset:0; background:rgba(0,0,0,0.6); display:none; align-items:center; justify-content:center; z-index:100;}
+  .modal-overlay.show{display:flex;}
+  .modal{background:var(--card); border-radius:var(--radius); padding:32px; width:320px; border:1px solid rgba(148,163,184,0.15); box-shadow:0 20px 50px rgba(0,0,0,0.4);}
+  .modal h3{margin-bottom:16px;}
+  .modal input{width:100%; padding:10px 12px; border-radius:8px; border:1px solid rgba(148,163,184,0.25); background:var(--bg2); color:var(--text); margin-bottom:12px; font-size:.9rem;}
+  .modal-actions{display:flex; gap:10px; margin-top:8px;}
+  .modal-actions button{flex:1; padding:10px; border:none; border-radius:8px; font-weight:600; cursor:pointer;}
+  .btn-primary{background:var(--accent); color:#0c2233;}
+  .btn-secondary{background:rgba(148,163,184,0.15); color:var(--text);}
+  .modal-error{color:var(--danger); font-size:.8rem; margin-bottom:8px; display:none;}
+  .toast{position:fixed; top:20px; right:20px; background:var(--ok); color:#052e16; padding:12px 20px; border-radius:10px; font-weight:600; font-size:.85rem; z-index:200; display:none; box-shadow:0 8px 24px rgba(0,0,0,0.3);}
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="brand">Josef <span>Iebed</span></div>
+  <div class="brand-sub">Soziologie & Data-driven Marketing</div>
+  <button class="lang-btn" id="langBtn">🌐 <span class="label">English</span></button>
+  <nav>
+    <button class="nav-btn active" data-page="profil">👤 <span class="label" id="nav-profil">Profil</span></button>
+    <button class="nav-btn" data-page="erfahrung">💼 <span class="label" id="nav-erfahrung">Berufserfahrung</span></button>
+    <button class="nav-btn" data-page="ausbildung">🎓 <span class="label" id="nav-ausbildung">Ausbildung</span></button>
+    <button class="nav-btn" data-page="weiterbildung">🧩 <span class="label" id="nav-weiterbildung">Weiterbildung</span></button>
+    <button class="nav-btn" data-page="ehrenamt">🤝 <span class="label" id="nav-ehrenamt">Ehrenamt</span></button>
+    <button class="nav-btn" data-page="skills">🫠️ <span class="label" id="nav-skills">Sprachen & Skills</span></button>
+    <button class="nav-btn" data-page="kontakt">✉️ <span class="label" id="nav-kontakt">Kontakt</span></button>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="login-status" id="loginStatus">Nicht angemeldet</div>
+    <button class="login-btn" id="loginToggleBtn">🔒 Anmelden</button>
+  </div>
+</div>
+
+<main>
+
+  <section class="page active" id="profil">
+    <h1 data-editable id="f-name">Josef Iebed</h1>
+    <p class="lead" data-editable id="f-profil">Soziologie-Absolvent (Universität Wien) mit Kenntnissen in SPSS, STATA, RStudio, MAXQDA und LimeSurvey. Forschungserfahrung bei L&amp;R Sozialforschung in Datenanalyse und -validierung. Zuverlässig und kommunikationsstark aus Betreuungs- und Verwaltungstätigkeiten.</p>
+    <div class="card">
+      <h3 id="fokusHeading">Aktueller Fokus</h3>
+      <p class="lead" data-editable id="f-fokus" style="margin-top:8px;">Übergang vom Soziologie-Master an der Universität Wien in das Masterprogramm <strong style="color:var(--text)">Consumer Research &amp; Data Driven Marketing (M.A.)</strong> an der FH Wiener Neustadt (Campus Wieselburg), Start 09/2026.</p>
+    </div>
+    <div class="contact-row">
+      <div class="chip">📍 <span data-editable id="f-ort">Wien, Österreich</span></div>
+      <div class="chip">📧 <a href="mailto:josef.iebed@gmail.com" data-editable id="f-mail">josef.iebed@gmail.com</a></div>
+      <div class="chip">📞 <span data-editable id="f-tel">+43 660 7560649</span></div>
+      <div class="chip">🔗 <a href="https://linkedin.com/in/josef-i-24071999" target="_blank" data-editable id="f-linkedin">linkedin.com/in/josef-i-24071999</a></div>
+    </div>
+  </section>
+
+  <section class="page" id="erfahrung">
+    <h2 class="page-title" id="pt-erfahrung">Berufserfahrung</h2>
+
+    <div class="card">
+      <h3 data-editable id="e1-title">Praktikant — L&amp;R Sozialforschung GmbH</h3>
+      <div class="meta" data-editable id="e1-meta">07/2026 · Wien</div>
+      <p class="lead" data-editable id="e1-desc" style="margin-bottom:8px;">Mitarbeit am Forschungsprojekt „Systematische Analyse der Workshopberichte der ‚Digital Überall‘-Initiative“.</p>
+      <ul data-editable id="e1-list">
+        <li>Sichtung und Validierung der Angaben in Workshopberichten</li>
+        <li>Systematisierung der Angaben der Workshopanbieter in Excel</li>
+        <li>Systematische Textanalyse mit MAXQDA</li>
+        <li>Quantifizierung qualitativer Prozesse in Kategorien</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3 data-editable id="e3-title">Studieren Probieren Betreuer — ÖH</h3>
+      <div class="meta" data-editable id="e3-meta">01/2023 – 05/2025 · Wien</div>
+      <ul data-editable id="e3-list">
+        <li>Begleitung interessierter Studierender zu Lehrveranstaltungen der Soziologie</li>
+        <li>Bereitstellung von Unterlagen auf Anfrage</li>
+        <li>Beantwortung von Fragen zu Aufnahmeverfahren, Studieninhalten und -aufbau</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3 data-editable id="e4-title">Aushilfsbediensteter im Zusammenhang mit Wahlen — Magistrat der Stadt Wien</h3>
+      <div class="meta" data-editable id="e4-meta">08/2020 – 10/2020 · Wien</div>
+      <ul data-editable id="e4-list">
+        <li>Briefwahlanträge bearbeiten</li>
+        <li>Alphabetische Sortierung und Verschicken der Stimmzettel</li>
+        <li>Unterstützung beim Beantragen von Wahlkarten</li>
+        <li>Zurückerhaltene Wahlzettel auszählen</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="page" id="ausbildung">
+    <h2 class="page-title" id="pt-ausbildung">Ausbildung</h2>
+    <div class="card">
+      <h3 data-editable id="a1-title">Consumer Research und Data Driven Marketing, M.A.</h3>
+      <div class="meta" data-editable id="a1-meta">FH Wiener Neustadt · 09/2026 – 07/2028 (voraussichtlich) · Wieselburg</div>
+      <ul data-editable id="a1-list">
+        <li>Marketing &amp; Data Driven Management: strategisches und digitales Marketing, CRM</li>
+        <li>Methodenkompetenz: quantitative/qualitative Forschungsmethoden, Data Science</li>
+        <li>Konsument*innenpsychologie: Behavioural Economics, Neuropsychologie</li>
+        <li>Social Skills, Projektmanagement &amp; wissenschaftliches Arbeiten (inkl. Masterarbeit)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 data-editable id="a2-title">Soziologie, Master of Arts</h3>
+      <div class="meta" data-editable id="a2-meta">Universität Wien · 03/2026 – 08/2026 · Wien</div>
+      <p class="lead" data-editable id="a2-desc" style="margin-bottom:8px;">Vorbereitender Übergang zum Master „Consumer Research &amp; Data Driven Marketing“ an der FH Wiener Neustadt.</p>
+      <ul data-editable id="a2-list">
+        <li>Wissenschaftliches Schreiben</li>
+        <li>Quantitative und qualitative Methoden der empirischen Sozialforschung</li>
+        <li>STATA und RStudio</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 data-editable id="a3-title">Soziologie, Bachelor of Arts</h3>
+      <div class="meta" data-editable id="a3-meta">Universität Wien · 10/2018 – 02/2026 · Wien</div>
+      <ul data-editable id="a3-list">
+        <li>Hauptfächer: Theorien, Methoden, Anwendungsfelder der Soziologie</li>
+        <li>Ergänzende Fächer: Öffentliches Recht, VWL, BWL, Kommunikative und Soziale Kompetenzen</li>
+        <li>Spezialisierungen: Soziale Ungleichheit, Konsumsoziologie, Stadtsoziologie, interpretative qualitative Sozialforschung</li>
+        <li>Erweiterungscurriculum: Geschichte</li>
+        <li>Bachelorarbeit: „Soziale Ungleichheit im Zugang zu adaptiven Controllern: Gaming für Menschen mit körperlicher Beeinträchtigung“ (Systematische Literaturrecherche + Mixed Methods; Note: gut)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 data-editable id="a4-title">Matura</h3>
+      <div class="meta" data-editable id="a4-meta">Ella Lingens-Gymnasium · 09/2010 – 06/2018 · Wien</div>
+    </div>
+  </section>
+
+  <section class="page" id="weiterbildung">
+    <h2 class="page-title" id="pt-weiterbildung">Weiterbildung und Workshops</h2>
+    <div class="card">
+      <h3 data-editable id="w1-title">Basisworkshop „Extremismus – normal, radikal, extrem?“</h3>
+      <div class="meta" data-editable id="w1-meta">füruns (Zentrum für Zivilgesellschaft) · 12/2025 · Online</div>
+      <ul data-editable id="w1-list">
+        <li>Grundlagen zu Extremismus und Radikalisierung</li>
+        <li>Unterscheidung zwischen normalen, radikalen und extremen Positionen</li>
+        <li>Prävention und Interventionsansätze</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 data-editable id="w2-title">Kinderschutz in der Ferienbetreuung</h3>
+      <div class="meta" data-editable id="w2-meta">Wiener Hilfswerk · 06/2025 · Wien</div>
+      <ul data-editable id="w2-list">
+        <li>Gewaltformen</li>
+        <li>Beschwerdemanagement</li>
+        <li>Handeln bei Kindeswohlgefährdung</li>
+        <li>Präventionsmaßnahmen</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 data-editable id="w3-title">Spielerklärer-Workshop</h3>
+      <div class="meta" data-editable id="w3-meta">Area 52 · 06/2025 · Wien</div>
+      <ul data-editable id="w3-list">
+        <li>Kenntnisse gängiger Brettspiele</li>
+        <li>Rasches Erfassen und Erklären von Spielregeln</li>
+        <li>Sicherstellung eines fairen Spielverlaufs</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 data-editable id="w4-title">Ausbildung zum lizenzierten eSports Schiedsrichter</h3>
+      <div class="meta" data-editable id="w4-meta">ESVÖ · 09/2024 · Wien</div>
+      <ul data-editable id="w4-list">
+        <li>Kenntnis verschiedener Turnierformate</li>
+        <li>Sicherstellung eines fairen Spielverlaufs</li>
+        <li>Koordination der Teilnehmenden</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="page" id="ehrenamt">
+    <h2 class="page-title" id="pt-ehrenamt">Ehrenamt</h2>
+    <div class="card">
+      <h3 data-editable id="eh1-title">Mitglied — E-Sports Verein E-Sports Mostviertel</h3>
+      <div class="meta" data-editable id="eh1-meta">04/2025 – Jetzt</div>
+      <ul data-editable id="eh1-list">
+        <li>Co-Austeller beim A1 Austrian E-Sports Festival 2025 und 2026</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 data-editable id="eh2-title">Teilnehmer und ehrenamtlicher Helfer — Muslimische Jugend Österreich</h3>
+      <div class="meta" data-editable id="eh2-meta">12/2012 – Jetzt</div>
+      <ul data-editable id="eh2-list">
+        <li>Teilnahme und Mitorganisation beim Projekt „Fasten Teilen Helfen“</li>
+        <li>Mitorganisation diverser Aktivitäten (Winter- und Sommertrips, Kurz-, Langreisen, Tagestrips, Freizeittreffen, Events)</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="page" id="skills">
+    <h2 class="page-title" id="pt-skills">Sprachen &amp; Skills</h2>
+    <div class="grid2">
+      <div class="card">
+        <h3 id="langHeading">Sprachen</h3>
+        <div class="badges" data-editable id="s-lang">
+          <div class="badge">Deutsch</div>
+          <div class="badge">Englisch</div>
+          <div class="badge">Französisch</div>
+          <div class="badge">Arabisch</div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 id="itHeading">IT-Kenntnisse</h3>
+        <div class="badges" data-editable id="s-it">
+          <div class="badge">STATA</div>
+          <div class="badge">R / RStudio</div>
+          <div class="badge">SPSS</div>
+          <div class="badge">MAXQDA</div>
+          <div class="badge">LimeSurvey</div>
+          <div class="badge">MS Office</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page" id="kontakt">
+    <h2 class="page-title" id="pt-kontakt">Kontakt</h2>
+    <div class="card">
+      <p class="lead" data-editable id="k-text">Ich freue mich über Anfragen zu Praktika, Werkstudierendenstellen oder Einstiegspositionen im Bereich Verwaltung, Forschung, Kommunikation oder europäische Angelegenheiten.</p>
+      <div class="contact-row">
+        <div class="chip">📧 <span data-editable id="k-mail">josef.iebed@gmail.com</span></div>
+        <div class="chip">📞 <span data-editable id="k-tel">+43 660 7560649</span></div>
+        <div class="chip">📍 <span data-editable id="k-ort">Wien, Österreich</span></div>
+        <div class="chip">🔗 <a href="https://linkedin.com/in/josef-i-24071999" target="_blank">LinkedIn</a></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div class="edit-toolbar">
+  <button class="tb-btn tb-save" id="saveBtn">💾 Speichern</button>
+  <button class="tb-btn tb-export" id="exportBtn">⬇️ Exportieren (JSON)</button>
+  <button class="tb-btn tb-import" id="importBtn">⬆️ Importieren</button>
+  <input type="file" id="importFile" accept=".json" style="display:none;">
+  <span class="tb-hint" id="tbHint">Klicke auf einen Text mit gestricheltem Rahmen, um ihn zu bearbeiten.</span>
+  <button class="tb-btn tb-logout" id="logoutBtn">Abmelden</button>
+</div>
+
+<div class="modal-overlay" id="loginOverlay">
+  <div class="modal">
+    <h3 id="modalTitle">🔒 Anmeldung</h3>
+    <div class="modal-error" id="loginError">Falsches Passwort.</div>
+    <input type="password" id="loginPassword" placeholder="Passwort" autocomplete="off">
+    <div class="modal-actions">
+      <button class="btn-secondary" id="loginCancel">Abbrechen</button>
+      <button class="btn-primary" id="loginSubmit">Anmelden</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">Gespeichert ✓</div>
+
+<script>
+  const PASSWORD = "josef2026";
+  const STORAGE_KEY = "iebed_portfolio_data_v1";
+
+  const UI = {
+    de: {
+      navProfil:"Profil", navErfahrung:"Berufserfahrung", navAusbildung:"Ausbildung", navWeiterbildung:"Weiterbildung",
+      navEhrenamt:"Ehrenamt", navSkills:"Sprachen & Skills", navKontakt:"Kontakt",
+      ptErfahrung:"Berufserfahrung", ptAusbildung:"Ausbildung", ptWeiterbildung:"Weiterbildung und Workshops",
+      ptEhrenamt:"Ehrenamt", ptSkills:"Sprachen & Skills", ptKontakt:"Kontakt",
+      fokusHeading:"Aktueller Fokus", langHeading:"Sprachen", itHeading:"IT-Kenntnisse",
+      loggedOut:"Nicht angemeldet", loggedIn:"✅ Angemeldet", btnLogin:"🔒 Anmelden", btnEdit:"🔓 Bearbeitungsmodus",
+      save:"💾 Speichern", exportBtn:"⬇️ Exportieren (JSON)", importBtn:"⬆️ Importieren",
+      hint:"Klicke auf einen Text mit gestricheltem Rahmen, um ihn zu bearbeiten.", logout:"Abmelden",
+      modalTitle:"🔒 Anmeldung", modalError:"Falsches Passwort.", modalCancel:"Abbrechen", modalSubmit:"Anmelden",
+      modalPlaceholder:"Passwort", toastSaved:"Gespeichert ✓", toastImport:"Import erfolgreich ✓", langBtn:"🌐 English"
+    },
+    en: {
+      navProfil:"Profile", navErfahrung:"Experience", navAusbildung:"Education", navWeiterbildung:"Training",
+      navEhrenamt:"Volunteering", navSkills:"Languages & Skills", navKontakt:"Contact",
+      ptErfahrung:"Work Experience", ptAusbildung:"Education", ptWeiterbildung:"Further Training & Workshops",
+      ptEhrenamt:"Volunteering", ptSkills:"Languages & Skills", ptKontakt:"Contact",
+      fokusHeading:"Current Focus", langHeading:"Languages", itHeading:"IT Skills",
+      loggedOut:"Not logged in", loggedIn:"✅ Logged in", btnLogin:"🔒 Login", btnEdit:"🔓 Edit mode",
+      save:"💾 Save", exportBtn:"⬇️ Export (JSON)", importBtn:"⬆️ Import",
+      hint:"Click on a dashed-outline text to edit it.", logout:"Log out",
+      modalTitle:"🔒 Login", modalError:"Incorrect password.", modalCancel:"Cancel", modalSubmit:"Login",
+      modalPlaceholder:"Password", toastSaved:"Saved ✓", toastImport:"Import successful ✓", langBtn:"🌐 Deutsch"
+    }
+  };
+
+  const CONTENT_EN = {
+    "f-name":"Josef Iebed",
+    "f-profil":"Sociology graduate (University of Vienna) with skills in SPSS, STATA, RStudio, MAXQDA, and LimeSurvey. Research experience at L&amp;R Sozialforschung in data analysis and validation. Reliable and communicative, gained through supervision and administrative roles.",
+    "f-fokus":"Transitioning from a Sociology Master's at the University of Vienna into the <strong style=\"color:var(--text)\">Consumer Research &amp; Data Driven Marketing (M.A.)</strong> program at FH Wiener Neustadt (Campus Wieselburg), starting 09/2026.",
+    "f-ort":"Vienna, Austria", "f-mail":"josef.iebed@gmail.com", "f-tel":"+43 660 7560649",
+    "f-linkedin":"linkedin.com/in/josef-i-24071999",
+
+    "e1-title":"Intern — L&amp;R Sozialforschung GmbH", "e1-meta":"07/2026 · Vienna",
+    "e1-desc":"Contributed to the research project \"Systematic Analysis of Workshop Reports of the 'Digital Überall' Initiative.\"",
+    "e1-list":"<li>Reviewed and validated information in workshop reports</li><li>Systematized data provided by workshop organizers in Excel</li><li>Conducted systematic text analysis of workshop reports using MAXQDA</li><li>Systematically mapped qualitative processes by quantifying them into categories</li>",
+
+    "e3-title":"\"Studieren Probieren\" Mentor — ÖH (Austrian Students' Union)", "e3-meta":"01/2023 – 05/2025 · Vienna",
+    "e3-list":"<li>Accompanied prospective students to Sociology program courses</li><li>Provided informational materials upon request</li><li>Answered questions about admission procedures, course content/structure, and personal experiences in the program</li>",
+
+    "e4-title":"Temporary Election Staff — Magistrat der Stadt Wien", "e4-meta":"08/2020 – 10/2020 · Vienna",
+    "e4-list":"<li>Processed postal vote applications</li><li>Alphabetically sorted and dispatched ballot papers</li><li>Assisted with voting card applications</li><li>Counted returned ballot papers</li>",
+
+    "a1-title":"Consumer Research and Data Driven Marketing, M.A.", "a1-meta":"FH Wiener Neustadt · 09/2026 – 07/2028 (expected) · Wieselburg",
+    "a1-list":"<li>Marketing &amp; Data Driven Management: strategic and digital marketing, CRM</li><li>Methodological competence: quantitative/qualitative research methods, data science</li><li>Consumer psychology and behavior: behavioral economics, neuropsychology</li><li>Social skills, project management, and academic work (incl. master's thesis)</li>",
+
+    "a2-title":"Sociology, Master of Arts", "a2-meta":"University of Vienna · 03/2026 – 08/2026 · Vienna",
+    "a2-desc":"Preparatory transition to the Master's program \"Consumer Research &amp; Data Driven Marketing\" at FH Wiener Neustadt.",
+    "a2-list":"<li>Academic writing</li><li>Quantitative and qualitative methods of empirical social research</li><li>STATA and RStudio</li>",
+
+    "a3-title":"Sociology, Bachelor of Arts", "a3-meta":"University of Vienna · 10/2018 – 02/2026 · Vienna",
+    "a3-list":"<li>Core subjects: theories, methods, and fields of application of sociology</li><li>Supplementary subjects: public law, economics, business administration, communicative and social skills</li><li>Specializations: social inequality, sociology of consumption, urban sociology, interpretive qualitative social research</li><li>Extension curriculum (minor): history</li><li>Bachelor's thesis: \"Social Inequality in Access to Adaptive Controllers: Gaming for People with Physical Disabilities\" (systematic literature review + mixed methods; grade: good)</li>",
+
+    "a4-title":"Matura (Austrian secondary school diploma)", "a4-meta":"Ella Lingens-Gymnasium · 09/2010 – 06/2018 · Vienna",
+
+    "w1-title":"Basic Workshop \"Extremism – Normal, Radical, Extreme?\"", "w1-meta":"füruns (Center for Civil Society) · 12/2025 · Online",
+    "w1-list":"<li>Fundamentals of extremism and radicalization</li><li>Distinguishing between normal, radical, and extreme positions</li><li>Prevention and intervention approaches</li>",
+
+    "w2-title":"Child Protection in Holiday Care", "w2-meta":"Wiener Hilfswerk · 06/2025 · Vienna",
+    "w2-list":"<li>Forms of violence</li><li>Complaint management</li><li>Responding to child welfare endangerment</li><li>Prevention measures</li>",
+
+    "w3-title":"Game Explainer Workshop", "w3-meta":"Area 52 · 06/2025 · Vienna",
+    "w3-list":"<li>Knowledge of common board games</li><li>Quickly grasping and explaining game rules</li><li>Ensuring fair gameplay</li>",
+
+    "w4-title":"Licensed eSports Referee Training", "w4-meta":"ESVÖ · 09/2024 · Vienna",
+    "w4-list":"<li>Knowledge of various tournament formats</li><li>Ensuring fair gameplay</li><li>Coordinating participants</li>",
+
+    "eh1-title":"Member — E-Sports Verein E-Sports Mostviertel", "eh1-meta":"04/2025 – Present",
+    "eh1-list":"<li>Co-exhibitor at the A1 Austrian E-Sports Festival 2025 and 2026</li>",
+
+    "eh2-title":"Participant and Volunteer — Muslimische Jugend Österreich", "eh2-meta":"12/2012 – Present",
+    "eh2-list":"<li>Participated in and helped organize the \"Fasten Teilen Helfen\" project</li><li>Co-organized various activities (winter/summer trips, short and long trips, day trips, social gatherings, events)</li>",
+
+    "s-lang":"<div class=\"badge\">German</div><div class=\"badge\">English</div><div class=\"badge\">French</div><div class=\"badge\">Arabic</div>",
+    "s-it":"<div class=\"badge\">STATA</div><div class=\"badge\">R / RStudio</div><div class=\"badge\">SPSS</div><div class=\"badge\">MAXQDA</div><div class=\"badge\">LimeSurvey</div><div class=\"badge\">MS Office</div>",
+
+    "k-text":"I welcome inquiries about internships, working-student positions, or entry-level roles in administration, research, communication, or European affairs.",
+    "k-mail":"josef.iebed@gmail.com", "k-tel":"+43 660 7560649", "k-ort":"Vienna, Austria"
+  };
+
+  let CONTENT_DE = {};
+  let currentLang = 'de';
+
+  const buttons = document.querySelectorAll('.nav-btn');
+  const pages = document.querySelectorAll('.page');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      pages.forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.page).classList.add('active');
+      window.scrollTo(0,0);
+    });
+  });
+
+  const editableEls = document.querySelectorAll('[data-editable]');
+
+  function loadData(){
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(!raw) return;
+    try{
+      const data = JSON.parse(raw);
+      Object.keys(data).forEach(id => {
+        const el = document.getElementById(id);
+        if(el) el.innerHTML = data[id];
+      });
+    }catch(e){ console.error("Ladefehler", e); }
+  }
+
+  function collectData(){
+    const data = {};
+    editableEls.forEach(el => { data[el.id] = el.innerHTML; });
+    return data;
+  }
+
+  function saveData(){
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(collectData()));
+    showToast(UI[currentLang].toastSaved);
+  }
+
+  function showToast(msg){
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.style.display = 'block';
+    setTimeout(()=>{ t.style.display = 'none'; }, 2200);
+  }
+
+  loadData();
+  editableEls.forEach(el => { CONTENT_DE[el.id] = el.innerHTML; });
+
+  function applyUIStrings(lang){
+    const s = UI[lang];
+    document.getElementById('nav-profil').textContent = s.navProfil;
+    document.getElementById('nav-erfahrung').textContent = s.navErfahrung;
+    document.getElementById('nav-ausbildung').textContent = s.navAusbildung;
+    document.getElementById('nav-weiterbildung').textContent = s.navWeiterbildung;
+    document.getElementById('nav-ehrenamt').textContent = s.navEhrenamt;
+    document.getElementById('nav-skills').textContent = s.navSkills;
+    document.getElementById('nav-kontakt').textContent = s.navKontakt;
+    document.getElementById('pt-erfahrung').textContent = s.ptErfahrung;
+    document.getElementById('pt-ausbildung').textContent = s.ptAusbildung;
+    document.getElementById('pt-weiterbildung').textContent = s.ptWeiterbildung;
+    document.getElementById('pt-ehrenamt').textContent = s.ptEhrenamt;
+    document.getElementById('pt-skills').textContent = s.ptSkills;
+    document.getElementById('pt-kontakt').textContent = s.ptKontakt;
+    document.getElementById('fokusHeading').textContent = s.fokusHeading;
+    document.getElementById('langHeading').textContent = s.langHeading;
+    document.getElementById('itHeading').textContent = s.itHeading;
+    document.getElementById('saveBtn').textContent = s.save;
+    document.getElementById('exportBtn').textContent = s.exportBtn;
+    document.getElementById('importBtn').textContent = s.importBtn;
+    document.getElementById('tbHint').textContent = s.hint;
+    document.getElementById('logoutBtn').textContent = s.logout;
+    document.getElementById('modalTitle').textContent = s.modalTitle;
+    document.getElementById('loginError').textContent = s.modalError;
+    document.getElementById('loginCancel').textContent = s.modalCancel;
+    document.getElementById('loginSubmit').textContent = s.modalSubmit;
+    document.getElementById('loginPassword').placeholder = s.modalPlaceholder;
+    document.querySelector('#langBtn .label').textContent = lang === 'de' ? 'English' : 'Deutsch';
+    loginStatus.textContent = isLoggedIn ? s.loggedIn : s.loggedOut;
+    loginToggleBtn.textContent = isLoggedIn ? s.btnEdit : s.btnLogin;
+  }
+
+  function applyContent(lang){
+    const dict = lang === 'de' ? CONTENT_DE : CONTENT_EN;
+    Object.keys(dict).forEach(id => {
+      const el = document.getElementById(id);
+      if(el) el.innerHTML = dict[id];
+    });
+  }
+
+  document.getElementById('langBtn').addEventListener('click', () => {
+    currentLang = currentLang === 'de' ? 'en' : 'de';
+    applyContent(currentLang);
+    applyUIStrings(currentLang);
+    document.documentElement.lang = currentLang;
+  });
+
+  const loginOverlay = document.getElementById('loginOverlay');
+  const loginToggleBtn = document.getElementById('loginToggleBtn');
+  const loginStatus = document.getElementById('loginStatus');
+  const loginPassword = document.getElementById('loginPassword');
+  const loginError = document.getElementById('loginError');
+
+  let isLoggedIn = false;
+
+  function openLogin(){
+    loginError.style.display = 'none';
+    loginPassword.value = '';
+    loginOverlay.classList.add('show');
+    setTimeout(()=> loginPassword.focus(), 50);
+  }
+  function closeLogin(){ loginOverlay.classList.remove('show'); }
+
+  function enterEditMode(){
+    isLoggedIn = true;
+    document.body.classList.add('edit-mode');
+    editableEls.forEach(el => el.setAttribute('contenteditable','true'));
+    applyUIStrings(currentLang);
+  }
+
+  function exitEditMode(){
+    isLoggedIn = false;
+    document.body.classList.remove('edit-mode');
+    editableEls.forEach(el => el.removeAttribute('contenteditable'));
+    applyUIStrings(currentLang);
+  }
+
+  loginToggleBtn.addEventListener('click', () => {
+    if(isLoggedIn){
+      exitEditMode();
+    } else {
+      openLogin();
+    }
+  });
+  document.getElementById('loginCancel').addEventListener('click', closeLogin);
+  document.getElementById('loginSubmit').addEventListener('click', () => {
+    if(loginPassword.value === PASSWORD){
+      closeLogin();
+      enterEditMode();
+    } else {
+      loginError.style.display = 'block';
+    }
+  });
+  loginPassword.addEventListener('keydown', e => {
+    if(e.key === 'Enter') document.getElementById('loginSubmit').click();
+  });
+
+  document.getElementById('logoutBtn').addEventListener('click', () => { exitEditMode(); });
+  document.getElementById('saveBtn').addEventListener('click', saveData);
+
+  document.getElementById('exportBtn').addEventListener('click', () => {
+    const blob = new Blob([JSON.stringify(collectData(), null, 2)], {type:"application/json"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = "josef_iebed_cv_daten.json"; a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  const importFile = document.getElementById('importFile');
+  document.getElementById('importBtn').addEventListener('click', () => importFile.click());
+  importFile.addEventListener('change', e => {
+    const file = e.target.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      try{
+        const data = JSON.parse(ev.target.result);
+        Object.keys(data).forEach(id => {
+          const el = document.getElementById(id);
+          if(el) el.innerHTML = data[id];
+        });
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        showToast(UI[currentLang].toastImport);
+      }catch(err){
+        alert("Fehler beim Import: ungültige JSON-Datei.");
+      }
+    };
+    reader.readAsText(file);
+  });
+</script>
+
+</body>
+</html>
