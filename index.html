@@ -13,8 +13,49 @@
   body{
     font-family:'Segoe UI', system-ui, -apple-system, sans-serif;
     background:linear-gradient(160deg,var(--bg) 0%, var(--bg2) 100%);
-    color:var(--text); min-height:100vh; display:flex;
+    color:var(--text); min-height:100vh;
   }
+  #builderView{ padding:40px 20px; }
+  .wrap{max-width:900px; margin:0 auto;}
+  .wrap header{margin-bottom:32px;}
+  .wrap h1{font-size:2rem; margin-bottom:8px;}
+  .wrap header p{color:var(--muted); font-size:1rem; line-height:1.6;}
+  .wrap h2{font-size:1.3rem; margin:36px 0 16px; border-bottom:1px solid rgba(148,163,184,0.2); padding-bottom:10px;}
+  .b-card{background:var(--card); border-radius:var(--radius); padding:22px 24px; margin-bottom:16px; border:1px solid rgba(148,163,184,0.1);}
+  .wrap label{display:block; font-size:.82rem; color:var(--muted); margin-bottom:6px; margin-top:14px; font-weight:600;}
+  .wrap label:first-child{margin-top:0;}
+  .wrap input, .wrap textarea{
+    width:100%; padding:10px 12px; border-radius:8px; border:1px solid rgba(148,163,184,0.25);
+    background:var(--bg2); color:var(--text); font-size:.92rem; font-family:inherit;
+  }
+  .wrap textarea{resize:vertical; min-height:70px;}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  .entry{border:1px solid rgba(148,163,184,0.15); border-radius:12px; padding:16px; margin-bottom:14px; position:relative; background:rgba(15,23,42,0.4);}
+  .entry .remove{
+    position:absolute; top:10px; right:10px; background:rgba(248,113,113,0.15); color:var(--danger);
+    border:1px solid rgba(248,113,113,0.3); border-radius:8px; padding:5px 10px; font-size:.75rem; cursor:pointer;
+  }
+  .add-btn{
+    background:rgba(56,189,248,0.12); border:1px dashed rgba(56,189,248,0.4); color:var(--accent);
+    padding:10px 16px; border-radius:10px; cursor:pointer; font-size:.85rem; font-weight:600; width:100%;
+  }
+  .actions{display:flex; gap:12px; margin:36px 0; flex-wrap:wrap;}
+  .btn{border:none; border-radius:10px; padding:13px 26px; font-size:.95rem; font-weight:700; cursor:pointer;}
+  .btn-primary{background:linear-gradient(135deg, var(--accent), var(--accent2)); color:#0c1220;}
+  .btn-secondary{background:var(--card); color:var(--text); border:1px solid rgba(148,163,184,0.25);}
+  .hint{font-size:.8rem; color:var(--muted); margin-top:6px;}
+  .owner-box{
+    background:rgba(56,189,248,0.08); border:1px solid rgba(56,189,248,0.25); border-radius:14px;
+    padding:16px 20px; margin-top:44px; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
+  }
+  .owner-box p{color:var(--muted); font-size:.85rem; margin:0;}
+  .owner-btn{
+    background:rgba(167,139,250,0.15); border:1px solid rgba(167,139,250,0.4); color:var(--accent2);
+    padding:9px 16px; border-radius:10px; cursor:pointer; font-size:.85rem; font-weight:600; white-space:nowrap;
+  }
+
+  #profileView{ display:none; min-height:100vh; }
+  .app{ display:flex; min-height:100vh; }
   .sidebar{
     width:230px; background:rgba(15,23,42,0.9); backdrop-filter:blur(10px);
     border-right:1px solid rgba(148,163,184,0.15); padding:28px 18px;
@@ -25,11 +66,14 @@
   .brand-sub{font-size:.78rem; color:var(--muted); margin-bottom:22px;}
   .lang-btn{
     background:rgba(167,139,250,0.12); border:1px solid rgba(167,139,250,0.3); color:var(--accent2);
-    padding:8px 12px; border-radius:10px; font-size:.8rem; cursor:pointer; font-weight:600; margin-bottom:10px;
+    padding:8px 12px; border-radius:10px; font-size:.8rem; cursor:pointer; font-weight:600; margin-bottom:10px; width:100%;
   }
-  .builder-link{
-    display:block; text-align:center; background:rgba(74,222,128,0.1); border:1px solid rgba(74,222,128,0.3);
-    color:var(--ok); padding:8px 12px; border-radius:10px; font-size:.78rem; font-weight:600; text-decoration:none; margin-bottom:18px;
+  .share-btn{
+    background:rgba(74,222,128,0.12); border:1px solid rgba(74,222,128,0.35); color:var(--ok);
+    padding:8px 12px; border-radius:10px; font-size:.78rem; cursor:pointer; font-weight:600; margin-bottom:10px; width:100%;
+  }
+  .backbuilder-link{
+    display:block; text-align:center; color:var(--muted); font-size:.75rem; text-decoration:underline; cursor:pointer; margin-bottom:18px; background:none; border:none; width:100%;
   }
   nav{display:flex; flex-direction:column; gap:6px; flex:1;}
   .nav-btn{
@@ -48,27 +92,25 @@
   .page{display:none; animation:fadeIn .35s ease;}
   .page.active{display:block;}
   @keyframes fadeIn{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);}}
-  h1{font-size:2rem; margin-bottom:6px;}
+  #profileView h1{font-size:2rem; margin-bottom:6px;}
   h2.page-title{font-size:1.6rem; margin-bottom:26px; border-bottom:1px solid rgba(148,163,184,0.2); padding-bottom:12px;}
   .lead{color:var(--muted); font-size:1.02rem; line-height:1.6; margin-bottom:18px;}
   .contact-row{display:flex; flex-wrap:wrap; gap:14px; margin-top:18px;}
   .chip{background:var(--card); padding:8px 14px; border-radius:999px; font-size:.85rem; border:1px solid rgba(148,163,184,0.15);}
   .chip a{color:var(--accent); text-decoration:none;}
   .card{background:var(--card); border-radius:var(--radius); padding:22px 24px; margin-bottom:18px; border:1px solid rgba(148,163,184,0.1); box-shadow:0 4px 18px rgba(0,0,0,0.25); position:relative;}
-  .card.caveat{border:1px solid rgba(251,191,36,0.35); background:linear-gradient(180deg, rgba(251,191,36,0.06), var(--card));}
   .card h3{font-size:1.08rem; margin-bottom:2px;}
   .card .meta{color:var(--accent2); font-size:.85rem; margin-bottom:10px; font-weight:500;}
   .card ul{margin-left:18px; color:var(--muted); font-size:.92rem; line-height:1.55;}
   .card ul li{margin-bottom:4px;}
-  .caveat-note{display:flex; gap:8px; align-items:flex-start; background:rgba(251,191,36,0.1); border:1px solid rgba(251,191,36,0.3); border-radius:10px; padding:10px 12px; margin-top:12px; font-size:.8rem; color:var(--warn);}
   .badges{display:flex; flex-wrap:wrap; gap:10px; margin-top:8px;}
   .badge{background:rgba(56,189,248,0.1); color:var(--accent); padding:7px 14px; border-radius:10px; font-size:.85rem; font-weight:500; border:1px solid rgba(56,189,248,0.25);}
-  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  .grid2b{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
   @media (max-width:800px){
     .sidebar{width:70px; padding:20px 8px;}
-    .brand, .brand-sub, .nav-btn span.label, .login-status, .lang-btn span.label, .builder-link span.label{display:none;}
+    .brand, .brand-sub, .nav-btn span.label, .login-status, .lang-btn span.label, .share-btn span.label{display:none;}
     main{margin-left:70px; padding:32px 20px;}
-    .grid2{grid-template-columns:1fr;}
+    .grid2b{grid-template-columns:1fr;}
   }
 
   body.edit-mode [data-editable]{
@@ -103,19 +145,90 @@
   .modal input{width:100%; padding:10px 12px; border-radius:8px; border:1px solid rgba(148,163,184,0.25); background:var(--bg2); color:var(--text); margin-bottom:12px; font-size:.9rem;}
   .modal-actions{display:flex; gap:10px; margin-top:8px;}
   .modal-actions button{flex:1; padding:10px; border:none; border-radius:8px; font-weight:600; cursor:pointer;}
-  .btn-primary{background:var(--accent); color:#0c2233;}
-  .btn-secondary{background:rgba(148,163,184,0.15); color:var(--text);}
+  .btn-primary2{background:var(--accent); color:#0c2233;}
+  .btn-secondary2{background:rgba(148,163,184,0.15); color:var(--text);}
   .modal-error{color:var(--danger); font-size:.8rem; margin-bottom:8px; display:none;}
   .toast{position:fixed; top:20px; right:20px; background:var(--ok); color:#052e16; padding:12px 20px; border-radius:10px; font-weight:600; font-size:.85rem; z-index:200; display:none; box-shadow:0 8px 24px rgba(0,0,0,0.3); max-width:320px;}
 </style>
 </head>
 <body>
 
+<div id="builderView">
+  <div class="wrap">
+    <header>
+      <h1>🛠️ Portfolio-Builder</h1>
+      <p>Trag deine eigenen Daten ein und lade dir am Ende eine fertige, eigenständige Portfolio-Webseite herunter — im gleichen Design wie diese Vorlage. Keine Anmeldung, keine Registrierung nötig, alles läuft nur in deinem Browser.</p>
+    </header>
+
+    <div class="b-card">
+      <h2 style="margin-top:0;">👤 Profil</h2>
+      <label>Name</label>
+      <input id="b-name" placeholder="z. B. Anna Musterfrau">
+      <label>Kurzprofil (1–3 Sätze)</label>
+      <textarea id="b-profil" placeholder="z. B. Absolventin der Politikwissenschaft mit Erfahrung in..."></textarea>
+      <div class="grid2">
+        <div>
+          <label>Ort</label>
+          <input id="b-ort" placeholder="z. B. Wien, Österreich">
+          <label>E-Mail</label>
+          <input id="b-mail" placeholder="name@email.com">
+        </div>
+        <div>
+          <label>Telefon</label>
+          <input id="b-tel" placeholder="+43 ...">
+          <label>LinkedIn (optional)</label>
+          <input id="b-linkedin" placeholder="linkedin.com/in/...">
+        </div>
+      </div>
+    </div>
+
+    <h2>💼 Berufserfahrung</h2>
+    <div id="erfahrung-list"></div>
+    <button class="add-btn" onclick="addEntry('erfahrung-list', erfahrungTemplate)">+ Station hinzufügen</button>
+
+    <h2>🎓 Ausbildung</h2>
+    <div id="ausbildung-list"></div>
+    <button class="add-btn" onclick="addEntry('ausbildung-list', ausbildungTemplate)">+ Ausbildung hinzufügen</button>
+
+    <h2>🧩 Weiterbildung (optional)</h2>
+    <div id="weiterbildung-list"></div>
+    <button class="add-btn" onclick="addEntry('weiterbildung-list', weiterbildungTemplate)">+ Weiterbildung hinzufügen</button>
+
+    <h2>🛠️ Skills &amp; Sprachen</h2>
+    <div class="b-card">
+      <label>Sprachen (durch Komma getrennt)</label>
+      <input id="b-lang" placeholder="Deutsch, Englisch, Französisch">
+      <label>Fachliche Skills / Tools (durch Komma getrennt)</label>
+      <input id="b-skills" placeholder="Excel, Projektmanagement, Adobe Photoshop">
+    </div>
+
+    <h2>✉️ Kontakt-Text</h2>
+    <div class="b-card">
+      <label>Abschlusstext auf der Kontaktseite</label>
+      <textarea id="b-kontakttext" placeholder="z. B. Ich freue mich über Anfragen zu..."></textarea>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-primary" onclick="generatePortfolio()">⬇️ Portfolio-Seite generieren &amp; herunterladen</button>
+      <button class="btn btn-secondary" onclick="loadDemoData()">✨ Beispieldaten laden</button>
+    </div>
+    <p class="hint">Die generierte Datei ist eine eigenständige HTML-Datei — einfach im Browser öffnen oder z. B. via GitHub Pages, Netlify oder Vercel kostenlos veröffentlichen.</p>
+
+    <div class="owner-box">
+      <p>🔒 Ist das deine eigene Seite? Melde dich an, um dein Portfolio zu bearbeiten.</p>
+      <button class="owner-btn" id="builderLoginBtn">Anmelden</button>
+    </div>
+  </div>
+</div>
+
+<div id="profileView">
+<div class="app">
 <div class="sidebar">
   <div class="brand">Josef <span>Iebed</span></div>
   <div class="brand-sub">Soziologie & Data-driven Marketing</div>
   <button class="lang-btn" id="langBtn">🌐 <span class="label">English</span></button>
-  <a class="builder-link" href="builder.html" target="_blank">✨ <span class="label">Erstelle dein eigenes Portfolio</span></a>
+  <button class="share-btn" id="shareBtn">🔗 <span class="label">Link teilen</span></button>
+  <button class="backbuilder-link" id="backToBuilderBtn">← Zurück zum Builder</button>
   <nav>
     <button class="nav-btn active" data-page="profil">👤 <span class="label" id="nav-profil">Profil</span></button>
     <button class="nav-btn" data-page="erfahrung">💼 <span class="label" id="nav-erfahrung">Berufserfahrung</span></button>
@@ -324,7 +437,7 @@
 
   <section class="page" id="skills">
     <h2 class="page-title" id="pt-skills">Sprachen &amp; Skills</h2>
-    <div class="grid2">
+    <div class="grid2b">
       <div class="card">
         <h3 id="langHeading">Sprachen</h3>
         <div class="badges" data-editable id="s-lang">
@@ -362,6 +475,8 @@
   </section>
 
 </main>
+</div>
+</div>
 
 <div class="edit-toolbar">
   <button class="tb-btn tb-save" id="saveBtn">💾 Speichern (Browser)</button>
@@ -369,7 +484,7 @@
   <button class="tb-btn tb-export" id="exportBtn">⬇️ Nur Daten (JSON)</button>
   <button class="tb-btn tb-import" id="importBtn">⬆️ Importieren</button>
   <input type="file" id="importFile" accept=".json" style="display:none;">
-  <span class="tb-hint" id="tbHint">Klicke auf einen Text mit gestricheltem Rahmen, um ihn zu bearbeiten. "+ Eintrag hinzufügen" fügt neue Kärtchen hinzu.</span>
+  <span class="tb-hint" id="tbHint">Klicke auf einen Text mit gestricheltem Rahmen, um ihn zu bearbeiten.</span>
   <button class="tb-btn tb-logout" id="logoutBtn">Abmelden</button>
 </div>
 
@@ -379,8 +494,8 @@
     <div class="modal-error" id="loginError">Falsches Passwort.</div>
     <input type="password" id="loginPassword" placeholder="Passwort" autocomplete="off">
     <div class="modal-actions">
-      <button class="btn-secondary" id="loginCancel">Abbrechen</button>
-      <button class="btn-primary" id="loginSubmit">Anmelden</button>
+      <button class="btn-secondary2" id="loginCancel">Abbrechen</button>
+      <button class="btn-primary2" id="loginSubmit">Anmelden</button>
     </div>
   </div>
 </div>
@@ -391,38 +506,203 @@
   const PASSWORD = "josef2026";
   const STORAGE_KEY = "iebed_portfolio_data_v1";
   let customIdCounter = 0;
+  let isLoggedIn = false;
+
+  const builderView = document.getElementById('builderView');
+  const profileView = document.getElementById('profileView');
+
+  function showProfileView(){
+    builderView.style.display = 'none';
+    profileView.style.display = 'block';
+  }
+  function showBuilderView(){
+    profileView.style.display = 'none';
+    builderView.style.display = 'block';
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  if(params.get('view') === 'profile'){ showProfileView(); } else { showBuilderView(); }
+
+  document.getElementById('backToBuilderBtn').addEventListener('click', showBuilderView);
+
+  document.getElementById('shareBtn').addEventListener('click', () => {
+    const url = window.location.origin + window.location.pathname + '?view=profile';
+    navigator.clipboard.writeText(url).then(() => showToast('Link kopiert ✓'))
+      .catch(() => { prompt('Link zum Kopieren:', url); });
+  });
+
+  function erfahrungTemplate(){
+    return `<label>Position &amp; Arbeitgeber</label>
+    <input class="e-title" placeholder="z. B. Praktikant — Firma XY">
+    <label>Zeitraum &amp; Ort</label>
+    <input class="e-meta" placeholder="z. B. 01/2025 – 06/2025 · Wien">
+    <label>Aufgaben (eine pro Zeile)</label>
+    <textarea class="e-bullets" placeholder="Aufgabe 1&#10;Aufgabe 2&#10;Aufgabe 3"></textarea>`;
+  }
+  function ausbildungTemplate(){
+    return `<label>Abschluss / Studiengang</label>
+    <input class="e-title" placeholder="z. B. Bachelor of Arts, Soziologie">
+    <label>Institution, Zeitraum &amp; Ort</label>
+    <input class="e-meta" placeholder="z. B. Universität Wien · 10/2020 – 06/2024 · Wien">
+    <label>Details (eine pro Zeile, optional)</label>
+    <textarea class="e-bullets" placeholder="Schwerpunkt 1&#10;Schwerpunkt 2"></textarea>`;
+  }
+  function weiterbildungTemplate(){
+    return `<label>Titel der Weiterbildung</label>
+    <input class="e-title" placeholder="z. B. Workshop XY">
+    <label>Anbieter, Zeitraum &amp; Ort</label>
+    <input class="e-meta" placeholder="z. B. Anbieter · 03/2025 · Online">
+    <label>Details (eine pro Zeile, optional)</label>
+    <textarea class="e-bullets" placeholder="Inhalt 1&#10;Inhalt 2"></textarea>`;
+  }
+  function addEntry(listId, templateFn){
+    const list = document.getElementById(listId);
+    const div = document.createElement('div');
+    div.className = 'entry b-card';
+    div.innerHTML = `<button class="remove" onclick="this.parentElement.remove()">✕ Entfernen</button>` + templateFn();
+    list.appendChild(div);
+  }
+  addEntry('erfahrung-list', erfahrungTemplate);
+  addEntry('ausbildung-list', ausbildungTemplate);
+
+  function collectEntries(listId){
+    const entries = [];
+    document.querySelectorAll('#' + listId + ' .entry').forEach(div => {
+      const title = div.querySelector('.e-title').value.trim();
+      const meta = div.querySelector('.e-meta').value.trim();
+      const bullets = div.querySelector('.e-bullets').value.split('\n').map(b=>b.trim()).filter(Boolean);
+      if(title) entries.push({title, meta, bullets});
+    });
+    return entries;
+  }
+  function esc(str){ return (str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  function loadDemoData(){
+    document.getElementById('b-name').value = 'Anna Musterfrau';
+    document.getElementById('b-profil').value = 'Politikwissenschafts-Absolventin mit Erfahrung in öffentlicher Verwaltung und Projektkoordination. Strukturiert, kommunikativ und interessiert an europäischen Themen.';
+    document.getElementById('b-ort').value = 'Wien, Österreich';
+    document.getElementById('b-mail').value = 'anna.musterfrau@email.com';
+    document.getElementById('b-tel').value = '+43 660 1234567';
+    document.getElementById('b-linkedin').value = 'linkedin.com/in/anna-musterfrau';
+    document.getElementById('b-lang').value = 'Deutsch, Englisch, Spanisch';
+    document.getElementById('b-skills').value = 'MS Office, Projektmanagement, Öffentlichkeitsarbeit';
+    document.getElementById('b-kontakttext').value = 'Ich freue mich über Anfragen zu Praktika oder Einstiegspositionen im öffentlichen Sektor.';
+  }
+
+  function generatePortfolio(){
+    const name = esc(document.getElementById('b-name').value || 'Dein Name');
+    const profil = esc(document.getElementById('b-profil').value);
+    const ort = esc(document.getElementById('b-ort').value);
+    const mail = esc(document.getElementById('b-mail').value);
+    const tel = esc(document.getElementById('b-tel').value);
+    const linkedin = esc(document.getElementById('b-linkedin').value);
+    const kontakttext = esc(document.getElementById('b-kontakttext').value);
+    const langs = document.getElementById('b-lang').value.split(',').map(s=>s.trim()).filter(Boolean);
+    const skills = document.getElementById('b-skills').value.split(',').map(s=>s.trim()).filter(Boolean);
+    const erfahrung = collectEntries('erfahrung-list');
+    const ausbildung = collectEntries('ausbildung-list');
+    const weiterbildung = collectEntries('weiterbildung-list');
+
+    function cardsHtml(entries){
+      return entries.map(e => `
+      <div class="card">
+        <h3>${esc(e.title)}</h3>
+        <div class="meta">${esc(e.meta)}</div>
+        ${e.bullets.length ? '<ul>' + e.bullets.map(b=>`<li>${esc(b)}</li>`).join('') + '</ul>' : ''}
+      </div>`).join('');
+    }
+
+    const pages = ['profil','erfahrung','ausbildung'];
+    if(weiterbildung.length) pages.push('weiterbildung');
+    pages.push('skills','kontakt');
+    const navLabels = {profil:'Profil', erfahrung:'Berufserfahrung', ausbildung:'Ausbildung', weiterbildung:'Weiterbildung', skills:'Skills', kontakt:'Kontakt'};
+    const navIcons = {profil:'👤', erfahrung:'💼', ausbildung:'🎓', weiterbildung:'🧩', skills:'🛠️', kontakt:'✉️'};
+
+    const html = `<!DOCTYPE html>
+<html lang="de"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${name} — Portfolio</title>
+<style>
+  :root{--bg:#0f172a;--bg2:#111827;--card:#1e293b;--accent:#38bdf8;--accent2:#a78bfa;--text:#e2e8f0;--muted:#94a3b8;--radius:16px;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 100%);color:var(--text);min-height:100vh;display:flex;}
+  .sidebar{width:230px;background:rgba(15,23,42,0.9);border-right:1px solid rgba(148,163,184,0.15);padding:28px 18px;display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;}
+  .brand{font-size:1.15rem;font-weight:700;margin-bottom:24px;}
+  .nav-btn{background:none;border:none;color:var(--muted);text-align:left;padding:11px 14px;border-radius:10px;font-size:.92rem;cursor:pointer;display:flex;align-items:center;gap:10px;margin-bottom:4px;}
+  .nav-btn.active{background:linear-gradient(135deg,rgba(56,189,248,0.18),rgba(167,139,250,0.14));color:var(--accent);font-weight:600;}
+  main{margin-left:230px;flex:1;padding:48px 56px;max-width:980px;}
+  .page{display:none;} .page.active{display:block;}
+  h1{font-size:2rem;margin-bottom:6px;}
+  h2.page-title{font-size:1.6rem;margin-bottom:26px;border-bottom:1px solid rgba(148,163,184,0.2);padding-bottom:12px;}
+  .lead{color:var(--muted);font-size:1.02rem;line-height:1.6;margin-bottom:18px;}
+  .contact-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:18px;}
+  .chip{background:var(--card);padding:8px 14px;border-radius:999px;font-size:.85rem;border:1px solid rgba(148,163,184,0.15);}
+  .card{background:var(--card);border-radius:var(--radius);padding:22px 24px;margin-bottom:18px;border:1px solid rgba(148,163,184,0.1);}
+  .card h3{font-size:1.08rem;margin-bottom:2px;} .card .meta{color:var(--accent2);font-size:.85rem;margin-bottom:10px;font-weight:500;}
+  .card ul{margin-left:18px;color:var(--muted);font-size:.92rem;line-height:1.55;}
+  .badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px;}
+  .badge{background:rgba(56,189,248,0.1);color:var(--accent);padding:7px 14px;border-radius:10px;font-size:.85rem;font-weight:500;border:1px solid rgba(56,189,248,0.25);}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  @media (max-width:800px){.sidebar{width:70px;padding:20px 8px;}.brand,.nav-btn span.label{display:none;}main{margin-left:70px;padding:32px 20px;}.grid2{grid-template-columns:1fr;}}
+</style></head><body>
+<div class="sidebar"><div class="brand">${name}</div><nav>
+${pages.map((p,i)=>`<button class="nav-btn${i===0?' active':''}" data-page="${p}">${navIcons[p]} <span class="label">${navLabels[p]}</span></button>`).join('')}
+</nav></div>
+<main>
+<section class="page active" id="profil"><h1>${name}</h1><p class="lead">${profil}</p>
+<div class="contact-row">
+${ort?`<div class="chip">📍 ${ort}</div>`:''}${mail?`<div class="chip">📧 <a href="mailto:${mail}" style="color:var(--accent);text-decoration:none;">${mail}</a></div>`:''}${tel?`<div class="chip">📞 ${tel}</div>`:''}${linkedin?`<div class="chip">🔗 <a href="https://${linkedin}" target="_blank" style="color:var(--accent);text-decoration:none;">${linkedin}</a></div>`:''}
+</div></section>
+<section class="page" id="erfahrung"><h2 class="page-title">Berufserfahrung</h2>${cardsHtml(erfahrung) || '<p class="lead">Noch keine Einträge.</p>'}</section>
+<section class="page" id="ausbildung"><h2 class="page-title">Ausbildung</h2>${cardsHtml(ausbildung) || '<p class="lead">Noch keine Einträge.</p>'}</section>
+${weiterbildung.length ? `<section class="page" id="weiterbildung"><h2 class="page-title">Weiterbildung</h2>${cardsHtml(weiterbildung)}</section>` : ''}
+<section class="page" id="skills"><h2 class="page-title">Skills &amp; Sprachen</h2><div class="grid2">
+<div class="card"><h3>Sprachen</h3><div class="badges">${langs.map(l=>`<div class="badge">${esc(l)}</div>`).join('')}</div></div>
+<div class="card"><h3>Skills</h3><div class="badges">${skills.map(s=>`<div class="badge">${esc(s)}</div>`).join('')}</div></div>
+</div></section>
+<section class="page" id="kontakt"><h2 class="page-title">Kontakt</h2><div class="card"><p class="lead">${kontakttext}</p>
+<div class="contact-row">${mail?`<div class="chip">📧 ${mail}</div>`:''}${tel?`<div class="chip">📞 ${tel}</div>`:''}${ort?`<div class="chip">📍 ${ort}</div>`:''}</div></div></section>
+</main>
+<script>
+const buttons=document.querySelectorAll('.nav-btn');const pages=document.querySelectorAll('.page');
+buttons.forEach(btn=>btn.addEventListener('click',()=>{buttons.forEach(b=>b.classList.remove('active'));pages.forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.getElementById(btn.dataset.page).classList.add('active');}));
+<\/script></body></html>`;
+
+    const blob = new Blob([html], {type:'text/html'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = (document.getElementById('b-name').value || 'mein-portfolio').replace(/\s+/g,'_').toLowerCase() + '_portfolio.html';
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('Portfolio wird heruntergeladen ✓');
+  }
 
   const UI = {
-    de: {
-      navProfil:"Profil", navErfahrung:"Berufserfahrung", navAusbildung:"Ausbildung", navWeiterbildung:"Weiterbildung",
+    de: { navProfil:"Profil", navErfahrung:"Berufserfahrung", navAusbildung:"Ausbildung", navWeiterbildung:"Weiterbildung",
       navEhrenamt:"Ehrenamt", navSkills:"Sprachen & Skills", navKontakt:"Kontakt",
       ptErfahrung:"Berufserfahrung", ptAusbildung:"Ausbildung", ptWeiterbildung:"Weiterbildung und Workshops",
       ptEhrenamt:"Ehrenamt", ptSkills:"Sprachen & Skills", ptKontakt:"Kontakt",
       fokusHeading:"Aktueller Fokus", langHeading:"Sprachen", itHeading:"IT-Kenntnisse",
       loggedOut:"Nicht angemeldet", loggedIn:"✅ Angemeldet", btnLogin:"🔒 Anmelden", btnEdit:"🔓 Bearbeitungsmodus",
-      hint:"Klicke auf einen Text mit gestricheltem Rahmen, um ihn zu bearbeiten. \"+ Eintrag hinzufügen\" fügt neue Kärtchen hinzu.", logout:"Abmelden",
+      hint:"Klicke auf einen Text mit gestricheltem Rahmen, um ihn zu bearbeiten.", logout:"Abmelden",
       modalTitle:"🔒 Anmeldung", modalError:"Falsches Passwort.", modalCancel:"Abbrechen", modalSubmit:"Anmelden",
-      modalPlaceholder:"Passwort", toastSaved:"Gespeichert ✓", toastImport:"Import erfolgreich ✓", toastHtml:"HTML-Datei wird heruntergeladen ✓", langBtn:"🌐 English"
-    },
-    en: {
-      navProfil:"Profile", navErfahrung:"Experience", navAusbildung:"Education", navWeiterbildung:"Training",
+      modalPlaceholder:"Passwort", toastSaved:"Gespeichert ✓", toastImport:"Import erfolgreich ✓", toastHtml:"HTML-Datei wird heruntergeladen ✓", langBtn:"🌐 English" },
+    en: { navProfil:"Profile", navErfahrung:"Experience", navAusbildung:"Education", navWeiterbildung:"Training",
       navEhrenamt:"Volunteering", navSkills:"Languages & Skills", navKontakt:"Contact",
       ptErfahrung:"Work Experience", ptAusbildung:"Education", ptWeiterbildung:"Further Training & Workshops",
       ptEhrenamt:"Volunteering", ptSkills:"Languages & Skills", ptKontakt:"Contact",
       fokusHeading:"Current Focus", langHeading:"Languages", itHeading:"IT Skills",
       loggedOut:"Not logged in", loggedIn:"✅ Logged in", btnLogin:"🔒 Login", btnEdit:"🔓 Edit mode",
-      hint:"Click a dashed-outline text to edit it. \"+ Add entry\" inserts new cards.", logout:"Log out",
+      hint:"Click a dashed-outline text to edit it.", logout:"Log out",
       modalTitle:"🔒 Login", modalError:"Incorrect password.", modalCancel:"Cancel", modalSubmit:"Login",
-      modalPlaceholder:"Password", toastSaved:"Saved ✓", toastImport:"Import successful ✓", toastHtml:"Downloading HTML file ✓", langBtn:"🌐 Deutsch"
-    }
+      modalPlaceholder:"Password", toastSaved:"Saved ✓", toastImport:"Import successful ✓", toastHtml:"Downloading HTML file ✓", langBtn:"🌐 Deutsch" }
   };
 
   const CONTENT_EN = {
     "f-name":"Josef Iebed",
     "f-profil":"Sociology graduate (University of Vienna) with skills in SPSS, STATA, RStudio, MAXQDA, and LimeSurvey. Research experience at L&amp;R Sozialforschung in data analysis and validation. Reliable and communicative, gained through supervision and administrative roles.",
     "f-fokus":"Transitioning from a Sociology Master's at the University of Vienna into the <strong style=\"color:var(--text)\">Consumer Research &amp; Data Driven Marketing (M.A.)</strong> program at FH Wiener Neustadt (Campus Wieselburg), starting 09/2026.",
-    "f-ort":"Vienna, Austria", "f-mail":"josef.iebed@gmail.com", "f-tel":"+43 660 7560649",
-    "f-linkedin":"linkedin.com/in/josef-i-24071999",
+    "f-ort":"Vienna, Austria", "f-mail":"josef.iebed@gmail.com", "f-tel":"+43 660 7560649", "f-linkedin":"linkedin.com/in/josef-i-24071999",
     "e1-title":"Intern — L&amp;R Sozialforschung GmbH", "e1-meta":"07/2026 · Vienna",
     "e1-desc":"Contributed to the research project \"Systematic Analysis of Workshop Reports of the 'Digital Überall' Initiative.\"",
     "e1-list":"<li>Reviewed and validated information in workshop reports</li><li>Systematized data provided by workshop organizers in Excel</li><li>Conducted systematic text analysis of workshop reports using MAXQDA</li><li>Systematically mapped qualitative processes by quantifying them into categories</li>",
@@ -480,30 +760,12 @@
     if(!raw) return;
     try{
       const data = JSON.parse(raw);
-      Object.keys(data).forEach(id => {
-        const el = document.getElementById(id);
-        if(el) el.innerHTML = data[id];
-      });
+      Object.keys(data).forEach(id => { const el = document.getElementById(id); if(el) el.innerHTML = data[id]; });
     }catch(e){ console.error("Ladefehler", e); }
   }
-
-  function collectData(){
-    const data = {};
-    getEditableEls().forEach(el => { data[el.id] = el.innerHTML; });
-    return data;
-  }
-
-  function saveData(){
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(collectData()));
-    showToast(UI[currentLang].toastSaved);
-  }
-
-  function showToast(msg){
-    const t = document.getElementById('toast');
-    t.textContent = msg;
-    t.style.display = 'block';
-    setTimeout(()=>{ t.style.display = 'none'; }, 2500);
-  }
+  function collectData(){ const data = {}; getEditableEls().forEach(el => { data[el.id] = el.innerHTML; }); return data; }
+  function saveData(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(collectData())); showToast(UI[currentLang].toastSaved); }
+  function showToast(msg){ const t = document.getElementById('toast'); t.textContent = msg; t.style.display = 'block'; setTimeout(()=>{ t.style.display = 'none'; }, 2500); }
 
   loadData();
   getEditableEls().forEach(el => { CONTENT_DE[el.id] = el.innerHTML; });
@@ -537,19 +799,13 @@
     loginStatus.textContent = isLoggedIn ? s.loggedIn : s.loggedOut;
     loginToggleBtn.textContent = isLoggedIn ? s.btnEdit : s.btnLogin;
   }
-
   function applyContent(lang){
     const dict = lang === 'de' ? CONTENT_DE : CONTENT_EN;
-    Object.keys(dict).forEach(id => {
-      const el = document.getElementById(id);
-      if(el) el.innerHTML = dict[id];
-    });
+    Object.keys(dict).forEach(id => { const el = document.getElementById(id); if(el) el.innerHTML = dict[id]; });
   }
-
   document.getElementById('langBtn').addEventListener('click', () => {
     currentLang = currentLang === 'de' ? 'en' : 'de';
-    applyContent(currentLang);
-    applyUIStrings(currentLang);
+    applyContent(currentLang); applyUIStrings(currentLang);
     document.documentElement.lang = currentLang;
   });
 
@@ -558,10 +814,10 @@
   const loginStatus = document.getElementById('loginStatus');
   const loginPassword = document.getElementById('loginPassword');
   const loginError = document.getElementById('loginError');
+  let pendingRedirectToProfile = false;
 
-  let isLoggedIn = false;
-
-  function openLogin(){
+  function openLogin(fromBuilder){
+    pendingRedirectToProfile = !!fromBuilder;
     loginError.style.display = 'none';
     loginPassword.value = '';
     loginOverlay.classList.add('show');
@@ -582,11 +838,15 @@
     applyUIStrings(currentLang);
   }
 
-  loginToggleBtn.addEventListener('click', () => { isLoggedIn ? exitEditMode() : openLogin(); });
+  document.getElementById('builderLoginBtn').addEventListener('click', () => openLogin(true));
+  loginToggleBtn.addEventListener('click', () => { isLoggedIn ? exitEditMode() : openLogin(false); });
   document.getElementById('loginCancel').addEventListener('click', closeLogin);
   document.getElementById('loginSubmit').addEventListener('click', () => {
-    if(loginPassword.value === PASSWORD){ closeLogin(); enterEditMode(); }
-    else { loginError.style.display = 'block'; }
+    if(loginPassword.value === PASSWORD){
+      closeLogin();
+      if(pendingRedirectToProfile){ showProfileView(); }
+      enterEditMode();
+    } else { loginError.style.display = 'block'; }
   });
   loginPassword.addEventListener('keydown', e => { if(e.key === 'Enter') document.getElementById('loginSubmit').click(); });
 
@@ -596,20 +856,17 @@
   document.getElementById('exportBtn').addEventListener('click', () => {
     const blob = new Blob([JSON.stringify(collectData(), null, 2)], {type:"application/json"});
     const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url; a.download = "josef_iebed_cv_daten.json"; a.click();
+    const a = document.createElement('a'); a.href = url; a.download = "josef_iebed_cv_daten.json"; a.click();
     URL.revokeObjectURL(url);
   });
 
   document.getElementById('exportHtmlBtn').addEventListener('click', () => {
-    const clone = document.documentElement.cloneNode(true);
+    const clone = document.getElementById('profileView').cloneNode(true);
     clone.querySelectorAll('[contenteditable]').forEach(el => el.removeAttribute('contenteditable'));
-    clone.querySelector('body').classList.remove('edit-mode');
-    const htmlStr = '<!DOCTYPE html>\n' + clone.outerHTML;
-    const blob = new Blob([htmlStr], {type:"text/html"});
+    const full = '<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8"><title>Josef Iebed — Portfolio</title></head><body>' + clone.outerHTML + '</body></html>';
+    const blob = new Blob([full], {type:"text/html"});
     const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url; a.download = "index.html"; a.click();
+    const a = document.createElement('a'); a.href = url; a.download = "profil.html"; a.click();
     URL.revokeObjectURL(url);
     showToast(UI[currentLang].toastHtml);
   });
@@ -623,10 +880,7 @@
     reader.onload = ev => {
       try{
         const data = JSON.parse(ev.target.result);
-        Object.keys(data).forEach(id => {
-          const el = document.getElementById(id);
-          if(el) el.innerHTML = data[id];
-        });
+        Object.keys(data).forEach(id => { const el = document.getElementById(id); if(el) el.innerHTML = data[id]; });
         localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
         showToast(UI[currentLang].toastImport);
       }catch(err){ alert("Fehler beim Import: ungültige JSON-Datei."); }
