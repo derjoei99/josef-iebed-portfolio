@@ -536,6 +536,7 @@
   <button class="tb-btn tb-view" id="exitEditModeBtn">👁️ Profil ansehen</button>
   <button class="tb-btn tb-save" id="saveBtn">💾 In der Cloud speichern</button>
   <button class="tb-btn tb-upload" id="uploadPhotoBtn">📷 Profilbild hochladen</button>
+  <button class="tb-btn tb-import" id="passwordSetupBtn">🔑 Passwort festlegen/ändern</button>
   <input type="file" id="avatarUpload" accept="image/*" style="display:none;">
   <button class="tb-btn tb-exporthtml" id="exportHtmlBtn">📄 Als HTML-Datei exportieren</button>
   <button class="tb-btn tb-export" id="exportBtn">⬇️ Nur Daten (JSON)</button>
@@ -555,6 +556,20 @@
     <div class="modal-actions">
       <button class="btn-secondary2" id="loginCancel">Abbrechen</button>
       <button class="btn-primary2" id="loginSubmit">Anmelden</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="passwordSetupOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="passwordSetupTitle">
+    <h3 id="passwordSetupTitle">🔑 Passwort festlegen oder ändern</h3>
+    <p class="login-help" id="passwordSetupHelp">Diese Aktion aktualisiert das Passwort für dein angemeldetes Besitzerkonto. Sie sendet keinen Anmeldelink.</p>
+    <div class="modal-error" id="passwordSetupError" role="alert"></div>
+    <input type="password" id="newPassword" placeholder="Neues Passwort" autocomplete="new-password" minlength="8" required>
+    <input type="password" id="confirmPassword" placeholder="Passwort wiederholen" autocomplete="new-password" minlength="8" required>
+    <div class="modal-actions">
+      <button class="btn-secondary2" id="passwordSetupCancel">Abbrechen</button>
+      <button class="btn-primary2" id="passwordSetupSubmit">Passwort speichern</button>
     </div>
   </div>
 </div>
@@ -772,6 +787,12 @@ buttons.forEach(btn=>btn.addEventListener('click',()=>{buttons.forEach(b=>b.clas
       modalTitle:"🔒 Sicher anmelden", modalHelp:"Melde dich mit deiner E-Mail-Adresse und deinem Passwort an. Nur dein Konto kann das Portfolio bearbeiten.",
       modalError:"Bitte gib eine gültige E-Mail-Adresse und dein Passwort ein.", modalCancel:"Abbrechen", modalSubmit:"Anmelden",
       modalPlaceholder:"Deine E-Mail-Adresse", passwordPlaceholder:"Dein Passwort",
+      passwordManage:"🔑 Passwort festlegen/ändern", passwordSetupTitle:"🔑 Passwort festlegen oder ändern",
+      passwordSetupHelp:"Diese Aktion aktualisiert das Passwort für dein angemeldetes Besitzerkonto. Sie sendet keinen Anmeldelink.",
+      passwordNewPlaceholder:"Neues Passwort", passwordConfirmPlaceholder:"Passwort wiederholen",
+      passwordCancel:"Abbrechen", passwordSave:"Passwort speichern", passwordMismatch:"Die Passwörter stimmen nicht überein.",
+      passwordTooShort:"Bitte verwende mindestens 8 Zeichen.", passwordUpdated:"Passwort aktualisiert ✓",
+      passwordUpdateError:"Das Passwort konnte nicht aktualisiert werden.",
       ownerOnly:"Diese E-Mail-Adresse ist nicht zum Bearbeiten dieses Portfolios berechtigt.",
       toastSaved:"In der Cloud gespeichert ✓", toastSaveError:"Speichern fehlgeschlagen. Bitte Verbindung prüfen.", toastPhoto:"Profilbild gewählt — speichere, um es zu veröffentlichen.",
       toastImport:"Import erfolgreich ✓", toastHtml:"HTML-Datei wird heruntergeladen ✓", langBtn:"🌐 English" },
@@ -787,6 +808,12 @@ buttons.forEach(btn=>btn.addEventListener('click',()=>{buttons.forEach(b=>b.clas
       modalTitle:"🔒 Secure sign in", modalHelp:"Sign in with your email and password. Only your account can edit this portfolio.",
       modalError:"Enter a valid email address and your password.", modalCancel:"Cancel", modalSubmit:"Sign in",
       modalPlaceholder:"Your email address", passwordPlaceholder:"Your password",
+      passwordManage:"🔑 Set/change password", passwordSetupTitle:"🔑 Set or change your password",
+      passwordSetupHelp:"This updates the password for your signed-in owner account. It does not send a sign-in link.",
+      passwordNewPlaceholder:"New password", passwordConfirmPlaceholder:"Repeat password",
+      passwordCancel:"Cancel", passwordSave:"Save password", passwordMismatch:"The passwords do not match.",
+      passwordTooShort:"Use at least 8 characters.", passwordUpdated:"Password updated ✓",
+      passwordUpdateError:"Could not update the password.",
       ownerOnly:"This email address is not authorized to edit this portfolio.",
       toastSaved:"Saved to cloud ✓", toastSaveError:"Save failed. Please check your connection.", toastPhoto:"Photo selected — save to publish it.",
       toastImport:"Import successful ✓", toastHtml:"Downloading HTML file ✓", langBtn:"🌐 Deutsch" }
@@ -964,6 +991,13 @@ buttons.forEach(btn=>btn.addEventListener('click',()=>{buttons.forEach(b=>b.clas
     document.getElementById('loginSubmit').textContent = s.modalSubmit;
     document.getElementById('loginEmail').placeholder = s.modalPlaceholder;
     document.getElementById('loginPassword').placeholder = s.passwordPlaceholder;
+    document.getElementById('passwordSetupBtn').textContent = s.passwordManage;
+    document.getElementById('passwordSetupTitle').textContent = s.passwordSetupTitle;
+    document.getElementById('passwordSetupHelp').textContent = s.passwordSetupHelp;
+    document.getElementById('newPassword').placeholder = s.passwordNewPlaceholder;
+    document.getElementById('confirmPassword').placeholder = s.passwordConfirmPlaceholder;
+    document.getElementById('passwordSetupCancel').textContent = s.passwordCancel;
+    document.getElementById('passwordSetupSubmit').textContent = s.passwordSave;
     document.getElementById('saveBtn').textContent = currentLang === 'de' ? '💾 In der Cloud speichern' : '💾 Save to cloud';
     document.getElementById('uploadPhotoBtn').textContent = currentLang === 'de' ? '📷 Profilbild hochladen' : '📷 Upload profile photo';
     document.getElementById('exitEditModeBtn').textContent = s.btnView;
@@ -987,6 +1021,11 @@ buttons.forEach(btn=>btn.addEventListener('click',()=>{buttons.forEach(b=>b.clas
   const loginEmail = document.getElementById('loginEmail');
   const loginPassword = document.getElementById('loginPassword');
   const loginError = document.getElementById('loginError');
+  const passwordSetupOverlay = document.getElementById('passwordSetupOverlay');
+  const passwordSetupError = document.getElementById('passwordSetupError');
+  const newPasswordInput = document.getElementById('newPassword');
+  const confirmPasswordInput = document.getElementById('confirmPassword');
+  const passwordSetupSubmit = document.getElementById('passwordSetupSubmit');
 
   function openLogin(){
     loginError.style.display = 'none';
@@ -1003,6 +1042,41 @@ buttons.forEach(btn=>btn.addEventListener('click',()=>{buttons.forEach(b=>b.clas
   function showLoginError(message){
     loginError.textContent = message;
     loginError.style.display = 'block';
+  }
+  function openPasswordSetup(){
+    if(!isLoggedIn || !isEditing) return;
+    passwordSetupError.style.display = 'none';
+    newPasswordInput.value = '';
+    confirmPasswordInput.value = '';
+    passwordSetupOverlay.classList.add('show');
+    setTimeout(()=> newPasswordInput.focus(), 50);
+  }
+  function closePasswordSetup(){
+    passwordSetupOverlay.classList.remove('show');
+    newPasswordInput.value = '';
+    confirmPasswordInput.value = '';
+  }
+  function showPasswordSetupError(message){
+    passwordSetupError.textContent = message;
+    passwordSetupError.style.display = 'block';
+  }
+  async function saveOwnerPassword(){
+    passwordSetupError.style.display = 'none';
+    if(!isLoggedIn || !isEditing){ showPasswordSetupError(UI[currentLang].passwordUpdateError); return; }
+    const password = newPasswordInput.value;
+    if(password.length < 8){ showPasswordSetupError(UI[currentLang].passwordTooShort); return; }
+    if(password !== confirmPasswordInput.value){ showPasswordSetupError(UI[currentLang].passwordMismatch); return; }
+    passwordSetupSubmit.disabled = true;
+    try{
+      const client = await getSupabaseClient();
+      const {error} = await client.auth.updateUser({password});
+      if(error) throw error;
+      closePasswordSetup();
+      showToast(UI[currentLang].passwordUpdated);
+    }catch(error){
+      console.error('Password update failed', error);
+      showPasswordSetupError(error.message || UI[currentLang].passwordUpdateError);
+    }finally{ passwordSetupSubmit.disabled = false; }
   }
   async function enterEditMode(){
     if(!isLoggedIn) return;
@@ -1071,6 +1145,10 @@ buttons.forEach(btn=>btn.addEventListener('click',()=>{buttons.forEach(b=>b.clas
   document.getElementById('exitEditModeBtn').addEventListener('click', exitEditModeOnly);
   document.getElementById('fullLogoutBtn').addEventListener('click', fullLogout);
   document.getElementById('loginCancel').addEventListener('click', closeLogin);
+  document.getElementById('passwordSetupBtn').addEventListener('click', openPasswordSetup);
+  document.getElementById('passwordSetupCancel').addEventListener('click', closePasswordSetup);
+  passwordSetupSubmit.addEventListener('click', saveOwnerPassword);
+  confirmPasswordInput.addEventListener('keydown', e => { if(e.key === 'Enter') passwordSetupSubmit.click(); });
   document.getElementById('loginSubmit').addEventListener('click', async () => {
     loginError.style.display = 'none';
     const email = loginEmail.value.trim().toLowerCase();
@@ -1091,6 +1169,7 @@ buttons.forEach(btn=>btn.addEventListener('click',()=>{buttons.forEach(b=>b.clas
   loginEmail.addEventListener('keydown', e => { if(e.key === 'Enter') document.getElementById('loginSubmit').click(); });
   loginPassword.addEventListener('keydown', e => { if(e.key === 'Enter') document.getElementById('loginSubmit').click(); });
   loginOverlay.addEventListener('click', e => { if(e.target === loginOverlay) closeLogin(); });
+  passwordSetupOverlay.addEventListener('click', e => { if(e.target === passwordSetupOverlay) closePasswordSetup(); });
 
   document.getElementById('logoutBtn').addEventListener('click', fullLogout);
   document.getElementById('saveBtn').addEventListener('click', saveData);

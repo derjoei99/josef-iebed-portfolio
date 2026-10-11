@@ -15,7 +15,9 @@ The frontend settings live in `supabase-config.js`. The owner email is allowlist
 
 The site signs in with `signInWithPassword`. Submitting the login form does **not** send a sign-in email or link. Public registration is not exposed in the portfolio.
 
-Before the first login, create the owner account in Supabase Dashboard under **Authentication → Users**. Use the portfolio owner email, set a password directly in the dashboard, and confirm the email for that account. Never put the password in this repository, a source file, or a chat message. Password reset is not currently implemented in the portfolio UI.
+For an owner who is already signed in (including an existing session from the earlier passwordless flow), open **Edit portfolio → Set/change password** and enter a new password twice. The portfolio calls `supabase.auth.updateUser({ password })` for the authenticated owner; it does not send a sign-in link. Passwords are never stored in this repository, a source file, or chat. Use a strong, unique password.
+
+The project’s **Password changed** security-notification toggle was verified as off on 2026-10-11, so setting the password through this flow does not send a notification email. If the owner session has expired before a password is set, the in-portfolio setup action is unavailable; do not expose public registration or add a password-reset email flow without an explicit decision.
 
 The dashboard’s **Site URL** and redirect allowlist are already set to `https://derjoei99.github.io/josef-iebed-portfolio/`. Those settings are not used by normal password sign-in; they remain useful for future confirmation or recovery flows.
 
@@ -28,6 +30,7 @@ The SQL migration is in `supabase/migrations/20261011184000_portfolio_content.sq
 ## References
 
 - [Supabase password-based authentication](https://supabase.com/docs/guides/auth/passwords)
+- [Supabase Auth email and security notification templates](https://supabase.com/docs/guides/auth/auth-email-templates)
 - [Supabase Auth redirect URLs](https://supabase.com/docs/guides/auth/redirect-urls)
 - [Supabase row-level security](https://supabase.com/docs/guides/database/postgres/row-level-security)
 - [Supabase pricing](https://supabase.com/pricing)
