@@ -34,3 +34,7 @@ The SQL migration is in `supabase/migrations/20261011184000_portfolio_content.sq
 - [Supabase Auth redirect URLs](https://supabase.com/docs/guides/auth/redirect-urls)
 - [Supabase row-level security](https://supabase.com/docs/guides/database/postgres/row-level-security)
 - [Supabase pricing](https://supabase.com/pricing)
+
+## Downloads (CV and other documents)
+
+The **Downloads** page lists files from the public Storage bucket `portfolio-files` (folders `cv/` and `other/`). Visitors can download; only the owner email can upload or delete (in edit mode). Run `supabase/migrations/20261126120000_portfolio_files_storage.sql` once in the Supabase SQL editor to create the bucket and policies. Max file size: 20 MB.
