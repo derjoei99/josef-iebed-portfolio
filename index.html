@@ -15,46 +15,7 @@
     background:linear-gradient(160deg,var(--bg) 0%, var(--bg2) 100%);
     color:var(--text); min-height:100vh;
   }
-  #builderView{ padding:40px 20px; }
-  .wrap{max-width:900px; margin:0 auto;}
-  .wrap header{margin-bottom:32px;}
-  .wrap h1{font-size:2rem; margin-bottom:8px;}
-  .wrap header p{color:var(--muted); font-size:1rem; line-height:1.6;}
-  .wrap h2{font-size:1.3rem; margin:36px 0 16px; border-bottom:1px solid rgba(148,163,184,0.2); padding-bottom:10px;}
-  .b-card{background:var(--card); border-radius:var(--radius); padding:22px 24px; margin-bottom:16px; border:1px solid rgba(148,163,184,0.1);}
-  .wrap label{display:block; font-size:.82rem; color:var(--muted); margin-bottom:6px; margin-top:14px; font-weight:600;}
-  .wrap label:first-child{margin-top:0;}
-  .wrap input, .wrap textarea{
-    width:100%; padding:10px 12px; border-radius:8px; border:1px solid rgba(148,163,184,0.25);
-    background:var(--bg2); color:var(--text); font-size:.92rem; font-family:inherit;
-  }
-  .wrap textarea{resize:vertical; min-height:70px;}
-  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
-  .entry{border:1px solid rgba(148,163,184,0.15); border-radius:12px; padding:16px; margin-bottom:14px; position:relative; background:rgba(15,23,42,0.4);}
-  .entry .remove{
-    position:absolute; top:10px; right:10px; background:rgba(248,113,113,0.15); color:var(--danger);
-    border:1px solid rgba(248,113,113,0.3); border-radius:8px; padding:5px 10px; font-size:.75rem; cursor:pointer;
-  }
-  .add-btn{
-    background:rgba(56,189,248,0.12); border:1px dashed rgba(56,189,248,0.4); color:var(--accent);
-    padding:10px 16px; border-radius:10px; cursor:pointer; font-size:.85rem; font-weight:600; width:100%;
-  }
-  .actions{display:flex; gap:12px; margin:36px 0; flex-wrap:wrap;}
-  .btn{border:none; border-radius:10px; padding:13px 26px; font-size:.95rem; font-weight:700; cursor:pointer;}
-  .btn-primary{background:linear-gradient(135deg, var(--accent), var(--accent2)); color:#0c1220;}
-  .btn-secondary{background:var(--card); color:var(--text); border:1px solid rgba(148,163,184,0.25);}
-  .hint{font-size:.8rem; color:var(--muted); margin-top:6px;}
-  .owner-box{
-    background:rgba(56,189,248,0.08); border:1px solid rgba(56,189,248,0.25); border-radius:14px;
-    padding:16px 20px; margin-top:44px; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
-  }
-  .owner-box p{color:var(--muted); font-size:.85rem; margin:0;}
-  .owner-btn{
-    background:rgba(167,139,250,0.15); border:1px solid rgba(167,139,250,0.4); color:var(--accent2);
-    padding:9px 16px; border-radius:10px; cursor:pointer; font-size:.85rem; font-weight:600; white-space:nowrap;
-  }
-
-  #profileView{ display:none; min-height:100vh; }
+  #profileView{ display:block; min-height:100vh; }
   .app{ display:flex; min-height:100vh; }
   .mobile-topbar{ display:none; }
   .hamburger-btn{ background:none; border:none; color:var(--text); font-size:1.5rem; cursor:pointer; padding:4px 8px; }
@@ -101,89 +62,24 @@
   .card ul li{margin-bottom:4px;}
   .view-btn{display:block;width:100%;margin:8px 0 14px;padding:8px 12px;border-radius:10px;border:1px solid rgba(148,163,184,0.25);background:transparent;color:var(--muted);cursor:pointer;font-size:.85rem;text-align:left;}
   .view-btn:hover{color:var(--text);}
-  body.compact:not(.edit-mode) main .card ul, body.compact:not(.edit-mode) main .card p.lead{display:none;}
-  body.compact:not(.edit-mode) main .card{padding:14px 20px;margin-bottom:10px;}
-  body.compact:not(.edit-mode) main .card .meta{margin-bottom:0;}
-  body.compact:not(.edit-mode) #profil .card p.lead, body.compact:not(.edit-mode) #skills .card, body.compact:not(.edit-mode) #kontakt .card p.lead, body.compact:not(.edit-mode) #downloads .card p.lead, body.compact:not(.edit-mode) #downloads .card ul{display:block;}
+  body.compact main .card ul, body.compact main .card p.lead{display:none;}
+  body.compact main .card{padding:14px 20px;margin-bottom:10px;}
+  body.compact main .card .meta{margin-bottom:0;}
+  body.compact #profil .card p.lead, body.compact #skills .card, body.compact #kontakt .card p.lead, body.compact #downloads .card p.lead, body.compact #downloads .card ul{display:block;}
   .dl-list{list-style:none;margin:0 !important;padding:0;}
   .dl-list li{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid rgba(148,163,184,0.12);}
   .dl-list li:last-child{border-bottom:none;}
   .dl-list a{color:var(--text);text-decoration:none;word-break:break-word;}
   .dl-list a:hover{text-decoration:underline;}
-  .dl-del{display:none;background:transparent;border:1px solid rgba(248,113,113,0.5);color:#f87171;border-radius:8px;padding:4px 10px;cursor:pointer;font-size:.8rem;}
-  body.edit-mode .dl-del{display:inline-block;}
-  .dl-upload{display:none;margin-top:14px;}
-  body.edit-mode .dl-upload{display:block;}
   .badges{display:flex; flex-wrap:wrap; gap:10px; margin-top:8px;}
   .badge{background:rgba(56,189,248,0.1); color:var(--accent); padding:7px 14px; border-radius:10px; font-size:.85rem; font-weight:500; border:1px solid rgba(56,189,248,0.25);}
   .grid2b{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
 
-  .topright-auth{
+  .topright-actions{
     position:fixed; top:20px; right:20px; z-index:40; display:flex; flex-direction:row; align-items:center; gap:8px;
     background:rgba(15,23,42,0.92); backdrop-filter:blur(10px); padding:8px 10px; border-radius:12px; border:1px solid rgba(148,163,184,0.15);
   }
-  .edit-entry-btn{position:fixed; left:18px; bottom:18px; z-index:45; box-shadow:0 8px 24px rgba(0,0,0,.35);}
-  body.edit-mode .edit-entry-btn{display:none;}
-  .login-btn{
-    background:rgba(56,189,248,0.12); border:1px solid rgba(56,189,248,0.3); color:var(--accent);
-    padding:9px 12px; border-radius:10px; font-size:.82rem; cursor:pointer; font-weight:600;
-  }
-  .logout-small{
-    background:none; border:none; color:var(--muted); font-size:.7rem; text-decoration:underline; cursor:pointer; padding:2px;
-  }
-  .login-status{font-size:.72rem; color:var(--muted);}
-
-  body.edit-mode [data-editable]{
-    outline:1.5px dashed rgba(56,189,248,0.5); border-radius:6px; padding:2px 4px;
-    cursor:text; transition:.15s;
-  }
-  body.edit-mode [data-editable]:hover{outline-color:var(--accent); background:rgba(56,189,248,0.06);}
-  body.edit-mode [data-editable]:focus{outline:1.5px solid var(--accent); background:rgba(56,189,248,0.1);}
-  .card-remove-btn{display:none; position:absolute; top:14px; right:14px; background:rgba(248,113,113,0.15); color:var(--danger); border:1px solid rgba(248,113,113,0.3); border-radius:8px; padding:4px 10px; font-size:.72rem; cursor:pointer; font-weight:600;}
-  body.edit-mode .card-remove-btn{display:block;}
-  .add-card-btn{display:none; width:100%; background:rgba(56,189,248,0.1); border:1.5px dashed rgba(56,189,248,0.4); color:var(--accent); padding:12px; border-radius:12px; cursor:pointer; font-size:.88rem; font-weight:600; margin-bottom:18px;}
-  body.edit-mode .add-card-btn{display:block;}
-  .edit-toolbar{
-    position:fixed; bottom:0; left:230px; right:0; background:rgba(15,23,42,0.97);
-    border-top:1px solid rgba(148,163,184,0.2); padding:12px 24px; display:none;
-    gap:10px; align-items:center; z-index:20; backdrop-filter:blur(10px); flex-wrap:wrap;
-  }
-  body.edit-mode .edit-toolbar{display:flex;}
-  body.edit-mode main{padding-bottom:200px;}
-  .tb-btn{border:none; border-radius:8px; padding:9px 16px; font-size:.85rem; font-weight:600; cursor:pointer;}
-  .tb-save{background:var(--ok); color:#052e16;}
-  .tb-upload{background:rgba(56,189,248,0.15); color:var(--accent); border:1px solid rgba(56,189,248,0.35);}
-  .tb-view{background:var(--card); color:var(--text); border:1px solid rgba(148,163,184,0.25);}
-  .tb-export{background:var(--card); color:var(--text); border:1px solid rgba(148,163,184,0.25);}
-  .tb-import{background:var(--card); color:var(--text); border:1px solid rgba(148,163,184,0.25);}
-  .tb-exporthtml{background:var(--accent2); color:#1a0b2e;}
-  .tb-logout{background:var(--danger); color:#450a0a; margin-left:auto;}
-  .tb-hint{font-size:.75rem; color:var(--muted);}
-
-  .modal-overlay{position:fixed; inset:0; background:rgba(0,0,0,0.6); display:none; align-items:center; justify-content:center; z-index:100;}
-  .modal-overlay.show{display:flex;}
-  .modal{background:var(--card); border-radius:var(--radius); padding:32px; width:320px; max-width:90vw; border:1px solid rgba(148,163,184,0.15); box-shadow:0 20px 50px rgba(0,0,0,0.4);}
-  .modal h3{margin-bottom:16px;}
-  .modal input{width:100%; padding:10px 12px; border-radius:8px; border:1px solid rgba(148,163,184,0.25); background:var(--bg2); color:var(--text); margin-bottom:12px; font-size:.9rem;}
-  .modal-actions{display:flex; gap:10px; margin-top:8px;}
-  .modal-actions button{flex:1; padding:10px; border:none; border-radius:8px; font-weight:600; cursor:pointer;}
-  .btn-primary2{background:var(--accent); color:#0c2233;}
-  .btn-secondary2{background:rgba(148,163,184,0.15); color:var(--text);}
-  .modal-error{color:var(--danger); font-size:.8rem; margin-bottom:8px; display:none;}
-  .modal-message{color:var(--ok); font-size:.84rem; line-height:1.5; margin-bottom:10px; display:none;}
-  .forgot-password-link{display:block;margin:-2px 0 12px auto;padding:0;background:none;border:0;color:var(--accent);font:inherit;font-size:.82rem;text-decoration:underline;cursor:pointer;}
-  .forgot-password-link:disabled{opacity:.6;cursor:wait;}
-  .login-help{color:var(--muted); font-size:.82rem; line-height:1.5; margin:0 0 14px;}
-  .toast{position:fixed; top:20px; right:20px; background:var(--ok); color:#052e16; padding:12px 20px; border-radius:10px; font-weight:600; font-size:.85rem; z-index:200; display:none; box-shadow:0 8px 24px rgba(0,0,0,0.3); max-width:320px;}
-
   @media (max-width:800px){
-    #builderView{ padding:20px 14px; }
-    .wrap h1{ font-size:1.5rem; }
-    .grid2{ grid-template-columns:1fr; }
-    .actions{ flex-direction:column; }
-    .actions .btn{ width:100%; }
-    .owner-box{ flex-direction:column; align-items:stretch; text-align:center; }
-
     .mobile-topbar{
       display:flex; align-items:center; gap:10px; position:fixed; top:0; left:0; right:0; height:56px;
       background:rgba(15,23,42,0.96); backdrop-filter:blur(10px); z-index:15; padding:0 12px;
@@ -197,86 +93,13 @@
     main{ margin-left:0; padding:116px 16px 100px; }
     h2.page-title{ font-size:1.3rem; }
     .grid2b{ grid-template-columns:1fr; }
-    .edit-toolbar{ left:0; padding:10px 12px; }
-    body.edit-mode main{padding-bottom:240px;}
-    .tb-hint{ display:none; }
     .avatar{ width:90px; height:90px; }
-    .topright-auth{ top:64px; right:10px; padding:7px 8px; gap:6px; }
-    .topright-auth .share-btn{padding:7px 9px; font-size:.74rem;}
-    .login-status{ display:none; }
-    .edit-entry-btn{left:12px; bottom:12px;}
+    .topright-actions{ top:64px; right:10px; padding:7px 8px; gap:6px; }
+    .topright-actions .share-btn{padding:7px 9px; font-size:.74rem;}
   }
 </style>
 </head>
 <body>
-
-<div id="builderView">
-  <div class="wrap">
-    <header>
-      <h1>🛠️ Portfolio-Builder</h1>
-      <p>Trag deine eigenen Daten ein und lade dir am Ende eine fertige, eigenständige Portfolio-Webseite herunter — im gleichen Design wie diese Vorlage. Keine Anmeldung, keine Registrierung nötig, alles läuft nur in deinem Browser.</p>
-    </header>
-
-    <div class="b-card">
-      <h2 style="margin-top:0;">👤 Profil</h2>
-      <label>Name</label>
-      <input id="b-name" placeholder="z. B. Anna Musterfrau">
-      <label>Kurzprofil (1–3 Sätze)</label>
-      <textarea id="b-profil" placeholder="z. B. Absolventin der Politikwissenschaft mit Erfahrung in..."></textarea>
-      <div class="grid2">
-        <div>
-          <label>Ort</label>
-          <input id="b-ort" placeholder="z. B. Wien, Österreich">
-          <label>E-Mail</label>
-          <input id="b-mail" placeholder="name@email.com">
-        </div>
-        <div>
-          <label>Telefon</label>
-          <input id="b-tel" placeholder="+43 ...">
-          <label>LinkedIn (optional)</label>
-          <input id="b-linkedin" placeholder="linkedin.com/in/...">
-        </div>
-      </div>
-    </div>
-
-    <h2>💼 Berufserfahrung</h2>
-    <div id="erfahrung-list"></div>
-    <button class="add-btn" onclick="addEntry('erfahrung-list', erfahrungTemplate)">+ Station hinzufügen</button>
-
-    <h2>🎓 Ausbildung</h2>
-    <div id="ausbildung-list"></div>
-    <button class="add-btn" onclick="addEntry('ausbildung-list', ausbildungTemplate)">+ Ausbildung hinzufügen</button>
-
-    <h2>🧩 Weiterbildung (optional)</h2>
-    <div id="weiterbildung-list"></div>
-    <button class="add-btn" onclick="addEntry('weiterbildung-list', weiterbildungTemplate)">+ Weiterbildung hinzufügen</button>
-
-    <h2>🛠️ Skills &amp; Sprachen</h2>
-    <div class="b-card">
-      <label>Sprachen (durch Komma getrennt)</label>
-      <input id="b-lang" placeholder="Deutsch, Englisch, Französisch">
-      <label>Fachliche Skills / Tools (durch Komma getrennt)</label>
-      <input id="b-skills" placeholder="Excel, Projektmanagement, Adobe Photoshop">
-    </div>
-
-    <h2>✉️ Kontakt-Text</h2>
-    <div class="b-card">
-      <label>Abschlusstext auf der Kontaktseite</label>
-      <textarea id="b-kontakttext" placeholder="z. B. Ich freue mich über Anfragen zu..."></textarea>
-    </div>
-
-    <div class="actions">
-      <button class="btn btn-primary" onclick="generatePortfolio()">⬇️ Portfolio-Seite generieren &amp; herunterladen</button>
-      <button class="btn btn-secondary" onclick="loadDemoData()">✨ Beispieldaten laden</button>
-    </div>
-    <p class="hint">Die generierte Datei ist eine eigenständige HTML-Datei — einfach im Browser öffnen oder z. B. via GitHub Pages, Netlify oder Vercel kostenlos veröffentlichen.</p>
-
-    <div class="owner-box">
-      <p>🔒 Ist das deine eigene Seite? Melde dich an, um dein Portfolio zu bearbeiten.</p>
-      <button class="owner-btn" id="builderLoginBtn">Anmelden</button>
-    </div>
-  </div>
-</div>
 
 <div id="profileView">
 <div class="mobile-topbar">
@@ -284,15 +107,12 @@
   <div class="mobile-brand">Josef Iebed</div>
 </div>
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
-<div class="topright-auth">
+<div class="topright-actions">
   <button class="share-btn" id="shareBtn">🔗 <span id="shareLabel">Profil teilen</span></button>
-  <div class="login-status" id="loginStatus">Öffentliches Profil</div>
-  <button class="logout-small" id="fullLogoutBtn" style="display:none;">Ganz abmelden</button>
-</div>
-<button class="login-btn edit-entry-btn" id="loginToggleBtn">🔒 Anmelden</button>
+    </div>
 <div class="app">
 <div class="sidebar" id="sidebarEl">
-  <img class="avatar" id="avatarImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%2338bdf8'/%3E%3Cstop offset='100%25' stop-color='%230f172a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='96' height='96' rx='48' fill='url(%23g)'/%3E%3Ctext x='48' y='61' text-anchor='middle' font-family='Arial,sans-serif' font-size='34' font-weight='700' fill='%23ffffff'%3EJI%3C/text%3E%3C/svg%3E" alt="Josef Iebed">
+  <img class="avatar" id="avatarImg" src="assets/profile.jpg" alt="Josef Iebed">
   <div class="brand">Josef <span>Iebed</span></div>
   <div class="brand-sub" id="brandSub">Research, Datenanalyse &amp; datenbasiertes Marketing</div>
   <button class="lang-btn" id="langBtn">🌐 <span class="label">English</span></button>
@@ -332,7 +152,6 @@
     <div class="cards-container" id="erfahrung-cards">
 
     <div class="card">
-      <button class="card-remove-btn" onclick="this.parentElement.remove()">✕ Entfernen</button>
       <h3 data-editable id="e1-title">Praktikant in der Forschungsassistenz — L&amp;R Sozialforschung GmbH</h3>
       <div class="meta" data-editable id="e1-meta">07/2026 · Wien</div>
       <p class="lead" data-editable id="e1-desc" style="margin-bottom:8px;">Mitarbeit am Forschungsprojekt „Systematische Analyse der Workshopberichte der ‚Digital Überall‘-Initiative“.</p>
@@ -345,7 +164,6 @@
     </div>
 
     <div class="card">
-      <button class="card-remove-btn" onclick="this.parentElement.remove()">✕ Entfernen</button>
       <h3 data-editable id="e2-title">Freizeitbetreuer (Springer) — Wiener Hilfswerk</h3>
       <div class="meta" data-editable id="e2-meta">06/2025 – Jetzt · Wien</div>
       <ul data-editable id="e2-list">
@@ -358,7 +176,6 @@
     </div>
 
     <div class="card">
-      <button class="card-remove-btn" onclick="this.parentElement.remove()">✕ Entfernen</button>
       <h3 data-editable id="e3-title">Betreuer „Studieren Probieren“ — Österreichische Hochschüler:innenschaft, ÖH Bundesvertretung</h3>
       <div class="meta" data-editable id="e3-meta">01/2023 – 05/2025 · Wien</div>
       <ul data-editable id="e3-list">
@@ -369,7 +186,6 @@
     </div>
 
     <div class="card">
-      <button class="card-remove-btn" onclick="this.parentElement.remove()">✕ Entfernen</button>
       <h3 data-editable id="e4-title">Aushilfsbediensteter im Wahlbereich — Magistrat der Stadt Wien</h3>
       <div class="meta" data-editable id="e4-meta">08/2020 – 10/2020 · Wien</div>
       <ul data-editable id="e4-list">
@@ -380,14 +196,12 @@
       </ul>
     </div>
     </div>
-    <button class="add-card-btn" onclick="addCard('erfahrung-cards','Neue Position — Arbeitgeber','Zeitraum · Ort')">+ Eintrag hinzufügen</button>
-  </section>
+    </section>
 
   <section class="page" id="ausbildung">
     <h2 class="page-title" id="pt-ausbildung">Ausbildung</h2>
     <div class="cards-container" id="ausbildung-cards">
     <div class="card">
-      <button class="card-remove-btn" onclick="this.parentElement.remove()">✕ Entfernen</button>
       <h3 data-editable id="a1-title">Consumer Research und Data Driven Marketing, M.A.</h3>
       <div class="meta" data-editable id="a1-meta">FH Wiener Neustadt, Campus Wieselburg · 09/2026 – Aktuell</div>
       <ul data-editable id="a1-list">
@@ -398,7 +212,6 @@
       </ul>
     </div>
     <div class="card">
-      <button class="card-remove-btn" onclick="this.parentElement.remove()">✕ Entfernen</button>
       <h3 data-editable id="a2-title">Soziologie, Master of Arts</h3>
       <div class="meta" data-editable id="a2-meta">Universität Wien · 03/2026 – 08/2026 · Wien</div>
       <p class="lead" data-editable id="a2-desc" style="margin-bottom:8px;">Vorbereitender Übergang zum Master „Consumer Research &amp; Data Driven Marketing“ an der FH Wiener Neustadt.</p>
@@ -409,7 +222,6 @@
       </ul>
     </div>
     <div class="card">
-      <button class="card-remove-btn" onclick="this.parentElement.remove()">✕ Entfernen</button>
       <h3 data-editable id="a3-title">Soziologie, Bachelor of Arts</h3>
       <div class="meta" data-editable id="a3-meta">Universität Wien · 10/2018 – 02/2026 · Wien</div>
       <ul data-editable id="a3-list">
@@ -421,19 +233,16 @@
       </ul>
     </div>
     <div class="card">
-      <button class="card-remove-btn" onclick="this.parentElement.remove()">✕ Entfernen</button>
       <h3 data-editable id="a4-title">Matura</h3>
       <div class="meta" data-editable id="a4-meta">Ella Lingens-Gymnasium · 09/2010 – 06/2018 · Wien</div>
     </div>
     </div>
-    <button class="add-card-btn" onclick="addCard('ausbildung-cards','Neuer Abschluss','Institution · Zeitraum · Ort')">+ Eintrag hinzufügen</button>
-  </section>
+    </section>
 
   <section class="page" id="projekte">
     <h2 class="page-title" id="pt-projekte">Projekte</h2>
     <div class="cards-container" id="projekte-cards">
     <div class="card">
-      <button class="card-remove-btn" onclick="this.parentElement.remove()">✕ Entfernen</button>
       <h3 data-editable id="p1-title">Lebensmitteleinkauf unter simulierten altersbedingten Veränderungen</h3>
       <div class="meta" data-editable id="p1-meta">Empathic-Design-Studie · FH Wiener Neustadt · 10/2026 – Aktuell</div>
       <ul data-editable id="p1-list">
@@ -441,7 +250,6 @@
       </ul>
     </div>
     <div class="card">
-      <button class="card-remove-btn" onclick="this.parentElement.remove()">✕ Entfernen</button>
       <h3 data-editable id="p2-title">Animal Crossing: Spielmotive, Wohlbefinden und Stressbewältigung</h3>
       <div class="meta" data-editable id="p2-meta">Qualitative Studie · FH Wiener Neustadt · 09/2026 – Aktuell</div>
       <ul data-editable id="p2-list">
@@ -450,7 +258,6 @@
       </ul>
     </div>
     <div class="card">
-      <button class="card-remove-btn" onclick="this.parentElement.remove()">✕ Entfernen</button>
       <h3 data-editable id="p3-title">Visuelle Kommunikation der Auswirkungen des Konsums auf das Meer</h3>
       <div class="meta" data-editable id="p3-meta">Forschungspraktikum · Universität Wien · 10/2024 – 07/2025</div>
       <ul data-editable id="p3-list">
@@ -459,14 +266,12 @@
       </ul>
     </div>
     </div>
-    <button class="add-card-btn" onclick="addCard('projekte-cards','Neues Projekt','Art · Zeitraum')">+ Eintrag hinzufügen</button>
-  </section>
+    </section>
 
   <section class="page" id="weiterbildung">
     <h2 class="page-title" id="pt-weiterbildung">Weiterbildung und Workshops</h2>
     <div class="cards-container" id="weiterbildung-cards">
     <div class="card">
-      <button class="card-remove-btn" onclick="this.parentElement.remove()">✕ Entfernen</button>
       <h3 data-editable id="w1-title">Extremismus- und Radikalisierungsprävention: Basisworkshop „Extremismus – normal, radikal, extrem?“</h3>
       <div class="meta" data-editable id="w1-meta">füruns (Zentrum für Zivilgesellschaft) · 12/2025 · Online</div>
       <ul data-editable id="w1-list">
@@ -476,7 +281,6 @@
       </ul>
     </div>
     <div class="card">
-      <button class="card-remove-btn" onclick="this.parentElement.remove()">✕ Entfernen</button>
       <h3 data-editable id="w2-title">Kinderschutz in der Ferienbetreuung</h3>
       <div class="meta" data-editable id="w2-meta">Wiener Hilfswerk · 06/2025 · Wien</div>
       <ul data-editable id="w2-list">
@@ -487,7 +291,6 @@
       </ul>
     </div>
     <div class="card">
-      <button class="card-remove-btn" onclick="this.parentElement.remove()">✕ Entfernen</button>
       <h3 data-editable id="w3-title">Spielerklärer-Ausbildung</h3>
       <div class="meta" data-editable id="w3-meta">Area52 · 06/2025 · Wien</div>
       <ul data-editable id="w3-list">
@@ -497,7 +300,6 @@
       </ul>
     </div>
     <div class="card">
-      <button class="card-remove-btn" onclick="this.parentElement.remove()">✕ Entfernen</button>
       <h3 data-editable id="w4-title">Ausbildung zum lizenzierten eSports Schiedsrichter</h3>
       <div class="meta" data-editable id="w4-meta">ESVÖ · 09/2024 · Wien</div>
       <ul data-editable id="w4-list">
@@ -507,14 +309,12 @@
       </ul>
     </div>
     </div>
-    <button class="add-card-btn" onclick="addCard('weiterbildung-cards','Neue Weiterbildung','Anbieter · Zeitraum · Ort')">+ Eintrag hinzufügen</button>
-  </section>
+    </section>
 
   <section class="page" id="ehrenamt">
     <h2 class="page-title" id="pt-ehrenamt">Ehrenamt</h2>
     <div class="cards-container" id="ehrenamt-cards">
     <div class="card">
-      <button class="card-remove-btn" onclick="this.parentElement.remove()">✕ Entfernen</button>
       <h3 data-editable id="eh1-title">Mitglied — E-Sports Verein E-Sports Mostviertel</h3>
       <div class="meta" data-editable id="eh1-meta">04/2025 – Jetzt</div>
       <ul data-editable id="eh1-list">
@@ -522,7 +322,6 @@
       </ul>
     </div>
     <div class="card">
-      <button class="card-remove-btn" onclick="this.parentElement.remove()">✕ Entfernen</button>
       <h3 data-editable id="eh2-title">Teilnehmer und ehrenamtlicher Helfer — Muslimische Jugend Österreich</h3>
       <div class="meta" data-editable id="eh2-meta">12/2012 – Jetzt</div>
       <ul data-editable id="eh2-list">
@@ -531,8 +330,7 @@
       </ul>
     </div>
     </div>
-    <button class="add-card-btn" onclick="addCard('ehrenamt-cards','Neues Ehrenamt','Zeitraum')">+ Eintrag hinzufügen</button>
-  </section>
+    </section>
 
   <section class="page" id="skills">
     <h2 class="page-title" id="pt-skills">Sprachen &amp; Skills</h2>
@@ -574,14 +372,11 @@
     <div class="card">
       <h3 id="dlCvHeading">Lebenslauf</h3>
       <ul class="dl-list" id="dl-list-cv"></ul>
-      <div class="dl-upload"><button class="add-card-btn" data-dl-folder="cv" id="dlCvUploadBtn">⬆️ Lebenslauf hochladen</button></div>
     </div>
     <div class="card">
       <h3 id="dlOtherHeading">Weitere Dokumente</h3>
       <ul class="dl-list" id="dl-list-other"></ul>
-      <div class="dl-upload"><button class="add-card-btn" data-dl-folder="other" id="dlOtherUploadBtn">⬆️ Dokument hochladen</button></div>
     </div>
-    <input type="file" id="dlFileInput" style="display:none;">
   </section>
 
   <section class="page" id="kontakt">
@@ -601,315 +396,13 @@
 </div>
 </div>
 
-<div class="edit-toolbar">
-  <button class="tb-btn tb-view" id="exitEditModeBtn">👁️ Profil ansehen</button>
-  <button class="tb-btn tb-save" id="saveBtn">💾 In der Cloud speichern</button>
-  <button class="tb-btn tb-upload" id="uploadPhotoBtn">📷 Profilbild hochladen</button>
-  <button class="tb-btn tb-import" id="passwordSetupBtn">🔑 Passwort festlegen/ändern</button>
-  <input type="file" id="avatarUpload" accept="image/*" style="display:none;">
-  <button class="tb-btn tb-exporthtml" id="exportHtmlBtn">📄 Als HTML-Datei exportieren</button>
-  <button class="tb-btn tb-export" id="exportBtn">⬇️ Nur Daten (JSON)</button>
-  <button class="tb-btn tb-import" id="importBtn">⬆️ Importieren</button>
-  <input type="file" id="importFile" accept=".json" style="display:none;">
-  <span class="tb-hint" id="tbHint">Klicke auf einen Text mit gestricheltem Rahmen, um ihn zu bearbeiten.</span>
-  <button class="tb-btn tb-logout" id="logoutBtn">Abmelden</button>
-</div>
-
-<div class="modal-overlay" id="loginOverlay">
-  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <h3 id="modalTitle">🔒 Sicher anmelden</h3>
-    <p class="login-help" id="loginHelp">Melde dich mit deiner E-Mail-Adresse und deinem Passwort an. Nur dein Konto kann das Portfolio bearbeiten.</p>
-    <div class="modal-error" id="loginError" role="alert"></div>
-    <input type="email" id="loginEmail" placeholder="Deine E-Mail-Adresse" autocomplete="off" required>
-    <input type="password" id="loginPassword" placeholder="Dein Passwort" autocomplete="current-password" required>
-    <button class="forgot-password-link" id="forgotPasswordBtn" type="button">Passwort vergessen?</button>
-    <p class="modal-message" id="forgotPasswordMessage" role="status" aria-live="polite"></p>
-    <p class="modal-message" id="passwordResetSuccess" role="status" aria-live="polite" style="display:none"></p>
-    <div class="modal-actions">
-      <button class="btn-secondary2" id="loginCancel">Abbrechen</button>
-      <button class="btn-primary2" id="loginSubmit">Anmelden</button>
-    </div>
-  </div>
-</div>
-
-<div class="modal-overlay" id="passwordSetupOverlay">
-  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="passwordSetupTitle">
-    <h3 id="passwordSetupTitle">🔑 Passwort festlegen oder ändern</h3>
-    <p class="login-help" id="passwordSetupHelp">Diese Aktion aktualisiert das Passwort für dein angemeldetes Besitzerkonto. Sie sendet keinen Anmeldelink.</p>
-    <div class="modal-error" id="passwordSetupError" role="alert"></div>
-    <input type="password" id="newPassword" placeholder="Neues Passwort" autocomplete="new-password" minlength="8" required>
-    <input type="password" id="confirmPassword" placeholder="Passwort wiederholen" autocomplete="new-password" minlength="8" required>
-    <div class="modal-actions">
-      <button class="btn-secondary2" id="passwordSetupCancel">Abbrechen</button>
-      <button class="btn-primary2" id="passwordSetupSubmit">Passwort speichern</button>
-    </div>
-  </div>
-</div>
-
-<div class="toast" id="toast">Gespeichert ✓</div>
-
-<script src="supabase-config.js"></script>
 <script>
-  const STORAGE_KEY = "iebed_portfolio_data_v1";
-  const SUPABASE_CONFIG = window.PORTFOLIO_SUPABASE_CONFIG;
-  const OWNER_EMAIL = (SUPABASE_CONFIG?.ownerEmail || '').trim().toLowerCase();
-  let supabaseClientPromise;
-  function getSupabaseClient(){
-    if(!supabaseClientPromise){
-      if(!SUPABASE_CONFIG?.url || !SUPABASE_CONFIG?.publishableKey) throw new Error('Supabase is not configured.');
-      supabaseClientPromise = import('https://esm.sh/@supabase/supabase-js@2')
-        .then(({createClient}) => createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.publishableKey));
-    }
-    return supabaseClientPromise;
-  }
-  let customIdCounter = 0;
-  let isLoggedIn = false;
-  let isEditing = false;
-  let profileImageData = null;
-  let contentLoaded = false;
-  let hasRemoteContent = false;
-  let legacyLocalDataRestored = false;
-
-  const builderView = document.getElementById('builderView');
-  const profileView = document.getElementById('profileView');
-  const sidebarEl = document.getElementById('sidebarEl');
-  const sidebarOverlay = document.getElementById('sidebarOverlay');
-
-  function showProfileView(){
-    builderView.style.display = 'none';
-    profileView.style.display = 'block';
-  }
-  function showBuilderView(){
-    profileView.style.display = 'none';
-    builderView.style.display = 'block';
-  }
-
-  function openMobileMenu(){ sidebarEl.classList.add('mobile-open'); sidebarOverlay.classList.add('show'); }
-  function closeMobileMenu(){ sidebarEl.classList.remove('mobile-open'); sidebarOverlay.classList.remove('show'); }
-  document.getElementById('hamburgerBtn').addEventListener('click', openMobileMenu);
-  sidebarOverlay.addEventListener('click', closeMobileMenu);
-
-  const params = new URLSearchParams(window.location.search);
-  if(params.get('view') === 'builder'){ showBuilderView(); } else { showProfileView(); }
-
-  document.getElementById('shareBtn').addEventListener('click', () => {
-    const url = new URL(window.location.href);
-    url.search = '';
-    url.hash = '';
-    navigator.clipboard.writeText(url.toString()).then(() => showToast(UI[currentLang].toastShare))
-      .catch(() => { prompt(UI[currentLang].sharePrompt, url.toString()); });
-  });
-
-  function erfahrungTemplate(){
-    return `<label>Position &amp; Arbeitgeber</label>
-    <input class="e-title" placeholder="z. B. Praktikant — Firma XY">
-    <label>Zeitraum &amp; Ort</label>
-    <input class="e-meta" placeholder="z. B. 01/2025 – 06/2025 · Wien">
-    <label>Aufgaben (eine pro Zeile)</label>
-    <textarea class="e-bullets" placeholder="Aufgabe 1&#10;Aufgabe 2&#10;Aufgabe 3"></textarea>`;
-  }
-  function ausbildungTemplate(){
-    return `<label>Abschluss / Studiengang</label>
-    <input class="e-title" placeholder="z. B. Bachelor of Arts, Soziologie">
-    <label>Institution, Zeitraum &amp; Ort</label>
-    <input class="e-meta" placeholder="z. B. Universität Wien · 10/2020 – 06/2024 · Wien">
-    <label>Details (eine pro Zeile, optional)</label>
-    <textarea class="e-bullets" placeholder="Schwerpunkt 1&#10;Schwerpunkt 2"></textarea>`;
-  }
-  function weiterbildungTemplate(){
-    return `<label>Titel der Weiterbildung</label>
-    <input class="e-title" placeholder="z. B. Workshop XY">
-    <label>Anbieter, Zeitraum &amp; Ort</label>
-    <input class="e-meta" placeholder="z. B. Anbieter · 03/2025 · Online">
-    <label>Details (eine pro Zeile, optional)</label>
-    <textarea class="e-bullets" placeholder="Inhalt 1&#10;Inhalt 2"></textarea>`;
-  }
-  function addEntry(listId, templateFn){
-    const list = document.getElementById(listId);
-    const div = document.createElement('div');
-    div.className = 'entry b-card';
-    div.innerHTML = `<button class="remove" onclick="this.parentElement.remove()">✕ Entfernen</button>` + templateFn();
-    list.appendChild(div);
-  }
-  addEntry('erfahrung-list', erfahrungTemplate);
-  addEntry('ausbildung-list', ausbildungTemplate);
-
-  function collectEntries(listId){
-    const entries = [];
-    document.querySelectorAll('#' + listId + ' .entry').forEach(div => {
-      const title = div.querySelector('.e-title').value.trim();
-      const meta = div.querySelector('.e-meta').value.trim();
-      const bullets = div.querySelector('.e-bullets').value.split('\n').map(b=>b.trim()).filter(Boolean);
-      if(title) entries.push({title, meta, bullets});
-    });
-    return entries;
-  }
-  function esc(str){ return (str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-
-  function loadDemoData(){
-    document.getElementById('b-name').value = 'Anna Musterfrau';
-    document.getElementById('b-profil').value = 'Politikwissenschafts-Absolventin mit Erfahrung in öffentlicher Verwaltung und Projektkoordination. Strukturiert, kommunikativ und interessiert an europäischen Themen.';
-    document.getElementById('b-ort').value = 'Wien, Österreich';
-    document.getElementById('b-mail').value = 'anna.musterfrau@email.com';
-    document.getElementById('b-tel').value = '+43 660 1234567';
-    document.getElementById('b-linkedin').value = 'linkedin.com/in/anna-musterfrau';
-    document.getElementById('b-lang').value = 'Deutsch, Englisch, Spanisch';
-    document.getElementById('b-skills').value = 'MS Office, Projektmanagement, Öffentlichkeitsarbeit';
-    document.getElementById('b-kontakttext').value = 'Ich freue mich über Anfragen zu Praktika oder Einstiegspositionen im öffentlichen Sektor.';
-  }
-
-  function generatePortfolio(){
-    const name = esc(document.getElementById('b-name').value || 'Dein Name');
-    const profil = esc(document.getElementById('b-profil').value);
-    const ort = esc(document.getElementById('b-ort').value);
-    const mail = esc(document.getElementById('b-mail').value);
-    const tel = esc(document.getElementById('b-tel').value);
-    const linkedin = esc(document.getElementById('b-linkedin').value);
-    const kontakttext = esc(document.getElementById('b-kontakttext').value);
-    const langs = document.getElementById('b-lang').value.split(',').map(s=>s.trim()).filter(Boolean);
-    const skills = document.getElementById('b-skills').value.split(',').map(s=>s.trim()).filter(Boolean);
-    const erfahrung = collectEntries('erfahrung-list');
-    const ausbildung = collectEntries('ausbildung-list');
-    const weiterbildung = collectEntries('weiterbildung-list');
-
-    function cardsHtml(entries){
-      return entries.map(e => `
-      <div class="card">
-        <h3>${esc(e.title)}</h3>
-        <div class="meta">${esc(e.meta)}</div>
-        ${e.bullets.length ? '<ul>' + e.bullets.map(b=>`<li>${esc(b)}</li>`).join('') + '</ul>' : ''}
-      </div>`).join('');
-    }
-
-    const pages = ['profil','erfahrung','ausbildung'];
-    if(weiterbildung.length) pages.push('weiterbildung');
-    pages.push('skills','kontakt');
-    const navLabels = {profil:'Profil', erfahrung:'Berufserfahrung', ausbildung:'Ausbildung', weiterbildung:'Weiterbildung', skills:'Skills', kontakt:'Kontakt'};
-    const navIcons = {profil:'👤', erfahrung:'💼', ausbildung:'🎓', weiterbildung:'🧩', skills:'🛠️', kontakt:'✉️'};
-
-    const html = `<!DOCTYPE html>
-<html lang="de"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>${name} — Portfolio</title>
-<style>
-  :root{--bg:#0f172a;--bg2:#111827;--card:#1e293b;--accent:#38bdf8;--accent2:#a78bfa;--text:#e2e8f0;--muted:#94a3b8;--radius:16px;}
-  *{box-sizing:border-box;margin:0;padding:0;}
-  body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 100%);color:var(--text);min-height:100vh;display:flex;}
-  .sidebar{width:230px;background:rgba(15,23,42,0.9);border-right:1px solid rgba(148,163,184,0.15);padding:28px 18px;display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;}
-  .brand{font-size:1.15rem;font-weight:700;margin-bottom:24px;}
-  .nav-btn{background:none;border:none;color:var(--muted);text-align:left;padding:11px 14px;border-radius:10px;font-size:.92rem;cursor:pointer;display:flex;align-items:center;gap:10px;margin-bottom:4px;}
-  .nav-btn.active{background:linear-gradient(135deg,rgba(56,189,248,0.18),rgba(167,139,250,0.14));color:var(--accent);font-weight:600;}
-  main{margin-left:230px;flex:1;padding:48px 56px;max-width:980px;}
-  .page{display:none;} .page.active{display:block;}
-  h1{font-size:2rem;margin-bottom:6px;}
-  h2.page-title{font-size:1.6rem;margin-bottom:26px;border-bottom:1px solid rgba(148,163,184,0.2);padding-bottom:12px;}
-  .lead{color:var(--muted);font-size:1.02rem;line-height:1.6;margin-bottom:18px;}
-  .contact-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:18px;}
-  .chip{background:var(--card);padding:8px 14px;border-radius:999px;font-size:.85rem;border:1px solid rgba(148,163,184,0.15);}
-  .card{background:var(--card);border-radius:var(--radius);padding:22px 24px;margin-bottom:18px;border:1px solid rgba(148,163,184,0.1);}
-  .card h3{font-size:1.08rem;margin-bottom:2px;} .card .meta{color:var(--accent2);font-size:.85rem;margin-bottom:10px;font-weight:500;}
-  .card ul{margin-left:18px;color:var(--muted);font-size:.92rem;line-height:1.55;}
-  .badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px;}
-  .badge{background:rgba(56,189,248,0.1);color:var(--accent);padding:7px 14px;border-radius:10px;font-size:.85rem;font-weight:500;border:1px solid rgba(56,189,248,0.25);}
-  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
-  @media (max-width:800px){.sidebar{width:70px;padding:20px 8px;}.brand,.nav-btn span.label{display:none;}main{margin-left:70px;padding:32px 20px;}.grid2{grid-template-columns:1fr;}}
-</style></head><body>
-<div class="sidebar"><div class="brand">${name}</div><nav>
-${pages.map((p,i)=>`<button class="nav-btn${i===0?' active':''}" data-page="${p}">${navIcons[p]} <span class="label">${navLabels[p]}</span></button>`).join('')}
-</nav></div>
-<main>
-<section class="page active" id="profil"><h1>${name}</h1><p class="lead">${profil}</p>
-<div class="contact-row">
-${ort?`<div class="chip">📍 ${ort}</div>`:''}${mail?`<div class="chip">📧 <a href="mailto:${mail}" style="color:var(--accent);text-decoration:none;">${mail}</a></div>`:''}${tel?`<div class="chip">📞 ${tel}</div>`:''}${linkedin?`<div class="chip">🔗 <a href="https://${linkedin}" target="_blank" style="color:var(--accent);text-decoration:none;">${linkedin}</a></div>`:''}
-</div></section>
-<section class="page" id="erfahrung"><h2 class="page-title">Berufserfahrung</h2>${cardsHtml(erfahrung) || '<p class="lead">Noch keine Einträge.</p>'}</section>
-<section class="page" id="ausbildung"><h2 class="page-title">Ausbildung</h2>${cardsHtml(ausbildung) || '<p class="lead">Noch keine Einträge.</p>'}</section>
-${weiterbildung.length ? `<section class="page" id="weiterbildung"><h2 class="page-title">Weiterbildung</h2>${cardsHtml(weiterbildung)}</section>` : ''}
-<section class="page" id="skills"><h2 class="page-title">Skills &amp; Sprachen</h2><div class="grid2">
-<div class="card"><h3>Sprachen</h3><div class="badges">${langs.map(l=>`<div class="badge">${esc(l)}</div>`).join('')}</div></div>
-<div class="card"><h3>Skills</h3><div class="badges">${skills.map(s=>`<div class="badge">${esc(s)}</div>`).join('')}</div></div>
-</div></section>
-<section class="page" id="kontakt"><h2 class="page-title">Kontakt</h2><div class="card"><p class="lead">${kontakttext}</p>
-<div class="contact-row">${mail?`<div class="chip">📧 ${mail}</div>`:''}${tel?`<div class="chip">📞 ${tel}</div>`:''}${ort?`<div class="chip">📍 ${ort}</div>`:''}</div></div></section>
-</main>
-<script>
-const buttons=document.querySelectorAll('.nav-btn');const pages=document.querySelectorAll('.page');
-buttons.forEach(btn=>btn.addEventListener('click',()=>{buttons.forEach(b=>b.classList.remove('active'));pages.forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.getElementById(btn.dataset.page).classList.add('active');}));
-<\/script></body></html>`;
-
-    const blob = new Blob([html], {type:'text/html'});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = (document.getElementById('b-name').value || 'mein-portfolio').replace(/\s+/g,'_').toLowerCase() + '_portfolio.html';
-    a.click();
-    URL.revokeObjectURL(url);
-    showToast('Portfolio wird heruntergeladen ✓');
-  }
-
-  const UI = {
-    de: { navProfil:"Profil", navErfahrung:"Berufserfahrung", navAusbildung:"Ausbildung", navWeiterbildung:"Weiterbildung",
-      navEhrenamt:"Ehrenamt", navSkills:"Sprachen & Skills", navKontakt:"Kontakt", navProjekte:"Projekte", navDownloads:"Downloads", ptProjekte:"Projekte", ptDownloads:"Downloads",
-      brandSub:"Research, Datenanalyse & datenbasiertes Marketing", viewCompact:"Kompaktansicht", viewFull:"Ausführliche Ansicht",
-      dlCv:"Lebenslauf", dlOther:"Weitere Dokumente", dlEmpty:"Derzeit keine Dateien.", dlUploadCv:"⬆️ Lebenslauf hochladen", dlUploadOther:"⬆️ Dokument hochladen",
-      dlDelete:"Löschen", dlConfirm:"Datei wirklich löschen?", dlUploaded:"Datei hochgeladen ✓", dlDeleted:"Datei gelöscht ✓", dlError:"Upload fehlgeschlagen. Ist der Storage eingerichtet?", dlTooBig:"Bitte eine Datei unter 20 MB wählen.",
-      ptErfahrung:"Berufserfahrung", ptAusbildung:"Ausbildung", ptWeiterbildung:"Weiterbildung und Workshops",
-      ptEhrenamt:"Ehrenamt", ptSkills:"Sprachen & Skills", ptKontakt:"Kontakt",
-      fokusHeading:"Aktueller Fokus", langHeading:"Sprachen", itHeading:"Methoden- und IT-Kenntnisse",
-      loggedOut:"Öffentliches Profil", loggedInEditing:"✅ Angemeldet (Bearbeitung)", loggedInView:"✅ Angemeldet",
-      btnLogin:"🔒 Anmelden zum Bearbeiten", btnEdit:"✏️ Portfolio bearbeiten", btnView:"👁️ Profil ansehen",
-      shareLabel:"Profil teilen", sharePrompt:"Link zum Profil kopieren:", toastShare:"Profil-Link kopiert ✓",
-      hint:"Klicke auf einen Text mit gestricheltem Rahmen, um ihn zu bearbeiten.", logout:"Abmelden", logoutSmall:"Ganz abmelden",
-      modalTitle:"🔒 Sicher anmelden", modalHelp:"Melde dich mit deiner E-Mail-Adresse und deinem Passwort an. Nur dein Konto kann das Portfolio bearbeiten.",
-      modalError:"Bitte gib eine gültige E-Mail-Adresse und dein Passwort ein.", modalCancel:"Abbrechen", modalSubmit:"Anmelden",
-      modalPlaceholder:"Deine E-Mail-Adresse", passwordPlaceholder:"Dein Passwort",
-      forgotPasswordLabel:"Passwort vergessen?", forgotPasswordEmailRequired:"Bitte gib zuerst die E-Mail-Adresse deines Besitzerkontos ein.",
-      forgotPasswordMessage:"Falls diese Adresse zu deinem Besitzerkonto gehört, wurde eine Zurücksetzungs-E-Mail gesendet. Prüfe auch den Spam-Ordner und öffne den Link, um hier ein neues Passwort festzulegen.",
-      forgotPasswordError:"Die Zurücksetzungs-E-Mail konnte nicht gesendet werden.",
-      passwordManage:"🔑 Passwort festlegen/ändern", passwordSetupTitle:"🔑 Passwort festlegen oder ändern",
-      passwordSetupHelp:"Diese Aktion aktualisiert das Passwort für dein angemeldetes Besitzerkonto. Sie sendet keinen Anmeldelink.",
-      passwordRecoveryTitle:"🔑 Neues Passwort festlegen", passwordRecoveryHelp:"Über diesen sicheren Wiederherstellungslink kannst du dein Passwort festlegen. Danach wirst du abgemeldet und musst dich mit dem neuen Passwort anmelden.",
-      passwordRecoveryCancel:"Abbrechen & abmelden", passwordRecoveryComplete:"Passwort aktualisiert. Bitte melde dich mit deinem neuen Passwort an.",
-      passwordRecoverySignOutError:"Du konntest nicht abgemeldet werden. Bitte versuche es erneut.",
-      passwordNewPlaceholder:"Neues Passwort", passwordConfirmPlaceholder:"Passwort wiederholen",
-      passwordCancel:"Abbrechen", passwordSave:"Passwort speichern", passwordMismatch:"Die Passwörter stimmen nicht überein.",
-      passwordTooShort:"Bitte verwende mindestens 8 Zeichen.", passwordUpdated:"Passwort aktualisiert ✓",
-      passwordUpdateError:"Das Passwort konnte nicht aktualisiert werden.",
-      ownerOnly:"Diese E-Mail-Adresse ist nicht zum Bearbeiten dieses Portfolios berechtigt.",
-      toastSaved:"In der Cloud gespeichert ✓", toastSaveError:"Speichern fehlgeschlagen. Bitte Verbindung prüfen.", toastPhoto:"Profilbild gewählt — speichere, um es zu veröffentlichen.",
-      toastImport:"Import erfolgreich ✓", toastHtml:"HTML-Datei wird heruntergeladen ✓", langBtn:"🌐 English" },
-    en: { navProfil:"Profile", navErfahrung:"Experience", navAusbildung:"Education", navWeiterbildung:"Training",
-      navEhrenamt:"Volunteering", navSkills:"Languages & Skills", navKontakt:"Contact", navProjekte:"Projects", navDownloads:"Downloads", ptProjekte:"Projects", ptDownloads:"Downloads",
-      brandSub:"Research, Data Analysis & Data-Driven Marketing", viewCompact:"Compact view", viewFull:"Detailed view",
-      dlCv:"CV", dlOther:"Other documents", dlEmpty:"No files yet.", dlUploadCv:"⬆️ Upload CV", dlUploadOther:"⬆️ Upload document",
-      dlDelete:"Delete", dlConfirm:"Delete this file?", dlUploaded:"File uploaded ✓", dlDeleted:"File deleted ✓", dlError:"Upload failed. Is storage set up?", dlTooBig:"Please choose a file under 20 MB.",
-      ptErfahrung:"Work Experience", ptAusbildung:"Education", ptWeiterbildung:"Further Training & Workshops",
-      ptEhrenamt:"Volunteering", ptSkills:"Languages & Skills", ptKontakt:"Contact",
-      fokusHeading:"Current Focus", langHeading:"Languages", itHeading:"Methods & IT Skills",
-      loggedOut:"Public profile", loggedInEditing:"✅ Signed in (editing)", loggedInView:"✅ Signed in",
-      btnLogin:"🔒 Sign in to edit", btnEdit:"✏️ Edit portfolio", btnView:"👁️ View profile",
-      shareLabel:"Share profile", sharePrompt:"Copy the profile link:", toastShare:"Profile link copied ✓",
-      hint:"Click a dashed-outline text to edit it.", logout:"Log out", logoutSmall:"Full logout",
-      modalTitle:"🔒 Secure sign in", modalHelp:"Sign in with your email and password. Only your account can edit this portfolio.",
-      modalError:"Enter a valid email address and your password.", modalCancel:"Cancel", modalSubmit:"Sign in",
-      modalPlaceholder:"Your email address", passwordPlaceholder:"Your password",
-      forgotPasswordLabel:"Forgot password?", forgotPasswordEmailRequired:"Enter the email address for your owner account first.",
-      forgotPasswordMessage:"If this address matches your owner account, a reset email has been sent. Check your inbox and spam folder, then open the link to set a new password here.",
-      forgotPasswordError:"Could not send the password reset email.",
-      passwordManage:"🔑 Set/change password", passwordSetupTitle:"🔑 Set or change your password",
-      passwordSetupHelp:"This updates the password for your signed-in owner account. It does not send a sign-in link.",
-      passwordRecoveryTitle:"🔑 Choose a new password", passwordRecoveryHelp:"Use this secure recovery link to choose a new password. You will then be signed out and asked to sign in with it.",
-      passwordRecoveryCancel:"Cancel & sign out", passwordRecoveryComplete:"Password updated. Please sign in with your new password.",
-      passwordRecoverySignOutError:"Could not sign you out. Please try again.",
-      passwordNewPlaceholder:"New password", passwordConfirmPlaceholder:"Repeat password",
-      passwordCancel:"Cancel", passwordSave:"Save password", passwordMismatch:"The passwords do not match.",
-      passwordTooShort:"Use at least 8 characters.", passwordUpdated:"Password updated ✓",
-      passwordUpdateError:"Could not update the password.",
-      ownerOnly:"This email address is not authorized to edit this portfolio.",
-      toastSaved:"Saved to cloud ✓", toastSaveError:"Save failed. Please check your connection.", toastPhoto:"Photo selected — save to publish it.",
-      toastImport:"Import successful ✓", toastHtml:"Downloading HTML file ✓", langBtn:"🌐 Deutsch" }
-  };
-
-  const CONTENT_EN = {
+  // GitHub Pages runtime: static JSON and repository assets only.
+  const CONTENT_VERSION = 2;
+  const CV_UPDATED_KEYS = ['f-profil','f-fokus','f-linkedin','e1-title','e1-list','e2-title','e2-list','e3-title','e3-list','e4-title','e4-list','a1-meta','a1-list','a3-list','w1-title','w3-title','w3-meta','s-it'];
+  let CONTENT_DE = {};
+  document.querySelectorAll('[data-editable]').forEach(el => { CONTENT_DE[el.id] = el.innerHTML; });
+    const CONTENT_EN = {
     "f-name":"Josef Iebed",
     "f-profil":"Master's student in Consumer Research &amp; Data Driven Marketing with a bachelor's degree in Sociology (University of Vienna) and first research experience in data validation and text analysis at L&amp;R Sozialforschung. Skills in SPSS, STATA, RStudio, MAXQDA, and LimeSurvey. Experienced in careful documentation and in working with diverse target groups.",
     "f-fokus":"Master's program <strong style=\"color:var(--text)\">Consumer Research &amp; Data Driven Marketing (M.A.)</strong> at FH Wiener Neustadt (Campus Wieselburg) since 09/2026. Aiming for a career start at the intersection of research, data analysis, and marketing, investigating customer needs and turning insights into practice.",
@@ -954,535 +447,89 @@ buttons.forEach(btn=>btn.addEventListener('click',()=>{buttons.forEach(b=>b.clas
     "k-text":"I welcome inquiries about internships, working-student positions, or entry-level roles in administration, research, communication, or office-based work.",
     "k-mail":"josef.iebed@gmail.com", "k-tel":"+43 660 7560649", "k-ort":"Vienna, Austria"
   };
-
-  let CONTENT_DE = {};
-  // Content revision: cloud data saved before this revision must not override the CV update.
-  const CONTENT_VERSION = 2;
-  const CV_UPDATED_KEYS = ['f-profil','f-fokus','f-linkedin','e1-title','e1-list','e2-title','e2-list','e3-title','e3-list','e4-title','e4-list','a1-meta','a1-list','a3-list','w1-title','w3-title','w3-meta','s-it'];
   let currentLang = 'de';
 
-  const buttons = document.querySelectorAll('.nav-btn');
-  const pages = document.querySelectorAll('.page');
-  buttons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      buttons.forEach(b => b.classList.remove('active'));
-      pages.forEach(p => p.classList.remove('active'));
-      btn.classList.add('active');
-      document.getElementById(btn.dataset.page).classList.add('active');
-      window.scrollTo(0,0);
-      closeMobileMenu();
-    });
-  });
-
-  function getEditableEls(){ return document.querySelectorAll('[data-editable]'); }
-
-  function captureCurrentContent(){
-    const target = currentLang === 'de' ? CONTENT_DE : CONTENT_EN;
-    getEditableEls().forEach(el => { target[el.id] = el.innerHTML; });
-  }
-  function collectData(){ captureCurrentContent(); return {...(currentLang === 'de' ? CONTENT_DE : CONTENT_EN)}; }
-  function collectContentBundle(){
-    captureCurrentContent();
-    return {version:CONTENT_VERSION, de:{...CONTENT_DE}, en:{...CONTENT_EN}, profileImage:profileImageData};
-  }
-  function restoreLegacyLocalData(){
-    if(legacyLocalDataRestored) return;
-    legacyLocalDataRestored = true;
-    try{
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if(!raw) return;
-      const data = JSON.parse(raw);
-      Object.keys(data).forEach(id => { const el = document.getElementById(id); if(el && typeof data[id] === 'string') el.innerHTML = data[id]; });
-      captureCurrentContent();
-      showToast(currentLang === 'de' ? 'Lokale Änderungen geladen — bitte speichern.' : 'Local edits loaded — please save.');
-    }catch(e){ console.error('Legacy local data could not be restored', e); }
-  }
-  async function loadRemoteData(force=false){
-    if(contentLoaded && !force) return;
-    const client = await getSupabaseClient();
-    const {data, error} = await client.from('portfolio_content').select('content').eq('id','main').maybeSingle();
-    if(error) throw error;
-    const content = data?.content;
-    if(content && typeof content === 'object'){
-      hasRemoteContent = true;
-      if((content.version || 1) < CONTENT_VERSION){
-        ['de','en'].forEach(l => { if(content[l]) CV_UPDATED_KEYS.forEach(k => delete content[l][k]); });
-      }
-      if(content.de && typeof content.de === 'object') Object.assign(CONTENT_DE, content.de);
-      if(content.en && typeof content.en === 'object') Object.assign(CONTENT_EN, content.en);
-      if(typeof content.profileImage === 'string' && content.profileImage.startsWith('data:image/jpeg;base64,')){
-        profileImageData = content.profileImage;
-        document.getElementById('avatarImg').src = profileImageData;
-      }
-      applyContent(currentLang);
-    } else if(isLoggedIn){
-      restoreLegacyLocalData();
+  const UI = {
+    de: {
+      navProfil:'Profil', navErfahrung:'Berufserfahrung', navAusbildung:'Ausbildung', navProjekte:'Projekte', navWeiterbildung:'Weiterbildung', navEhrenamt:'Ehrenamt', navSkills:'Sprachen & Skills', navDownloads:'Downloads', navKontakt:'Kontakt',
+      ptProjekte:'Projekte', ptDownloads:'Downloads', brandSub:'Research, Datenanalyse & datenbasiertes Marketing', viewCompact:'Kompaktansicht', viewFull:'Ausführliche Ansicht', dlCv:'Lebenslauf', dlOther:'Weitere Dokumente', dlEmpty:'Derzeit keine Dateien.',
+      ptErfahrung:'Berufserfahrung', ptAusbildung:'Ausbildung', ptWeiterbildung:'Weiterbildung und Workshops', ptEhrenamt:'Ehrenamt', ptSkills:'Sprachen & Skills', ptKontakt:'Kontakt', fokusHeading:'Aktueller Fokus', langHeading:'Sprachen', itHeading:'Methoden- und IT-Kenntnisse', shareLabel:'Profil teilen', sharePrompt:'Link zum Profil kopieren:', toastShare:'Profil-Link kopiert ✓'
+    },
+    en: {
+      navProfil:'Profile', navErfahrung:'Experience', navAusbildung:'Education', navProjekte:'Projects', navWeiterbildung:'Training', navEhrenamt:'Volunteering', navSkills:'Languages & Skills', navDownloads:'Downloads', navKontakt:'Contact',
+      ptProjekte:'Projects', ptDownloads:'Downloads', brandSub:'Research, Data Analysis & Data-Driven Marketing', viewCompact:'Compact view', viewFull:'Detailed view', dlCv:'CV', dlOther:'Other documents', dlEmpty:'No files yet.',
+      ptErfahrung:'Work Experience', ptAusbildung:'Education', ptWeiterbildung:'Further Training & Workshops', ptEhrenamt:'Volunteering', ptSkills:'Languages & Skills', ptKontakt:'Contact', fokusHeading:'Current Focus', langHeading:'Languages', itHeading:'Methods & IT Skills', shareLabel:'Share profile', sharePrompt:'Copy the profile link:', toastShare:'Profile link copied ✓'
     }
-    contentLoaded = true;
-  }
-  async function saveData(){
-    if(!isLoggedIn || !isEditing) return;
-    const button = document.getElementById('saveBtn');
-    button.disabled = true;
-    try{
-      const client = await getSupabaseClient();
-      const {error} = await client.from('portfolio_content').upsert({
-        id:'main', content:collectContentBundle(), updated_at:new Date().toISOString()
-      }, {onConflict:'id'});
-      if(error) throw error;
-      contentLoaded = true;
-      showToast(UI[currentLang].toastSaved);
-    }catch(error){
-      console.error('Portfolio save failed', error);
-      showToast(UI[currentLang].toastSaveError);
-    }finally{ button.disabled = false; }
-  }
-  function showToast(msg){ const t = document.getElementById('toast'); t.textContent = msg; t.style.display = 'block'; setTimeout(()=>{ t.style.display = 'none'; }, 3000); }
+  };
 
-  getEditableEls().forEach(el => { CONTENT_DE[el.id] = el.innerHTML; });
+  const navButtons = document.querySelectorAll('.nav-btn');
+  const pages = document.querySelectorAll('.page');
+  navButtons.forEach(btn => btn.addEventListener('click', () => {
+    navButtons.forEach(item => item.classList.remove('active'));
+    pages.forEach(page => page.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.page)?.classList.add('active');
+    window.scrollTo(0, 0);
+    closeMobileMenu();
+  }));
 
-  function updateLoginUI(){
-    const s = UI[currentLang];
-    const fullLogoutBtn = document.getElementById('fullLogoutBtn');
-    const shareBtnEl = document.getElementById('shareBtn');
+  const sidebar = document.getElementById('sidebarEl');
+  const sidebarOverlay = document.getElementById('sidebarOverlay');
+  function closeMobileMenu(){ sidebar?.classList.remove('mobile-open'); sidebarOverlay?.classList.remove('show'); }
+  document.getElementById('hamburgerBtn')?.addEventListener('click', () => { sidebar?.classList.add('mobile-open'); sidebarOverlay?.classList.add('show'); });
+  sidebarOverlay?.addEventListener('click', closeMobileMenu);
 
-    shareBtnEl.style.display = 'inline-flex';
-    document.getElementById('shareLabel').textContent = s.shareLabel;
-    loginToggleBtn.style.display = isEditing ? 'none' : 'inline-flex';
-
-    if(!isLoggedIn){
-      loginToggleBtn.textContent = s.btnLogin;
-      loginStatus.textContent = s.loggedOut;
-      fullLogoutBtn.style.display = 'none';
-    } else if(isEditing){
-      loginStatus.textContent = s.loggedInEditing;
-      fullLogoutBtn.style.display = 'inline';
-      fullLogoutBtn.textContent = s.logoutSmall;
-    } else {
-      loginToggleBtn.textContent = s.btnEdit;
-      loginStatus.textContent = s.loggedInView;
-      fullLogoutBtn.style.display = 'inline';
-      fullLogoutBtn.textContent = s.logoutSmall;
+  function applyContent(lang){
+    const dict = lang === 'de' ? CONTENT_DE : CONTENT_EN;
+    Object.entries(dict).forEach(([id, value]) => {
+      const el = document.getElementById(id);
+      if(el && typeof value === 'string') el.innerHTML = value;
+    });
+    const email = document.getElementById('f-mail');
+    if(email) email.href = 'mailto:' + (email.textContent || '').trim();
+    const linkedin = document.getElementById('f-linkedin');
+    if(linkedin){
+      const value = (linkedin.textContent || '').trim().replace(/^https?:\/\//, '');
+      linkedin.href = 'https://' + value;
     }
   }
 
   function applyUIStrings(lang){
     const s = UI[lang];
-    document.getElementById('nav-profil').textContent = s.navProfil;
-    document.getElementById('nav-erfahrung').textContent = s.navErfahrung;
-    document.getElementById('nav-ausbildung').textContent = s.navAusbildung;
-    document.getElementById('nav-weiterbildung').textContent = s.navWeiterbildung;
-    document.getElementById('nav-ehrenamt').textContent = s.navEhrenamt;
-    document.getElementById('nav-skills').textContent = s.navSkills;
-    document.getElementById('nav-kontakt').textContent = s.navKontakt;
-    document.getElementById('nav-projekte').textContent = s.navProjekte;
-    document.getElementById('nav-downloads').textContent = s.navDownloads;
-    document.getElementById('pt-projekte').textContent = s.ptProjekte;
-    document.getElementById('pt-downloads').textContent = s.ptDownloads;
-    document.getElementById('brandSub').textContent = s.brandSub;
-    document.querySelector('#viewBtn .label').textContent = document.body.classList.contains('compact') ? s.viewFull : s.viewCompact;
-    document.getElementById('dlCvHeading').textContent = s.dlCv;
-    document.getElementById('dlOtherHeading').textContent = s.dlOther;
-    document.getElementById('dlCvUploadBtn').textContent = s.dlUploadCv;
-    document.getElementById('dlOtherUploadBtn').textContent = s.dlUploadOther;
-    if(typeof renderDownloads === 'function') renderDownloads();
-    document.getElementById('pt-erfahrung').textContent = s.ptErfahrung;
-    document.getElementById('pt-ausbildung').textContent = s.ptAusbildung;
-    document.getElementById('pt-weiterbildung').textContent = s.ptWeiterbildung;
-    document.getElementById('pt-ehrenamt').textContent = s.ptEhrenamt;
-    document.getElementById('pt-skills').textContent = s.ptSkills;
-    document.getElementById('pt-kontakt').textContent = s.ptKontakt;
-    document.getElementById('fokusHeading').textContent = s.fokusHeading;
-    document.getElementById('langHeading').textContent = s.langHeading;
-    document.getElementById('itHeading').textContent = s.itHeading;
-    document.getElementById('tbHint').textContent = s.hint;
-    document.getElementById('logoutBtn').textContent = s.logout;
-    document.getElementById('modalTitle').textContent = s.modalTitle;
-    document.getElementById('loginHelp').textContent = s.modalHelp;
-    document.getElementById('loginError').textContent = s.modalError;
-    document.getElementById('loginCancel').textContent = s.modalCancel;
-    document.getElementById('loginSubmit').textContent = s.modalSubmit;
-    document.getElementById('loginEmail').placeholder = s.modalPlaceholder;
-    document.getElementById('loginPassword').placeholder = s.passwordPlaceholder;
-    document.getElementById('forgotPasswordBtn').textContent = s.forgotPasswordLabel;
-    document.getElementById('passwordSetupBtn').textContent = s.passwordManage;
-    document.getElementById('passwordSetupTitle').textContent = recoveryMode ? s.passwordRecoveryTitle : s.passwordSetupTitle;
-    document.getElementById('passwordSetupHelp').textContent = recoveryMode ? s.passwordRecoveryHelp : s.passwordSetupHelp;
-    document.getElementById('newPassword').placeholder = s.passwordNewPlaceholder;
-    document.getElementById('confirmPassword').placeholder = s.passwordConfirmPlaceholder;
-    document.getElementById('passwordSetupCancel').textContent = recoveryMode ? s.passwordRecoveryCancel : s.passwordCancel;
-    document.getElementById('passwordSetupSubmit').textContent = s.passwordSave;
-    document.getElementById('saveBtn').textContent = currentLang === 'de' ? '💾 In der Cloud speichern' : '💾 Save to cloud';
-    document.getElementById('uploadPhotoBtn').textContent = currentLang === 'de' ? '📷 Profilbild hochladen' : '📷 Upload profile photo';
-    document.getElementById('exitEditModeBtn').textContent = s.btnView;
+    const ids = {
+      'nav-profil':'navProfil', 'nav-erfahrung':'navErfahrung', 'nav-ausbildung':'navAusbildung', 'nav-projekte':'navProjekte',
+      'nav-weiterbildung':'navWeiterbildung', 'nav-ehrenamt':'navEhrenamt', 'nav-skills':'navSkills', 'nav-downloads':'navDownloads', 'nav-kontakt':'navKontakt',
+      'pt-projekte':'ptProjekte', 'pt-downloads':'ptDownloads', brandSub:'brandSub', dlCvHeading:'dlCv', dlOtherHeading:'dlOther',
+      'pt-erfahrung':'ptErfahrung', 'pt-ausbildung':'ptAusbildung', 'pt-weiterbildung':'ptWeiterbildung', 'pt-ehrenamt':'ptEhrenamt',
+      'pt-skills':'ptSkills', 'pt-kontakt':'ptKontakt', fokusHeading:'fokusHeading', langHeading:'langHeading', itHeading:'itHeading'
+    };
+    Object.entries(ids).forEach(([id, key]) => { const el = document.getElementById(id); if(el) el.textContent = s[key]; });
+    document.getElementById('shareLabel').textContent = s.shareLabel;
     document.querySelector('#langBtn .label').textContent = lang === 'de' ? 'English' : 'Deutsch';
-    updateLoginUI();
+    const compact = document.body.classList.contains('compact');
+    document.querySelector('#viewBtn .label').textContent = compact ? s.viewFull : s.viewCompact;
+    renderDownloads();
   }
-  function applyContent(lang){
-    const dict = lang === 'de' ? CONTENT_DE : CONTENT_EN;
-    Object.keys(dict).forEach(id => { const el = document.getElementById(id); if(el) el.innerHTML = dict[id]; });
-  }
+
   document.getElementById('langBtn').addEventListener('click', () => {
-    captureCurrentContent();
     currentLang = currentLang === 'de' ? 'en' : 'de';
-    applyContent(currentLang); applyUIStrings(currentLang);
+    applyContent(currentLang);
+    applyUIStrings(currentLang);
     document.documentElement.lang = currentLang;
   });
 
-  const loginOverlay = document.getElementById('loginOverlay');
-  const loginToggleBtn = document.getElementById('loginToggleBtn');
-  const loginStatus = document.getElementById('loginStatus');
-  const loginEmail = document.getElementById('loginEmail');
-  const loginPassword = document.getElementById('loginPassword');
-  const loginError = document.getElementById('loginError');
-  const forgotPasswordMessage = document.getElementById('forgotPasswordMessage');
-  const passwordResetSuccess = document.getElementById('passwordResetSuccess');
-  const forgotPasswordBtn = document.getElementById('forgotPasswordBtn');
-  const RECOVERY_PENDING_KEY = 'iebed_portfolio_password_recovery_pending';
-  let recoveryMode = false;
-  let recoveryPasswordDialogHandled = false;
-  const passwordSetupOverlay = document.getElementById('passwordSetupOverlay');
-  const passwordSetupError = document.getElementById('passwordSetupError');
-  const newPasswordInput = document.getElementById('newPassword');
-  const confirmPasswordInput = document.getElementById('confirmPassword');
-  const passwordSetupSubmit = document.getElementById('passwordSetupSubmit');
-
-  function openLogin(){
-    loginError.style.display = 'none';
-    forgotPasswordMessage.style.display = 'none';
-    passwordResetSuccess.style.display = 'none';
-    loginEmail.value = '';
-    loginPassword.value = '';
-    loginOverlay.classList.add('show');
-    setTimeout(()=> loginEmail.focus(), 50);
-  }
-  function closeLogin(){
-    loginOverlay.classList.remove('show');
-    forgotPasswordMessage.style.display = 'none';
-    passwordResetSuccess.style.display = 'none';
-    loginEmail.value = '';
-    loginPassword.value = '';
-  }
-  function showLoginError(message){
-    loginError.textContent = message;
-    loginError.style.display = 'block';
-  }
-  function isPasswordRecoveryRedirect(){
-    const hashType = new URLSearchParams(window.location.hash.slice(1)).get('type');
-    const queryType = new URLSearchParams(window.location.search).get('type');
-    return hashType === 'recovery' || queryType === 'recovery';
-  }
-  async function handlePasswordRecovery(user, fromRecoveryEvent=false){
-    const recoveryPending = localStorage.getItem(RECOVERY_PENDING_KEY) === '1';
-    if(recoveryPasswordDialogHandled || (!fromRecoveryEvent && !recoveryPending && !isPasswordRecoveryRedirect())) return;
-    if((user?.email || '').trim().toLowerCase() !== OWNER_EMAIL) return;
-    recoveryPasswordDialogHandled = true;
-    recoveryMode = true;
-    localStorage.setItem(RECOVERY_PENDING_KEY, '1');
-    isLoggedIn = false;
-    if(isEditing) exitEditModeOnly();
-    else updateLoginUI();
-    closeLogin();
-    showProfileView();
-    openPasswordSetup();
-    const cleanUrl = new URL(window.location.href);
-    cleanUrl.hash = '';
-    cleanUrl.searchParams.delete('type');
-    cleanUrl.searchParams.delete('code');
-    window.history.replaceState({}, document.title, cleanUrl.pathname + cleanUrl.search);
-  }
-  function openPasswordSetup(){
-    if(!recoveryMode && (!isLoggedIn || !isEditing)) return;
-    passwordSetupError.style.display = 'none';
-    const s = UI[currentLang];
-    document.getElementById('passwordSetupTitle').textContent = recoveryMode ? s.passwordRecoveryTitle : s.passwordSetupTitle;
-    document.getElementById('passwordSetupHelp').textContent = recoveryMode ? s.passwordRecoveryHelp : s.passwordSetupHelp;
-    document.getElementById('passwordSetupCancel').textContent = recoveryMode ? s.passwordRecoveryCancel : s.passwordCancel;
-    newPasswordInput.value = '';
-    confirmPasswordInput.value = '';
-    passwordSetupOverlay.classList.add('show');
-    setTimeout(()=> newPasswordInput.focus(), 50);
-  }
-  function closePasswordSetup(){
-    passwordSetupOverlay.classList.remove('show');
-    newPasswordInput.value = '';
-    confirmPasswordInput.value = '';
-  }
-  async function cancelPasswordSetup(){
-    if(!recoveryMode){ closePasswordSetup(); return; }
-    const cancelButton = document.getElementById('passwordSetupCancel');
-    cancelButton.disabled = true;
-    try{
-      const client = await getSupabaseClient();
-      const {error} = await client.auth.signOut();
-      if(error) throw error;
-      localStorage.removeItem(RECOVERY_PENDING_KEY);
-      recoveryMode = false;
-      isLoggedIn = false;
-      if(isEditing) exitEditModeOnly();
-      else updateLoginUI();
-      closePasswordSetup();
-      openLogin();
-    }catch(error){
-      console.error('Could not cancel password recovery cleanly', error);
-      showPasswordSetupError(UI[currentLang].passwordRecoverySignOutError);
-    }finally{ cancelButton.disabled = false; }
-  }
-  function showPasswordSetupError(message){
-    passwordSetupError.textContent = message;
-    passwordSetupError.style.display = 'block';
-  }
-  async function saveOwnerPassword(){
-    passwordSetupError.style.display = 'none';
-    if(!recoveryMode && (!isLoggedIn || !isEditing)){ showPasswordSetupError(UI[currentLang].passwordUpdateError); return; }
-    const password = newPasswordInput.value;
-    if(password.length < 8){ showPasswordSetupError(UI[currentLang].passwordTooShort); return; }
-    if(password !== confirmPasswordInput.value){ showPasswordSetupError(UI[currentLang].passwordMismatch); return; }
-    passwordSetupSubmit.disabled = true;
-    let passwordWasUpdated = false;
-    try{
-      const client = await getSupabaseClient();
-      const {error} = await client.auth.updateUser({password});
-      if(error) throw error;
-      passwordWasUpdated = true;
-      if(recoveryMode){
-        const {error:signOutError} = await client.auth.signOut();
-        if(signOutError) throw signOutError;
-        localStorage.removeItem(RECOVERY_PENDING_KEY);
-        recoveryMode = false;
-        isLoggedIn = false;
-        if(isEditing) exitEditModeOnly();
-        else updateLoginUI();
-        closePasswordSetup();
-        openLogin();
-        passwordResetSuccess.textContent = UI[currentLang].passwordRecoveryComplete;
-        passwordResetSuccess.style.display = 'block';
-      }else{
-        closePasswordSetup();
-        showToast(UI[currentLang].passwordUpdated);
-      }
-    }catch(error){
-      console.error('Password update failed', error);
-      showPasswordSetupError(recoveryMode && passwordWasUpdated ? UI[currentLang].passwordRecoverySignOutError : (error.message || UI[currentLang].passwordUpdateError));
-    }finally{ passwordSetupSubmit.disabled = false; }
-  }
-  async function enterEditMode(){
-    if(!isLoggedIn) return;
-    try{
-      if(!contentLoaded) await loadRemoteData();
-      if(!hasRemoteContent) restoreLegacyLocalData();
-    }catch(error){
-      console.error('Could not load portfolio data before editing', error);
-      showToast(UI[currentLang].toastSaveError);
-      return;
+  document.getElementById('shareBtn').addEventListener('click', () => {
+    const url = new URL(window.location.href);
+    url.search = '';
+    url.hash = '';
+    const message = UI[currentLang].toastShare;
+    if(navigator.clipboard?.writeText){
+      navigator.clipboard.writeText(url.toString()).then(() => window.alert(message)).catch(() => window.prompt(UI[currentLang].sharePrompt, url.toString()));
+    } else {
+      window.prompt(UI[currentLang].sharePrompt, url.toString());
     }
-    isEditing = true;
-    document.body.classList.add('edit-mode');
-    getEditableEls().forEach(el => el.setAttribute('contenteditable','true'));
-    updateLoginUI();
-  }
-  function exitEditModeOnly(){
-    isEditing = false;
-    document.body.classList.remove('edit-mode');
-    getEditableEls().forEach(el => el.removeAttribute('contenteditable'));
-    updateLoginUI();
-  }
-  async function fullLogout(){
-    try{
-      const client = await getSupabaseClient();
-      const {error} = await client.auth.signOut();
-      if(error) throw error;
-    }catch(error){ console.error('Sign out failed', error); }
-    isLoggedIn = false;
-    exitEditModeOnly();
-    updateLoginUI();
-  }
-  function applyAuthUser(user){
-    const wasOwner = isLoggedIn;
-    isLoggedIn = !!user && (user.email || '').trim().toLowerCase() === OWNER_EMAIL;
-    if(!isLoggedIn && isEditing) exitEditModeOnly();
-    updateLoginUI();
-    return !wasOwner && isLoggedIn;
-  }
-  async function initializeAuth(){
-    try{
-      const client = await getSupabaseClient();
-      const {data, error} = await client.auth.getSession();
-      if(error) throw error;
-      client.auth.onAuthStateChange((event, session) => {
-        const user = session?.user || null;
-        const isOwner = (user?.email || '').trim().toLowerCase() === OWNER_EMAIL;
-        const recoveryContext = event === 'PASSWORD_RECOVERY' || isPasswordRecoveryRedirect() || (localStorage.getItem(RECOVERY_PENDING_KEY) === '1' && isOwner);
-        if(recoveryContext){
-          if(isOwner) handlePasswordRecovery(user, true);
-          else applyAuthUser(null);
-          return;
-        }
-        const becameOwner = applyAuthUser(user);
-        if(event === 'SIGNED_IN' && becameOwner){
-          closeLogin();
-          showProfileView();
-          enterEditMode();
-        }
-      });
-      const initialUser = data.session?.user || null;
-      const initialIsOwner = (initialUser?.email || '').trim().toLowerCase() === OWNER_EMAIL;
-      const recoveryPending = isPasswordRecoveryRedirect() || localStorage.getItem(RECOVERY_PENDING_KEY) === '1';
-      if(recoveryPending && initialIsOwner){
-        await handlePasswordRecovery(initialUser, true);
-      }else{
-        if(localStorage.getItem(RECOVERY_PENDING_KEY) === '1') localStorage.removeItem(RECOVERY_PENDING_KEY);
-        applyAuthUser(initialUser);
-      }
-    }catch(error){
-      console.error('Authentication initialization failed', error);
-      loginToggleBtn.disabled = true;
-      loginToggleBtn.title = currentLang === 'de' ? 'Anmeldung gerade nicht verfügbar' : 'Sign-in is temporarily unavailable';
-    }
-  }
-
-  document.getElementById('builderLoginBtn').addEventListener('click', () => openLogin());
-  loginToggleBtn.addEventListener('click', () => {
-    if(!isLoggedIn){ openLogin(); }
-    else { enterEditMode(); }
-  });
-  document.getElementById('exitEditModeBtn').addEventListener('click', exitEditModeOnly);
-  document.getElementById('fullLogoutBtn').addEventListener('click', fullLogout);
-  document.getElementById('loginCancel').addEventListener('click', closeLogin);
-  document.getElementById('passwordSetupBtn').addEventListener('click', openPasswordSetup);
-  document.getElementById('passwordSetupCancel').addEventListener('click', cancelPasswordSetup);
-  passwordSetupSubmit.addEventListener('click', saveOwnerPassword);
-  confirmPasswordInput.addEventListener('keydown', e => { if(e.key === 'Enter') passwordSetupSubmit.click(); });
-  forgotPasswordBtn.addEventListener('click', async () => {
-    loginError.style.display = 'none';
-    forgotPasswordMessage.style.display = 'none';
-    const email = loginEmail.value.trim().toLowerCase();
-    if(!email || !loginEmail.checkValidity()){
-      showLoginError(UI[currentLang].forgotPasswordEmailRequired);
-      loginEmail.focus();
-      return;
-    }
-    if(email !== OWNER_EMAIL){ showLoginError(UI[currentLang].ownerOnly); return; }
-    forgotPasswordBtn.disabled = true;
-    try{
-      const client = await getSupabaseClient();
-      const redirectTo = new URL('.', window.location.href).href;
-      const {error} = await client.auth.resetPasswordForEmail(email, {redirectTo});
-      if(error) throw error;
-      forgotPasswordMessage.textContent = UI[currentLang].forgotPasswordMessage;
-      forgotPasswordMessage.style.display = 'block';
-    }catch(error){
-      console.error('Password reset request failed', error);
-      showLoginError(`${UI[currentLang].forgotPasswordError} ${error.message || ''}`.trim());
-    }finally{ forgotPasswordBtn.disabled = false; }
-  });
-  document.getElementById('loginSubmit').addEventListener('click', async () => {
-    loginError.style.display = 'none';
-    forgotPasswordMessage.style.display = 'none';
-    const email = loginEmail.value.trim().toLowerCase();
-    const password = loginPassword.value;
-    if(!email || !password){ showLoginError(UI[currentLang].modalError); return; }
-    if(email !== OWNER_EMAIL){ showLoginError(UI[currentLang].ownerOnly); return; }
-    const submitButton = document.getElementById('loginSubmit');
-    submitButton.disabled = true;
-    try{
-      const client = await getSupabaseClient();
-      const {error} = await client.auth.signInWithPassword({email, password});
-      if(error) throw error;
-    }catch(error){
-      console.error('Password sign-in failed', error);
-      showLoginError(error.message || UI[currentLang].modalError);
-    }finally{ submitButton.disabled = false; }
-  });
-  loginEmail.addEventListener('keydown', e => { if(e.key === 'Enter') document.getElementById('loginSubmit').click(); });
-  loginPassword.addEventListener('keydown', e => { if(e.key === 'Enter') document.getElementById('loginSubmit').click(); });
-  loginOverlay.addEventListener('click', e => { if(e.target === loginOverlay) closeLogin(); });
-  passwordSetupOverlay.addEventListener('click', e => { if(e.target === passwordSetupOverlay){ if(recoveryMode) cancelPasswordSetup(); else closePasswordSetup(); } });
-
-  document.getElementById('logoutBtn').addEventListener('click', fullLogout);
-  document.getElementById('saveBtn').addEventListener('click', saveData);
-  document.getElementById('uploadPhotoBtn').addEventListener('click', () => document.getElementById('avatarUpload').click());
-  document.getElementById('avatarUpload').addEventListener('change', async event => {
-    const file = event.target.files?.[0];
-    if(!file) return;
-    if(!file.type.startsWith('image/')){ showToast(UI[currentLang].toastSaveError); event.target.value = ''; return; }
-    if(file.size > 15 * 1024 * 1024){ showToast(currentLang === 'de' ? 'Bitte ein Bild unter 15 MB wählen.' : 'Please choose an image smaller than 15 MB.'); event.target.value = ''; return; }
-    try{
-      const imageUrl = URL.createObjectURL(file);
-      const image = new Image();
-      image.onload = () => {
-        try{
-          const scale = Math.min(1, 1200 / image.width, 1200 / image.height);
-          const canvas = document.createElement('canvas');
-          canvas.width = Math.max(1, Math.round(image.width * scale));
-          canvas.height = Math.max(1, Math.round(image.height * scale));
-          canvas.getContext('2d').drawImage(image, 0, 0, canvas.width, canvas.height);
-          profileImageData = canvas.toDataURL('image/jpeg', 0.82);
-          document.getElementById('avatarImg').src = profileImageData;
-          URL.revokeObjectURL(imageUrl);
-          showToast(UI[currentLang].toastPhoto);
-        }catch(error){ URL.revokeObjectURL(imageUrl); console.error(error); showToast(UI[currentLang].toastSaveError); }
-      };
-      image.onerror = () => { URL.revokeObjectURL(imageUrl); showToast(UI[currentLang].toastSaveError); };
-      image.src = imageUrl;
-    }catch(error){ console.error(error); showToast(UI[currentLang].toastSaveError); }
-    event.target.value = '';
   });
 
-  document.getElementById('exportBtn').addEventListener('click', () => {
-    const blob = new Blob([JSON.stringify(collectData(), null, 2)], {type:"application/json"});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a'); a.href = url; a.download = "josef_iebed_cv_daten.json"; a.click();
-    URL.revokeObjectURL(url);
-  });
-
-  document.getElementById('exportHtmlBtn').addEventListener('click', () => {
-    const clone = document.getElementById('profileView').cloneNode(true);
-    clone.querySelectorAll('[contenteditable]').forEach(el => el.removeAttribute('contenteditable'));
-    const full = '<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8"><title>Josef Iebed — Portfolio</title></head><body>' + clone.outerHTML + '</body></html>';
-    const blob = new Blob([full], {type:"text/html"});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a'); a.href = url; a.download = "profil.html"; a.click();
-    URL.revokeObjectURL(url);
-    showToast(UI[currentLang].toastHtml);
-  });
-
-  const importFile = document.getElementById('importFile');
-  document.getElementById('importBtn').addEventListener('click', () => importFile.click());
-  importFile.addEventListener('change', e => {
-    const file = e.target.files[0];
-    if(!file) return;
-    const reader = new FileReader();
-    reader.onload = ev => {
-      try{
-        const data = JSON.parse(ev.target.result);
-        Object.keys(data).forEach(id => { const el = document.getElementById(id); if(el) el.innerHTML = data[id]; });
-        captureCurrentContent();
-        saveData();
-      }catch(err){ alert("Fehler beim Import: ungültige JSON-Datei."); }
-    };
-    reader.readAsText(file);
-  });
-
-  function addCard(containerId, defaultTitle, defaultMeta){
-    customIdCounter++;
-    const container = document.getElementById(containerId);
-    const div = document.createElement('div');
-    div.className = 'card';
-    const titleId = 'custom-title-' + customIdCounter;
-    const metaId = 'custom-meta-' + customIdCounter;
-    const listId = 'custom-list-' + customIdCounter;
-    div.innerHTML = `
-      <button class="card-remove-btn" onclick="this.parentElement.remove()">✕ Entfernen</button>
-      <h3 data-editable contenteditable="true" id="${titleId}">${defaultTitle}</h3>
-      <div class="meta" data-editable contenteditable="true" id="${metaId}">${defaultMeta}</div>
-      <ul data-editable contenteditable="true" id="${listId}"><li>Aufgabe / Detail hier eintragen</li></ul>
-    `;
-    container.appendChild(div);
-  }
-
-  updateLoginUI();
-  // Compact view
   const VIEW_KEY = 'iebed_portfolio_view';
   function setCompact(on){
     document.body.classList.toggle('compact', on);
@@ -1492,75 +539,57 @@ buttons.forEach(btn=>btn.addEventListener('click',()=>{buttons.forEach(b=>b.clas
   document.getElementById('viewBtn').addEventListener('click', () => setCompact(!document.body.classList.contains('compact')));
   try{ if(localStorage.getItem(VIEW_KEY) === 'compact') setCompact(true); }catch(e){}
 
-  // Downloads (Supabase Storage bucket "portfolio-files": public read, owner write)
-  const DL_BUCKET = 'portfolio-files';
-  let dlFiles = {cv:[], other:[]};
-  let dlTargetFolder = 'cv';
-  function dlName(name){ return name.replace(/^\d{13}_/, ''); }
+  let downloads = {cv:[], other:[]};
   function renderDownloads(){
     const s = UI[currentLang];
     ['cv','other'].forEach(folder => {
       const list = document.getElementById('dl-list-' + folder);
-      list.innerHTML = '';
-      if(!dlFiles[folder].length){ const li = document.createElement('li'); li.textContent = s.dlEmpty; li.style.color = 'var(--muted)'; list.appendChild(li); return; }
-      dlFiles[folder].forEach(f => {
+      if(!list) return;
+      list.replaceChildren();
+      const entries = downloads[folder] || [];
+      if(!entries.length){
         const li = document.createElement('li');
-        const a = document.createElement('a');
-        a.href = f.url; a.target = '_blank'; a.rel = 'noopener'; a.textContent = '📄 ' + dlName(f.name); a.setAttribute('download', dlName(f.name));
-        const del = document.createElement('button');
-        del.className = 'dl-del'; del.textContent = s.dlDelete;
-        del.addEventListener('click', () => deleteDownload(folder, f.name));
-        li.append(a, del); list.appendChild(li);
+        li.textContent = s.dlEmpty;
+        li.style.color = 'var(--muted)';
+        list.appendChild(li);
+        return;
+      }
+      entries.forEach(file => {
+        if(!file || typeof file.path !== 'string' || typeof file.name !== 'string') return;
+        const li = document.createElement('li');
+        const link = document.createElement('a');
+        link.href = file.path;
+        link.textContent = '📄 ' + file.name;
+        link.setAttribute('download', file.name);
+        li.appendChild(link);
+        list.appendChild(li);
       });
     });
   }
-  async function loadDownloads(){
+
+  async function loadStaticFiles(){
     try{
-      const client = await getSupabaseClient();
-      for(const folder of ['cv','other']){
-        const {data, error} = await client.storage.from(DL_BUCKET).list(folder, {sortBy:{column:'created_at', order:'desc'}});
-        if(error) throw error;
-        dlFiles[folder] = (data || []).filter(f => f.name && !f.name.startsWith('.')).map(f => ({
-          name:f.name, url:client.storage.from(DL_BUCKET).getPublicUrl(folder + '/' + f.name).data.publicUrl
-        }));
+      const response = await fetch('./portfolio-content.json');
+      if(!response.ok) throw new Error('Portfolio content file unavailable');
+      const data = await response.json();
+      if((data.version || 1) < CONTENT_VERSION){
+        ['de','en'].forEach(lang => { if(data[lang]) CV_UPDATED_KEYS.forEach(key => delete data[lang][key]); });
       }
-    }catch(error){ console.error('Could not load downloads', error); }
+      if(data.de && typeof data.de === 'object') Object.assign(CONTENT_DE, data.de);
+      if(data.en && typeof data.en === 'object') Object.assign(CONTENT_EN, data.en);
+      applyContent(currentLang);
+    }catch(error){ console.error('Could not load the static portfolio content.', error); }
+    try{
+      const response = await fetch('./portfolio-downloads.json');
+      if(!response.ok) throw new Error('Download manifest unavailable');
+      const data = await response.json();
+      downloads = {cv:Array.isArray(data.cv) ? data.cv : [], other:Array.isArray(data.other) ? data.other : []};
+    }catch(error){ console.error('Could not load static downloads.', error); }
     renderDownloads();
   }
-  async function deleteDownload(folder, name){
-    if(!isLoggedIn || !isEditing || !confirm(UI[currentLang].dlConfirm)) return;
-    try{
-      const client = await getSupabaseClient();
-      const {error} = await client.storage.from(DL_BUCKET).remove([folder + '/' + name]);
-      if(error) throw error;
-      showToast(UI[currentLang].dlDeleted); await loadDownloads();
-    }catch(error){ console.error(error); showToast(UI[currentLang].dlError); }
-  }
-  const dlFileInput = document.getElementById('dlFileInput');
-  document.querySelectorAll('[data-dl-folder]').forEach(btn => btn.addEventListener('click', () => {
-    if(!isLoggedIn || !isEditing) return;
-    dlTargetFolder = btn.dataset.dlFolder;
-    dlFileInput.accept = dlTargetFolder === 'cv' ? '.pdf,application/pdf' : '';
-    dlFileInput.click();
-  }));
-  dlFileInput.addEventListener('change', async event => {
-    const file = event.target.files?.[0];
-    event.target.value = '';
-    if(!file) return;
-    if(file.size > 20 * 1024 * 1024){ showToast(UI[currentLang].dlTooBig); return; }
-    try{
-      const client = await getSupabaseClient();
-      const safe = file.name.normalize('NFKD').replace(/[^\w.\-]+/g, '_');
-      const {error} = await client.storage.from(DL_BUCKET).upload(dlTargetFolder + '/' + Date.now() + '_' + safe, file, {contentType:file.type || 'application/octet-stream', upsert:false});
-      if(error) throw error;
-      showToast(UI[currentLang].dlUploaded); await loadDownloads();
-    }catch(error){ console.error(error); showToast(UI[currentLang].dlError); }
-  });
-  renderDownloads();
-  loadDownloads();
 
-  loadRemoteData().catch(error => { console.error('Could not load public portfolio data', error); });
-  initializeAuth();
+  applyUIStrings(currentLang);
+  loadStaticFiles();
 </script>
 
 </body>
