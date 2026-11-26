@@ -171,6 +171,8 @@
   .btn-secondary2{background:rgba(148,163,184,0.15); color:var(--text);}
   .modal-error{color:var(--danger); font-size:.8rem; margin-bottom:8px; display:none;}
   .modal-message{color:var(--ok); font-size:.84rem; line-height:1.5; margin-bottom:10px; display:none;}
+  .forgot-password-link{display:block;margin:-2px 0 12px auto;padding:0;background:none;border:0;color:var(--accent);font:inherit;font-size:.82rem;text-decoration:underline;cursor:pointer;}
+  .forgot-password-link:disabled{opacity:.6;cursor:wait;}
   .login-help{color:var(--muted); font-size:.82rem; line-height:1.5; margin:0 0 14px;}
   .toast{position:fixed; top:20px; right:20px; background:var(--ok); color:#052e16; padding:12px 20px; border-radius:10px; font-weight:600; font-size:.85rem; z-index:200; display:none; box-shadow:0 8px 24px rgba(0,0,0,0.3); max-width:320px;}
 
@@ -620,6 +622,9 @@
     <div class="modal-error" id="loginError" role="alert"></div>
     <input type="email" id="loginEmail" placeholder="Deine E-Mail-Adresse" autocomplete="off" required>
     <input type="password" id="loginPassword" placeholder="Dein Passwort" autocomplete="current-password" required>
+    <button class="forgot-password-link" id="forgotPasswordBtn" type="button">Passwort vergessen?</button>
+    <p class="modal-message" id="forgotPasswordMessage" role="status" aria-live="polite"></p>
+    <p class="modal-message" id="passwordResetSuccess" role="status" aria-live="polite" style="display:none"></p>
     <div class="modal-actions">
       <button class="btn-secondary2" id="loginCancel">Abbrechen</button>
       <button class="btn-primary2" id="loginSubmit">Anmelden</button>
@@ -857,8 +862,14 @@ buttons.forEach(btn=>btn.addEventListener('click',()=>{buttons.forEach(b=>b.clas
       modalTitle:"🔒 Sicher anmelden", modalHelp:"Melde dich mit deiner E-Mail-Adresse und deinem Passwort an. Nur dein Konto kann das Portfolio bearbeiten.",
       modalError:"Bitte gib eine gültige E-Mail-Adresse und dein Passwort ein.", modalCancel:"Abbrechen", modalSubmit:"Anmelden",
       modalPlaceholder:"Deine E-Mail-Adresse", passwordPlaceholder:"Dein Passwort",
+      forgotPasswordLabel:"Passwort vergessen?", forgotPasswordEmailRequired:"Bitte gib zuerst die E-Mail-Adresse deines Besitzerkontos ein.",
+      forgotPasswordMessage:"Falls diese Adresse zu deinem Besitzerkonto gehört, wurde eine Zurücksetzungs-E-Mail gesendet. Prüfe auch den Spam-Ordner und öffne den Link, um hier ein neues Passwort festzulegen.",
+      forgotPasswordError:"Die Zurücksetzungs-E-Mail konnte nicht gesendet werden.",
       passwordManage:"🔑 Passwort festlegen/ändern", passwordSetupTitle:"🔑 Passwort festlegen oder ändern",
       passwordSetupHelp:"Diese Aktion aktualisiert das Passwort für dein angemeldetes Besitzerkonto. Sie sendet keinen Anmeldelink.",
+      passwordRecoveryTitle:"🔑 Neues Passwort festlegen", passwordRecoveryHelp:"Über diesen sicheren Wiederherstellungslink kannst du dein Passwort festlegen. Danach wirst du abgemeldet und musst dich mit dem neuen Passwort anmelden.",
+      passwordRecoveryCancel:"Abbrechen & abmelden", passwordRecoveryComplete:"Passwort aktualisiert. Bitte melde dich mit deinem neuen Passwort an.",
+      passwordRecoverySignOutError:"Du konntest nicht abgemeldet werden. Bitte versuche es erneut.",
       passwordNewPlaceholder:"Neues Passwort", passwordConfirmPlaceholder:"Passwort wiederholen",
       passwordCancel:"Abbrechen", passwordSave:"Passwort speichern", passwordMismatch:"Die Passwörter stimmen nicht überein.",
       passwordTooShort:"Bitte verwende mindestens 8 Zeichen.", passwordUpdated:"Passwort aktualisiert ✓",
@@ -881,8 +892,14 @@ buttons.forEach(btn=>btn.addEventListener('click',()=>{buttons.forEach(b=>b.clas
       modalTitle:"🔒 Secure sign in", modalHelp:"Sign in with your email and password. Only your account can edit this portfolio.",
       modalError:"Enter a valid email address and your password.", modalCancel:"Cancel", modalSubmit:"Sign in",
       modalPlaceholder:"Your email address", passwordPlaceholder:"Your password",
+      forgotPasswordLabel:"Forgot password?", forgotPasswordEmailRequired:"Enter the email address for your owner account first.",
+      forgotPasswordMessage:"If this address matches your owner account, a reset email has been sent. Check your inbox and spam folder, then open the link to set a new password here.",
+      forgotPasswordError:"Could not send the password reset email.",
       passwordManage:"🔑 Set/change password", passwordSetupTitle:"🔑 Set or change your password",
       passwordSetupHelp:"This updates the password for your signed-in owner account. It does not send a sign-in link.",
+      passwordRecoveryTitle:"🔑 Choose a new password", passwordRecoveryHelp:"Use this secure recovery link to choose a new password. You will then be signed out and asked to sign in with it.",
+      passwordRecoveryCancel:"Cancel & sign out", passwordRecoveryComplete:"Password updated. Please sign in with your new password.",
+      passwordRecoverySignOutError:"Could not sign you out. Please try again.",
       passwordNewPlaceholder:"New password", passwordConfirmPlaceholder:"Repeat password",
       passwordCancel:"Cancel", passwordSave:"Save password", passwordMismatch:"The passwords do not match.",
       passwordTooShort:"Use at least 8 characters.", passwordUpdated:"Password updated ✓",
@@ -1087,12 +1104,13 @@ buttons.forEach(btn=>btn.addEventListener('click',()=>{buttons.forEach(b=>b.clas
     document.getElementById('loginSubmit').textContent = s.modalSubmit;
     document.getElementById('loginEmail').placeholder = s.modalPlaceholder;
     document.getElementById('loginPassword').placeholder = s.passwordPlaceholder;
+    document.getElementById('forgotPasswordBtn').textContent = s.forgotPasswordLabel;
     document.getElementById('passwordSetupBtn').textContent = s.passwordManage;
-    document.getElementById('passwordSetupTitle').textContent = s.passwordSetupTitle;
-    document.getElementById('passwordSetupHelp').textContent = s.passwordSetupHelp;
+    document.getElementById('passwordSetupTitle').textContent = recoveryMode ? s.passwordRecoveryTitle : s.passwordSetupTitle;
+    document.getElementById('passwordSetupHelp').textContent = recoveryMode ? s.passwordRecoveryHelp : s.passwordSetupHelp;
     document.getElementById('newPassword').placeholder = s.passwordNewPlaceholder;
     document.getElementById('confirmPassword').placeholder = s.passwordConfirmPlaceholder;
-    document.getElementById('passwordSetupCancel').textContent = s.passwordCancel;
+    document.getElementById('passwordSetupCancel').textContent = recoveryMode ? s.passwordRecoveryCancel : s.passwordCancel;
     document.getElementById('passwordSetupSubmit').textContent = s.passwordSave;
     document.getElementById('saveBtn').textContent = currentLang === 'de' ? '💾 In der Cloud speichern' : '💾 Save to cloud';
     document.getElementById('uploadPhotoBtn').textContent = currentLang === 'de' ? '📷 Profilbild hochladen' : '📷 Upload profile photo';
@@ -1117,6 +1135,12 @@ buttons.forEach(btn=>btn.addEventListener('click',()=>{buttons.forEach(b=>b.clas
   const loginEmail = document.getElementById('loginEmail');
   const loginPassword = document.getElementById('loginPassword');
   const loginError = document.getElementById('loginError');
+  const forgotPasswordMessage = document.getElementById('forgotPasswordMessage');
+  const passwordResetSuccess = document.getElementById('passwordResetSuccess');
+  const forgotPasswordBtn = document.getElementById('forgotPasswordBtn');
+  const RECOVERY_PENDING_KEY = 'iebed_portfolio_password_recovery_pending';
+  let recoveryMode = false;
+  let recoveryPasswordDialogHandled = false;
   const passwordSetupOverlay = document.getElementById('passwordSetupOverlay');
   const passwordSetupError = document.getElementById('passwordSetupError');
   const newPasswordInput = document.getElementById('newPassword');
@@ -1125,6 +1149,8 @@ buttons.forEach(btn=>btn.addEventListener('click',()=>{buttons.forEach(b=>b.clas
 
   function openLogin(){
     loginError.style.display = 'none';
+    forgotPasswordMessage.style.display = 'none';
+    passwordResetSuccess.style.display = 'none';
     loginEmail.value = '';
     loginPassword.value = '';
     loginOverlay.classList.add('show');
@@ -1132,6 +1158,8 @@ buttons.forEach(btn=>btn.addEventListener('click',()=>{buttons.forEach(b=>b.clas
   }
   function closeLogin(){
     loginOverlay.classList.remove('show');
+    forgotPasswordMessage.style.display = 'none';
+    passwordResetSuccess.style.display = 'none';
     loginEmail.value = '';
     loginPassword.value = '';
   }
@@ -1139,9 +1167,37 @@ buttons.forEach(btn=>btn.addEventListener('click',()=>{buttons.forEach(b=>b.clas
     loginError.textContent = message;
     loginError.style.display = 'block';
   }
+  function isPasswordRecoveryRedirect(){
+    const hashType = new URLSearchParams(window.location.hash.slice(1)).get('type');
+    const queryType = new URLSearchParams(window.location.search).get('type');
+    return hashType === 'recovery' || queryType === 'recovery';
+  }
+  async function handlePasswordRecovery(user, fromRecoveryEvent=false){
+    const recoveryPending = localStorage.getItem(RECOVERY_PENDING_KEY) === '1';
+    if(recoveryPasswordDialogHandled || (!fromRecoveryEvent && !recoveryPending && !isPasswordRecoveryRedirect())) return;
+    if((user?.email || '').trim().toLowerCase() !== OWNER_EMAIL) return;
+    recoveryPasswordDialogHandled = true;
+    recoveryMode = true;
+    localStorage.setItem(RECOVERY_PENDING_KEY, '1');
+    isLoggedIn = false;
+    if(isEditing) exitEditModeOnly();
+    else updateLoginUI();
+    closeLogin();
+    showProfileView();
+    openPasswordSetup();
+    const cleanUrl = new URL(window.location.href);
+    cleanUrl.hash = '';
+    cleanUrl.searchParams.delete('type');
+    cleanUrl.searchParams.delete('code');
+    window.history.replaceState({}, document.title, cleanUrl.pathname + cleanUrl.search);
+  }
   function openPasswordSetup(){
-    if(!isLoggedIn || !isEditing) return;
+    if(!recoveryMode && (!isLoggedIn || !isEditing)) return;
     passwordSetupError.style.display = 'none';
+    const s = UI[currentLang];
+    document.getElementById('passwordSetupTitle').textContent = recoveryMode ? s.passwordRecoveryTitle : s.passwordSetupTitle;
+    document.getElementById('passwordSetupHelp').textContent = recoveryMode ? s.passwordRecoveryHelp : s.passwordSetupHelp;
+    document.getElementById('passwordSetupCancel').textContent = recoveryMode ? s.passwordRecoveryCancel : s.passwordCancel;
     newPasswordInput.value = '';
     confirmPasswordInput.value = '';
     passwordSetupOverlay.classList.add('show');
@@ -1152,26 +1208,62 @@ buttons.forEach(btn=>btn.addEventListener('click',()=>{buttons.forEach(b=>b.clas
     newPasswordInput.value = '';
     confirmPasswordInput.value = '';
   }
+  async function cancelPasswordSetup(){
+    if(!recoveryMode){ closePasswordSetup(); return; }
+    const cancelButton = document.getElementById('passwordSetupCancel');
+    cancelButton.disabled = true;
+    try{
+      const client = await getSupabaseClient();
+      const {error} = await client.auth.signOut();
+      if(error) throw error;
+      localStorage.removeItem(RECOVERY_PENDING_KEY);
+      recoveryMode = false;
+      isLoggedIn = false;
+      if(isEditing) exitEditModeOnly();
+      else updateLoginUI();
+      closePasswordSetup();
+      openLogin();
+    }catch(error){
+      console.error('Could not cancel password recovery cleanly', error);
+      showPasswordSetupError(UI[currentLang].passwordRecoverySignOutError);
+    }finally{ cancelButton.disabled = false; }
+  }
   function showPasswordSetupError(message){
     passwordSetupError.textContent = message;
     passwordSetupError.style.display = 'block';
   }
   async function saveOwnerPassword(){
     passwordSetupError.style.display = 'none';
-    if(!isLoggedIn || !isEditing){ showPasswordSetupError(UI[currentLang].passwordUpdateError); return; }
+    if(!recoveryMode && (!isLoggedIn || !isEditing)){ showPasswordSetupError(UI[currentLang].passwordUpdateError); return; }
     const password = newPasswordInput.value;
     if(password.length < 8){ showPasswordSetupError(UI[currentLang].passwordTooShort); return; }
     if(password !== confirmPasswordInput.value){ showPasswordSetupError(UI[currentLang].passwordMismatch); return; }
     passwordSetupSubmit.disabled = true;
+    let passwordWasUpdated = false;
     try{
       const client = await getSupabaseClient();
       const {error} = await client.auth.updateUser({password});
       if(error) throw error;
-      closePasswordSetup();
-      showToast(UI[currentLang].passwordUpdated);
+      passwordWasUpdated = true;
+      if(recoveryMode){
+        const {error:signOutError} = await client.auth.signOut();
+        if(signOutError) throw signOutError;
+        localStorage.removeItem(RECOVERY_PENDING_KEY);
+        recoveryMode = false;
+        isLoggedIn = false;
+        if(isEditing) exitEditModeOnly();
+        else updateLoginUI();
+        closePasswordSetup();
+        openLogin();
+        passwordResetSuccess.textContent = UI[currentLang].passwordRecoveryComplete;
+        passwordResetSuccess.style.display = 'block';
+      }else{
+        closePasswordSetup();
+        showToast(UI[currentLang].passwordUpdated);
+      }
     }catch(error){
       console.error('Password update failed', error);
-      showPasswordSetupError(error.message || UI[currentLang].passwordUpdateError);
+      showPasswordSetupError(recoveryMode && passwordWasUpdated ? UI[currentLang].passwordRecoverySignOutError : (error.message || UI[currentLang].passwordUpdateError));
     }finally{ passwordSetupSubmit.disabled = false; }
   }
   async function enterEditMode(){
@@ -1217,15 +1309,31 @@ buttons.forEach(btn=>btn.addEventListener('click',()=>{buttons.forEach(b=>b.clas
       const client = await getSupabaseClient();
       const {data, error} = await client.auth.getSession();
       if(error) throw error;
-      applyAuthUser(data.session?.user || null);
       client.auth.onAuthStateChange((event, session) => {
-        const becameOwner = applyAuthUser(session?.user || null);
+        const user = session?.user || null;
+        const isOwner = (user?.email || '').trim().toLowerCase() === OWNER_EMAIL;
+        const recoveryContext = event === 'PASSWORD_RECOVERY' || isPasswordRecoveryRedirect() || (localStorage.getItem(RECOVERY_PENDING_KEY) === '1' && isOwner);
+        if(recoveryContext){
+          if(isOwner) handlePasswordRecovery(user, true);
+          else applyAuthUser(null);
+          return;
+        }
+        const becameOwner = applyAuthUser(user);
         if(event === 'SIGNED_IN' && becameOwner){
           closeLogin();
           showProfileView();
           enterEditMode();
         }
       });
+      const initialUser = data.session?.user || null;
+      const initialIsOwner = (initialUser?.email || '').trim().toLowerCase() === OWNER_EMAIL;
+      const recoveryPending = isPasswordRecoveryRedirect() || localStorage.getItem(RECOVERY_PENDING_KEY) === '1';
+      if(recoveryPending && initialIsOwner){
+        await handlePasswordRecovery(initialUser, true);
+      }else{
+        if(localStorage.getItem(RECOVERY_PENDING_KEY) === '1') localStorage.removeItem(RECOVERY_PENDING_KEY);
+        applyAuthUser(initialUser);
+      }
     }catch(error){
       console.error('Authentication initialization failed', error);
       loginToggleBtn.disabled = true;
@@ -1242,11 +1350,35 @@ buttons.forEach(btn=>btn.addEventListener('click',()=>{buttons.forEach(b=>b.clas
   document.getElementById('fullLogoutBtn').addEventListener('click', fullLogout);
   document.getElementById('loginCancel').addEventListener('click', closeLogin);
   document.getElementById('passwordSetupBtn').addEventListener('click', openPasswordSetup);
-  document.getElementById('passwordSetupCancel').addEventListener('click', closePasswordSetup);
+  document.getElementById('passwordSetupCancel').addEventListener('click', cancelPasswordSetup);
   passwordSetupSubmit.addEventListener('click', saveOwnerPassword);
   confirmPasswordInput.addEventListener('keydown', e => { if(e.key === 'Enter') passwordSetupSubmit.click(); });
+  forgotPasswordBtn.addEventListener('click', async () => {
+    loginError.style.display = 'none';
+    forgotPasswordMessage.style.display = 'none';
+    const email = loginEmail.value.trim().toLowerCase();
+    if(!email || !loginEmail.checkValidity()){
+      showLoginError(UI[currentLang].forgotPasswordEmailRequired);
+      loginEmail.focus();
+      return;
+    }
+    if(email !== OWNER_EMAIL){ showLoginError(UI[currentLang].ownerOnly); return; }
+    forgotPasswordBtn.disabled = true;
+    try{
+      const client = await getSupabaseClient();
+      const redirectTo = new URL('.', window.location.href).href;
+      const {error} = await client.auth.resetPasswordForEmail(email, {redirectTo});
+      if(error) throw error;
+      forgotPasswordMessage.textContent = UI[currentLang].forgotPasswordMessage;
+      forgotPasswordMessage.style.display = 'block';
+    }catch(error){
+      console.error('Password reset request failed', error);
+      showLoginError(`${UI[currentLang].forgotPasswordError} ${error.message || ''}`.trim());
+    }finally{ forgotPasswordBtn.disabled = false; }
+  });
   document.getElementById('loginSubmit').addEventListener('click', async () => {
     loginError.style.display = 'none';
+    forgotPasswordMessage.style.display = 'none';
     const email = loginEmail.value.trim().toLowerCase();
     const password = loginPassword.value;
     if(!email || !password){ showLoginError(UI[currentLang].modalError); return; }
@@ -1265,7 +1397,7 @@ buttons.forEach(btn=>btn.addEventListener('click',()=>{buttons.forEach(b=>b.clas
   loginEmail.addEventListener('keydown', e => { if(e.key === 'Enter') document.getElementById('loginSubmit').click(); });
   loginPassword.addEventListener('keydown', e => { if(e.key === 'Enter') document.getElementById('loginSubmit').click(); });
   loginOverlay.addEventListener('click', e => { if(e.target === loginOverlay) closeLogin(); });
-  passwordSetupOverlay.addEventListener('click', e => { if(e.target === passwordSetupOverlay) closePasswordSetup(); });
+  passwordSetupOverlay.addEventListener('click', e => { if(e.target === passwordSetupOverlay){ if(recoveryMode) cancelPasswordSetup(); else closePasswordSetup(); } });
 
   document.getElementById('logoutBtn').addEventListener('click', fullLogout);
   document.getElementById('saveBtn').addEventListener('click', saveData);
