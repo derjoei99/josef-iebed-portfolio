@@ -99,6 +99,21 @@
   .card .meta{color:var(--accent2); font-size:.85rem; margin-bottom:10px; font-weight:500;}
   .card ul{margin-left:18px; color:var(--muted); font-size:.92rem; line-height:1.55;}
   .card ul li{margin-bottom:4px;}
+  .view-btn{display:block;width:100%;margin:8px 0 14px;padding:8px 12px;border-radius:10px;border:1px solid rgba(148,163,184,0.25);background:transparent;color:var(--muted);cursor:pointer;font-size:.85rem;text-align:left;}
+  .view-btn:hover{color:var(--text);}
+  body.compact:not(.edit-mode) main .card ul, body.compact:not(.edit-mode) main .card p.lead{display:none;}
+  body.compact:not(.edit-mode) main .card{padding:14px 20px;margin-bottom:10px;}
+  body.compact:not(.edit-mode) main .card .meta{margin-bottom:0;}
+  body.compact:not(.edit-mode) #profil .card p.lead, body.compact:not(.edit-mode) #skills .card, body.compact:not(.edit-mode) #kontakt .card p.lead, body.compact:not(.edit-mode) #downloads .card p.lead, body.compact:not(.edit-mode) #downloads .card ul{display:block;}
+  .dl-list{list-style:none;margin:0 !important;padding:0;}
+  .dl-list li{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid rgba(148,163,184,0.12);}
+  .dl-list li:last-child{border-bottom:none;}
+  .dl-list a{color:var(--text);text-decoration:none;word-break:break-word;}
+  .dl-list a:hover{text-decoration:underline;}
+  .dl-del{display:none;background:transparent;border:1px solid rgba(248,113,113,0.5);color:#f87171;border-radius:8px;padding:4px 10px;cursor:pointer;font-size:.8rem;}
+  body.edit-mode .dl-del{display:inline-block;}
+  .dl-upload{display:none;margin-top:14px;}
+  body.edit-mode .dl-upload{display:block;}
   .badges{display:flex; flex-wrap:wrap; gap:10px; margin-top:8px;}
   .badge{background:rgba(56,189,248,0.1); color:var(--accent); padding:7px 14px; border-radius:10px; font-size:.85rem; font-weight:500; border:1px solid rgba(56,189,248,0.25);}
   .grid2b{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
@@ -277,15 +292,18 @@
 <div class="sidebar" id="sidebarEl">
   <img class="avatar" id="avatarImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%2338bdf8'/%3E%3Cstop offset='100%25' stop-color='%230f172a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='96' height='96' rx='48' fill='url(%23g)'/%3E%3Ctext x='48' y='61' text-anchor='middle' font-family='Arial,sans-serif' font-size='34' font-weight='700' fill='%23ffffff'%3EJI%3C/text%3E%3C/svg%3E" alt="Josef Iebed">
   <div class="brand">Josef <span>Iebed</span></div>
-  <div class="brand-sub">Soziologie & Data-driven Marketing</div>
+  <div class="brand-sub" id="brandSub">Research, Datenanalyse &amp; datenbasiertes Marketing</div>
   <button class="lang-btn" id="langBtn">🌐 <span class="label">English</span></button>
+  <button class="view-btn" id="viewBtn">☰ <span class="label">Kompaktansicht</span></button>
   <nav>
     <button class="nav-btn active" data-page="profil">👤 <span class="label" id="nav-profil">Profil</span></button>
     <button class="nav-btn" data-page="erfahrung">💼 <span class="label" id="nav-erfahrung">Berufserfahrung</span></button>
     <button class="nav-btn" data-page="ausbildung">🎓 <span class="label" id="nav-ausbildung">Ausbildung</span></button>
+    <button class="nav-btn" data-page="projekte">📊 <span class="label" id="nav-projekte">Projekte</span></button>
     <button class="nav-btn" data-page="weiterbildung">🧩 <span class="label" id="nav-weiterbildung">Weiterbildung</span></button>
     <button class="nav-btn" data-page="ehrenamt">🤝 <span class="label" id="nav-ehrenamt">Ehrenamt</span></button>
     <button class="nav-btn" data-page="skills">🫠️ <span class="label" id="nav-skills">Sprachen & Skills</span></button>
+    <button class="nav-btn" data-page="downloads">📁 <span class="label" id="nav-downloads">Downloads</span></button>
     <button class="nav-btn" data-page="kontakt">✉️ <span class="label" id="nav-kontakt">Kontakt</span></button>
   </nav>
 </div>
@@ -294,16 +312,16 @@
 
   <section class="page active" id="profil">
     <h1 data-editable id="f-name">Josef Iebed</h1>
-    <p class="lead" data-editable id="f-profil">Soziologie-Absolvent (Universität Wien) mit Kenntnissen in SPSS, STATA, RStudio, MAXQDA und LimeSurvey. Forschungserfahrung bei L&amp;R Sozialforschung in Datenanalyse und -validierung. Zuverlässig und kommunikationsstark aus Betreuungs- und Verwaltungstätigkeiten.</p>
+    <p class="lead" data-editable id="f-profil">Masterstudent in Consumer Research &amp; Data Driven Marketing mit Bachelorabschluss in Soziologie (Universität Wien) und erster Forschungspraxis in Datenvalidierung und Textanalyse bei L&amp;R Sozialforschung. Kenntnisse in SPSS, STATA, RStudio, MAXQDA und LimeSurvey. Erfahrung in sorgfältiger Dokumentation und im Umgang mit unterschiedlichen Zielgruppen.</p>
     <div class="card">
       <h3 id="fokusHeading">Aktueller Fokus</h3>
-      <p class="lead" data-editable id="f-fokus" style="margin-top:8px;">Übergang vom Soziologie-Master an der Universität Wien in das Masterprogramm <strong style="color:var(--text)">Consumer Research &amp; Data Driven Marketing (M.A.)</strong> an der FH Wiener Neustadt (Campus Wieselburg), Start 09/2026.</p>
+      <p class="lead" data-editable id="f-fokus" style="margin-top:8px;">Masterstudium <strong style="color:var(--text)">Consumer Research &amp; Data Driven Marketing (M.A.)</strong> an der FH Wiener Neustadt (Campus Wieselburg) seit 09/2026. Ziel ist der Berufseinstieg an der Schnittstelle von Research, Datenanalyse und Marketing, um Kundenbedürfnisse zu untersuchen und Erkenntnisse für die Praxis aufzubereiten.</p>
     </div>
     <div class="contact-row">
       <div class="chip">📍 <span data-editable id="f-ort">Wien, Österreich</span></div>
       <div class="chip">📧 <a href="mailto:josef.iebed@gmail.com" data-editable id="f-mail">josef.iebed@gmail.com</a></div>
       <div class="chip">📞 <span data-editable id="f-tel">+43 660 7560649</span></div>
-      <div class="chip">🔗 <a href="https://linkedin.com/in/josef-i-24071999" target="_blank" data-editable id="f-linkedin">linkedin.com/in/josef-i-24071999</a></div>
+      <div class="chip">🔗 <a href="https://linkedin.com/in/josefiebedba" target="_blank" data-editable id="f-linkedin">linkedin.com/in/josefiebedba</a></div>
     </div>
   </section>
 
@@ -313,25 +331,25 @@
 
     <div class="card">
       <button class="card-remove-btn" onclick="this.parentElement.remove()">✕ Entfernen</button>
-      <h3 data-editable id="e1-title">Praktikant — L&amp;R Sozialforschung GmbH</h3>
+      <h3 data-editable id="e1-title">Praktikant in der Forschungsassistenz — L&amp;R Sozialforschung GmbH</h3>
       <div class="meta" data-editable id="e1-meta">07/2026 · Wien</div>
       <p class="lead" data-editable id="e1-desc" style="margin-bottom:8px;">Mitarbeit am Forschungsprojekt „Systematische Analyse der Workshopberichte der ‚Digital Überall‘-Initiative“.</p>
       <ul data-editable id="e1-list">
         <li>Sichtung und Validierung der Angaben in Workshopberichten</li>
         <li>Systematisierung der Angaben der Workshopanbieter in Excel</li>
-        <li>Systematische Textanalyse mit MAXQDA</li>
+        <li>Entwicklung von Kategorien und systematische Textanalyse mit MAXQDA</li>
         <li>Quantifizierung qualitativer Prozesse in Kategorien</li>
       </ul>
     </div>
 
     <div class="card">
       <button class="card-remove-btn" onclick="this.parentElement.remove()">✕ Entfernen</button>
-      <h3 data-editable id="e2-title">Kinderbetreuung (Springer/fallweise) — Wiener Hilfswerk</h3>
+      <h3 data-editable id="e2-title">Freizeitbetreuer (Springer) — Wiener Hilfswerk</h3>
       <div class="meta" data-editable id="e2-meta">06/2025 – Jetzt · Wien</div>
       <ul data-editable id="e2-list">
-        <li>Selbstständige Betreuung von Kindern (0–12 Jahre)</li>
+        <li>Durchführung von Freizeitprogrammen für bis zu 25 Kinder (0–12 Jahre)</li>
         <li>Professionelle, einfühlsame pädagogische Arbeit</li>
-        <li>Laufende Kommunikation mit Obsorgeberechtigten sowie internen/externen Stellen</li>
+        <li>Laufende Abstimmung mit Eltern und Standortleitung sowie internen/externen Stellen</li>
         <li>Administrative Nachbereitung und Dokumentation (Berichte, Abwesenheiten, Dienstaufzeichnungen)</li>
         <li>Vereinzelt betriebliche Ferienbetreuung und Kindergarten-Einsätze</li>
       </ul>
@@ -339,23 +357,23 @@
 
     <div class="card">
       <button class="card-remove-btn" onclick="this.parentElement.remove()">✕ Entfernen</button>
-      <h3 data-editable id="e3-title">Studieren Probieren Betreuer — ÖH</h3>
+      <h3 data-editable id="e3-title">Betreuer „Studieren Probieren“ — Österreichische Hochschüler:innenschaft, ÖH Bundesvertretung</h3>
       <div class="meta" data-editable id="e3-meta">01/2023 – 05/2025 · Wien</div>
       <ul data-editable id="e3-list">
         <li>Begleitung interessierter Studierender zu Lehrveranstaltungen der Soziologie</li>
         <li>Bereitstellung von Unterlagen auf Anfrage</li>
-        <li>Beantwortung von Fragen zu Aufnahmeverfahren, Studieninhalten und -aufbau</li>
+        <li>Moderation von Fragerunden zu Aufnahmeverfahren, Studieninhalten und -aufbau</li>
       </ul>
     </div>
 
     <div class="card">
       <button class="card-remove-btn" onclick="this.parentElement.remove()">✕ Entfernen</button>
-      <h3 data-editable id="e4-title">Aushilfsbediensteter im Zusammenhang mit Wahlen — Magistrat der Stadt Wien</h3>
+      <h3 data-editable id="e4-title">Aushilfsbediensteter im Wahlbereich — Magistrat der Stadt Wien</h3>
       <div class="meta" data-editable id="e4-meta">08/2020 – 10/2020 · Wien</div>
       <ul data-editable id="e4-list">
         <li>Briefwahlanträge bearbeiten</li>
         <li>Alphabetische Sortierung und Verschicken der Stimmzettel</li>
-        <li>Unterstützung beim Beantragen von Wahlkarten</li>
+        <li>Bearbeitung von Wahlkartenanträgen</li>
         <li>Zurückerhaltene Wahlzettel auszählen</li>
       </ul>
     </div>
@@ -369,11 +387,11 @@
     <div class="card">
       <button class="card-remove-btn" onclick="this.parentElement.remove()">✕ Entfernen</button>
       <h3 data-editable id="a1-title">Consumer Research und Data Driven Marketing, M.A.</h3>
-      <div class="meta" data-editable id="a1-meta">FH Wiener Neustadt · 09/2026 – 07/2028 (voraussichtlich) · Wieselburg</div>
+      <div class="meta" data-editable id="a1-meta">FH Wiener Neustadt, Campus Wieselburg · 09/2026 – Aktuell</div>
       <ul data-editable id="a1-list">
         <li>Marketing &amp; Data Driven Management: strategisches und digitales Marketing, CRM</li>
         <li>Methodenkompetenz: quantitative/qualitative Forschungsmethoden, Data Science</li>
-        <li>Konsument*innenpsychologie: Behavioural Economics, Neuropsychologie</li>
+        <li>Konsument*innenpsychologie und Konsumverhalten: Behavioural Economics, Neuropsychologie</li>
         <li>Social Skills, Projektmanagement &amp; wissenschaftliches Arbeiten (inkl. Masterarbeit)</li>
       </ul>
     </div>
@@ -395,7 +413,7 @@
       <ul data-editable id="a3-list">
         <li>Hauptfächer: Theorien, Methoden, Anwendungsfelder der Soziologie</li>
         <li>Ergänzende Fächer: Öffentliches Recht, VWL, BWL, Kommunikative und Soziale Kompetenzen</li>
-        <li>Spezialisierungen: Soziale Ungleichheit, Konsumsoziologie, Stadtsoziologie, interpretative qualitative Sozialforschung</li>
+        <li>Schwerpunkte: Konsumsoziologie, Stadtsoziologie, Methoden und Statistik, soziale Ungleichheit, interpretative qualitative Sozialforschung</li>
         <li>Erweiterungscurriculum: Geschichte</li>
         <li>Bachelorarbeit: „Soziale Ungleichheit im Zugang zu adaptiven Controllern: Gaming für Menschen mit körperlicher Beeinträchtigung“ (Systematische Literaturrecherche + Mixed Methods; Note: gut)</li>
       </ul>
@@ -409,12 +427,45 @@
     <button class="add-card-btn" onclick="addCard('ausbildung-cards','Neuer Abschluss','Institution · Zeitraum · Ort')">+ Eintrag hinzufügen</button>
   </section>
 
+  <section class="page" id="projekte">
+    <h2 class="page-title" id="pt-projekte">Projekte</h2>
+    <div class="cards-container" id="projekte-cards">
+    <div class="card">
+      <button class="card-remove-btn" onclick="this.parentElement.remove()">✕ Entfernen</button>
+      <h3 data-editable id="p1-title">Lebensmitteleinkauf unter simulierten altersbedingten Veränderungen</h3>
+      <div class="meta" data-editable id="p1-meta">Empathic-Design-Studie · FH Wiener Neustadt · 10/2026 – Aktuell</div>
+      <ul data-editable id="p1-list">
+        <li>Eigener Beitrag: Beobachtung und Dokumentation einer Person im Alterssimulationsanzug</li>
+      </ul>
+    </div>
+    <div class="card">
+      <button class="card-remove-btn" onclick="this.parentElement.remove()">✕ Entfernen</button>
+      <h3 data-editable id="p2-title">Animal Crossing: Spielmotive, Wohlbefinden und Stressbewältigung</h3>
+      <div class="meta" data-editable id="p2-meta">Qualitative Studie · FH Wiener Neustadt · 09/2026 – Aktuell</div>
+      <ul data-editable id="p2-list">
+        <li>Qualitative Studie zu den Spielmotiven junger Erwachsener</li>
+        <li>Eigener Beitrag: Durchführung eines Interviews</li>
+      </ul>
+    </div>
+    <div class="card">
+      <button class="card-remove-btn" onclick="this.parentElement.remove()">✕ Entfernen</button>
+      <h3 data-editable id="p3-title">Visuelle Kommunikation der Auswirkungen des Konsums auf das Meer</h3>
+      <div class="meta" data-editable id="p3-meta">Forschungspraktikum · Universität Wien · 10/2024 – 07/2025</div>
+      <ul data-editable id="p3-list">
+        <li>Analyse der Bildsprache von Greenpeace Österreich</li>
+        <li>Methode: Segmentanalyse nach Breckner</li>
+      </ul>
+    </div>
+    </div>
+    <button class="add-card-btn" onclick="addCard('projekte-cards','Neues Projekt','Art · Zeitraum')">+ Eintrag hinzufügen</button>
+  </section>
+
   <section class="page" id="weiterbildung">
     <h2 class="page-title" id="pt-weiterbildung">Weiterbildung und Workshops</h2>
     <div class="cards-container" id="weiterbildung-cards">
     <div class="card">
       <button class="card-remove-btn" onclick="this.parentElement.remove()">✕ Entfernen</button>
-      <h3 data-editable id="w1-title">Basisworkshop „Extremismus – normal, radikal, extrem?“</h3>
+      <h3 data-editable id="w1-title">Extremismus- und Radikalisierungsprävention: Basisworkshop „Extremismus – normal, radikal, extrem?“</h3>
       <div class="meta" data-editable id="w1-meta">füruns (Zentrum für Zivilgesellschaft) · 12/2025 · Online</div>
       <ul data-editable id="w1-list">
         <li>Grundlagen zu Extremismus und Radikalisierung</li>
@@ -435,8 +486,8 @@
     </div>
     <div class="card">
       <button class="card-remove-btn" onclick="this.parentElement.remove()">✕ Entfernen</button>
-      <h3 data-editable id="w3-title">Spielerklärer-Workshop</h3>
-      <div class="meta" data-editable id="w3-meta">Area 52 · 06/2025 · Wien</div>
+      <h3 data-editable id="w3-title">Spielerklärer-Ausbildung</h3>
+      <div class="meta" data-editable id="w3-meta">Area52 · 06/2025 · Wien</div>
       <ul data-editable id="w3-list">
         <li>Kenntnisse gängiger Brettspiele</li>
         <li>Rasches Erfassen und Erklären von Spielregeln</li>
@@ -499,20 +550,36 @@
           <div class="badge">Quantitative Analyse: SPSS (fortgeschritten)</div>
           <div class="badge">STATA (Grundkenntnisse)</div>
           <div class="badge">R / RStudio (Grundkenntnisse)</div>
-          <div class="badge">Qualitative Methoden: MAXQDA (fortgeschritten)</div>
-          <div class="badge">Qualitative Interviews</div>
+          <div class="badge">Qualitative Forschung: MAXQDA (fortgeschritten)</div>
+          <div class="badge">Qualitative Interviews (fortgeschritten)</div>
           <div class="badge">Textanalyse</div>
-          <div class="badge">LimeSurvey</div>
-          <div class="badge">Fragebogenkonstruktion</div>
-          <div class="badge">Datenvalidierung</div>
+          <div class="badge">LimeSurvey (Grundkenntnisse)</div>
+          <div class="badge">Fragebogenkonstruktion (Grundkenntnisse)</div>
+          <div class="badge">Datenvalidierung (fortgeschritten)</div>
           <div class="badge">Systematische Literaturrecherche</div>
-          <div class="badge">Excel, Word &amp; PowerPoint (sehr gut)</div>
-          <div class="badge">Präsentationsgestaltung, Fotografie &amp; Videodreh</div>
-          <div class="badge">Canva (Grundkenntnisse)</div>
-          <div class="badge">CapCut (Grundkenntnisse; persönliche Projekte)</div>
+          <div class="badge">Textverarbeitung, Tabellenkalkulation &amp; Präsentationen (sehr gut)</div>
+          <div class="badge">KI-Tools für Recherche und Textgestaltung (fortgeschritten)</div>
+          <div class="badge">Canva (Grundkenntnisse, für Präsentationen)</div>
+          <div class="badge">CapCut (Grundkenntnisse)</div>
+          <div class="badge">Fotografie, Videodreh und Videobearbeitung (gut)</div>
         </div>
       </div>
     </div>
+  </section>
+
+  <section class="page" id="downloads">
+    <h2 class="page-title" id="pt-downloads">Downloads</h2>
+    <div class="card">
+      <h3 id="dlCvHeading">Lebenslauf</h3>
+      <ul class="dl-list" id="dl-list-cv"></ul>
+      <div class="dl-upload"><button class="add-card-btn" data-dl-folder="cv" id="dlCvUploadBtn">⬆️ Lebenslauf hochladen</button></div>
+    </div>
+    <div class="card">
+      <h3 id="dlOtherHeading">Weitere Dokumente</h3>
+      <ul class="dl-list" id="dl-list-other"></ul>
+      <div class="dl-upload"><button class="add-card-btn" data-dl-folder="other" id="dlOtherUploadBtn">⬆️ Dokument hochladen</button></div>
+    </div>
+    <input type="file" id="dlFileInput" style="display:none;">
   </section>
 
   <section class="page" id="kontakt">
@@ -523,7 +590,7 @@
         <div class="chip">📧 <span data-editable id="k-mail">josef.iebed@gmail.com</span></div>
         <div class="chip">📞 <span data-editable id="k-tel">+43 660 7560649</span></div>
         <div class="chip">📍 <span data-editable id="k-ort">Wien, Österreich</span></div>
-        <div class="chip">🔗 <a href="https://linkedin.com/in/josef-i-24071999" target="_blank">LinkedIn</a></div>
+        <div class="chip">🔗 <a href="https://linkedin.com/in/josefiebedba" target="_blank">LinkedIn</a></div>
       </div>
     </div>
   </section>
@@ -776,7 +843,10 @@ buttons.forEach(btn=>btn.addEventListener('click',()=>{buttons.forEach(b=>b.clas
 
   const UI = {
     de: { navProfil:"Profil", navErfahrung:"Berufserfahrung", navAusbildung:"Ausbildung", navWeiterbildung:"Weiterbildung",
-      navEhrenamt:"Ehrenamt", navSkills:"Sprachen & Skills", navKontakt:"Kontakt",
+      navEhrenamt:"Ehrenamt", navSkills:"Sprachen & Skills", navKontakt:"Kontakt", navProjekte:"Projekte", navDownloads:"Downloads", ptProjekte:"Projekte", ptDownloads:"Downloads",
+      brandSub:"Research, Datenanalyse & datenbasiertes Marketing", viewCompact:"Kompaktansicht", viewFull:"Ausführliche Ansicht",
+      dlCv:"Lebenslauf", dlOther:"Weitere Dokumente", dlEmpty:"Derzeit keine Dateien.", dlUploadCv:"⬆️ Lebenslauf hochladen", dlUploadOther:"⬆️ Dokument hochladen",
+      dlDelete:"Löschen", dlConfirm:"Datei wirklich löschen?", dlUploaded:"Datei hochgeladen ✓", dlDeleted:"Datei gelöscht ✓", dlError:"Upload fehlgeschlagen. Ist der Storage eingerichtet?", dlTooBig:"Bitte eine Datei unter 20 MB wählen.",
       ptErfahrung:"Berufserfahrung", ptAusbildung:"Ausbildung", ptWeiterbildung:"Weiterbildung und Workshops",
       ptEhrenamt:"Ehrenamt", ptSkills:"Sprachen & Skills", ptKontakt:"Kontakt",
       fokusHeading:"Aktueller Fokus", langHeading:"Sprachen", itHeading:"Methoden- und IT-Kenntnisse",
@@ -797,7 +867,10 @@ buttons.forEach(btn=>btn.addEventListener('click',()=>{buttons.forEach(b=>b.clas
       toastSaved:"In der Cloud gespeichert ✓", toastSaveError:"Speichern fehlgeschlagen. Bitte Verbindung prüfen.", toastPhoto:"Profilbild gewählt — speichere, um es zu veröffentlichen.",
       toastImport:"Import erfolgreich ✓", toastHtml:"HTML-Datei wird heruntergeladen ✓", langBtn:"🌐 English" },
     en: { navProfil:"Profile", navErfahrung:"Experience", navAusbildung:"Education", navWeiterbildung:"Training",
-      navEhrenamt:"Volunteering", navSkills:"Languages & Skills", navKontakt:"Contact",
+      navEhrenamt:"Volunteering", navSkills:"Languages & Skills", navKontakt:"Contact", navProjekte:"Projects", navDownloads:"Downloads", ptProjekte:"Projects", ptDownloads:"Downloads",
+      brandSub:"Research, Data Analysis & Data-Driven Marketing", viewCompact:"Compact view", viewFull:"Detailed view",
+      dlCv:"CV", dlOther:"Other documents", dlEmpty:"No files yet.", dlUploadCv:"⬆️ Upload CV", dlUploadOther:"⬆️ Upload document",
+      dlDelete:"Delete", dlConfirm:"Delete this file?", dlUploaded:"File uploaded ✓", dlDeleted:"File deleted ✓", dlError:"Upload failed. Is storage set up?", dlTooBig:"Please choose a file under 20 MB.",
       ptErfahrung:"Work Experience", ptAusbildung:"Education", ptWeiterbildung:"Further Training & Workshops",
       ptEhrenamt:"Volunteering", ptSkills:"Languages & Skills", ptKontakt:"Contact",
       fokusHeading:"Current Focus", langHeading:"Languages", itHeading:"Methods & IT Skills",
@@ -821,31 +894,31 @@ buttons.forEach(btn=>btn.addEventListener('click',()=>{buttons.forEach(b=>b.clas
 
   const CONTENT_EN = {
     "f-name":"Josef Iebed",
-    "f-profil":"Sociology graduate (University of Vienna) with skills in SPSS, STATA, RStudio, MAXQDA, and LimeSurvey. Research experience at L&amp;R Sozialforschung in data analysis and validation. Reliable and communicative, gained through supervision and administrative roles.",
-    "f-fokus":"Transitioning from a Sociology Master's at the University of Vienna into the <strong style=\"color:var(--text)\">Consumer Research &amp; Data Driven Marketing (M.A.)</strong> program at FH Wiener Neustadt (Campus Wieselburg), starting 09/2026.",
-    "f-ort":"Vienna, Austria", "f-mail":"josef.iebed@gmail.com", "f-tel":"+43 660 7560649", "f-linkedin":"linkedin.com/in/josef-i-24071999",
-    "e1-title":"Intern — L&amp;R Sozialforschung GmbH", "e1-meta":"07/2026 · Vienna",
+    "f-profil":"Master's student in Consumer Research &amp; Data Driven Marketing with a bachelor's degree in Sociology (University of Vienna) and first research experience in data validation and text analysis at L&amp;R Sozialforschung. Skills in SPSS, STATA, RStudio, MAXQDA, and LimeSurvey. Experienced in careful documentation and in working with diverse target groups.",
+    "f-fokus":"Master's program <strong style=\"color:var(--text)\">Consumer Research &amp; Data Driven Marketing (M.A.)</strong> at FH Wiener Neustadt (Campus Wieselburg) since 09/2026. Aiming for a career start at the intersection of research, data analysis, and marketing, investigating customer needs and turning insights into practice.",
+    "f-ort":"Vienna, Austria", "f-mail":"josef.iebed@gmail.com", "f-tel":"+43 660 7560649", "f-linkedin":"linkedin.com/in/josefiebedba",
+    "e1-title":"Research Assistant Intern — L&amp;R Sozialforschung GmbH", "e1-meta":"07/2026 · Vienna",
     "e1-desc":"Contributed to the research project \"Systematic Analysis of Workshop Reports of the 'Digital Überall' Initiative.\"",
-    "e1-list":"<li>Reviewed and validated information in workshop reports</li><li>Systematized data provided by workshop organizers in Excel</li><li>Conducted systematic text analysis of workshop reports using MAXQDA</li><li>Systematically mapped qualitative processes by quantifying them into categories</li>",
-    "e2-title":"Childcare Supervisor (Relief/Occasional Staff) — Wiener Hilfswerk", "e2-meta":"06/2025 – Present · Vienna",
-    "e2-list":"<li>Independently supervised children (ages 0–12)</li><li>Provided professional, empathetic pedagogical care</li><li>Maintained ongoing communication with legal guardians and collaborated with internal/external agencies</li><li>Handled administrative follow-up and documentation (reports, absences, duty logs)</li><li>Occasional corporate holiday care and kindergarten assignments</li>",
-    "e3-title":"\"Studieren Probieren\" Mentor — ÖH (Austrian Students' Union)", "e3-meta":"01/2023 – 05/2025 · Vienna",
-    "e3-list":"<li>Accompanied prospective students to Sociology program courses</li><li>Provided informational materials upon request</li><li>Answered questions about admission procedures, course content/structure, and personal experiences in the program</li>",
-    "e4-title":"Temporary Election Staff — Magistrat der Stadt Wien", "e4-meta":"08/2020 – 10/2020 · Vienna",
-    "e4-list":"<li>Processed postal vote applications</li><li>Alphabetically sorted and dispatched ballot papers</li><li>Assisted with voting card applications</li><li>Counted returned ballot papers</li>",
-    "a1-title":"Consumer Research and Data Driven Marketing, M.A.", "a1-meta":"FH Wiener Neustadt · 09/2026 – 07/2028 (expected) · Wieselburg",
+    "e1-list":"<li>Reviewed and validated information in workshop reports</li><li>Systematized data provided by workshop organizers in Excel</li><li>Developed categories and conducted systematic text analysis using MAXQDA</li><li>Systematically mapped qualitative processes by quantifying them into categories</li>",
+    "e2-title":"Leisure Activity Supervisor (Relief Staff) — Wiener Hilfswerk", "e2-meta":"06/2025 – Present · Vienna",
+    "e2-list":"<li>Ran leisure programs for up to 25 children (ages 0–12)</li><li>Provided professional, empathetic pedagogical care</li><li>Coordinated with parents and site management as well as internal/external agencies</li><li>Handled administrative follow-up and documentation (reports, absences, duty logs)</li><li>Occasional corporate holiday care and kindergarten assignments</li>",
+    "e3-title":"\"Studieren Probieren\" Mentor — Austrian Students' Union, ÖH Bundesvertretung", "e3-meta":"01/2023 – 05/2025 · Vienna",
+    "e3-list":"<li>Accompanied prospective students to Sociology program courses</li><li>Provided informational materials upon request</li><li>Moderated Q&amp;A sessions on admission procedures, course content/structure, and personal experiences in the program</li>",
+    "e4-title":"Temporary Election Staff (Elections Department) — Magistrat der Stadt Wien", "e4-meta":"08/2020 – 10/2020 · Vienna",
+    "e4-list":"<li>Processed postal vote applications</li><li>Alphabetically sorted and dispatched ballot papers</li><li>Processed voting card applications</li><li>Counted returned ballot papers</li>",
+    "a1-title":"Consumer Research and Data Driven Marketing, M.A.", "a1-meta":"FH Wiener Neustadt, Campus Wieselburg · 09/2026 – Present",
     "a1-list":"<li>Marketing &amp; Data Driven Management: strategic and digital marketing, CRM</li><li>Methodological competence: quantitative/qualitative research methods, data science</li><li>Consumer psychology and behavior: behavioral economics, neuropsychology</li><li>Social skills, project management, and academic work (incl. master's thesis)</li>",
     "a2-title":"Sociology, Master of Arts", "a2-meta":"University of Vienna · 03/2026 – 08/2026 · Vienna",
     "a2-desc":"Preparatory transition to the Master's program \"Consumer Research &amp; Data Driven Marketing\" at FH Wiener Neustadt.",
     "a2-list":"<li>Academic writing</li><li>Quantitative and qualitative methods of empirical social research</li><li>STATA and RStudio</li>",
     "a3-title":"Sociology, Bachelor of Arts", "a3-meta":"University of Vienna · 10/2018 – 02/2026 · Vienna",
-    "a3-list":"<li>Core subjects: theories, methods, and fields of application of sociology</li><li>Supplementary subjects: public law, economics, business administration, communicative and social skills</li><li>Specializations: social inequality, sociology of consumption, urban sociology, interpretive qualitative social research</li><li>Extension curriculum (minor): history</li><li>Bachelor's thesis: \"Social Inequality in Access to Adaptive Controllers: Gaming for People with Physical Disabilities\" (systematic literature review + mixed methods; grade: good)</li>",
+    "a3-list":"<li>Core subjects: theories, methods, and fields of application of sociology</li><li>Supplementary subjects: public law, economics, business administration, communicative and social skills</li><li>Focus areas: sociology of consumption, urban sociology, methods and statistics, social inequality, interpretive qualitative social research</li><li>Extension curriculum (minor): history</li><li>Bachelor's thesis: \"Social Inequality in Access to Adaptive Controllers: Gaming for People with Physical Disabilities\" (systematic literature review + mixed methods; grade: good)</li>",
     "a4-title":"Matura (Austrian secondary school diploma)", "a4-meta":"Ella Lingens-Gymnasium · 09/2010 – 06/2018 · Vienna",
-    "w1-title":"Basic Workshop \"Extremism – Normal, Radical, Extreme?\"", "w1-meta":"füruns (Center for Civil Society) · 12/2025 · Online",
+    "w1-title":"Extremism and Radicalization Prevention: Basic Workshop \"Extremism – Normal, Radical, Extreme?\"", "w1-meta":"füruns (Center for Civil Society) · 12/2025 · Online",
     "w1-list":"<li>Fundamentals of extremism and radicalization</li><li>Distinguishing between normal, radical, and extreme positions</li><li>Prevention and intervention approaches</li>",
     "w2-title":"Child Protection in Holiday Care", "w2-meta":"Wiener Hilfswerk · 06/2025 · Vienna",
     "w2-list":"<li>Forms of violence</li><li>Complaint management</li><li>Responding to child welfare endangerment</li><li>Prevention measures</li>",
-    "w3-title":"Game Explainer Workshop", "w3-meta":"Area 52 · 06/2025 · Vienna",
+    "w3-title":"Game Explainer Training", "w3-meta":"Area52 · 06/2025 · Vienna",
     "w3-list":"<li>Knowledge of common board games</li><li>Quickly grasping and explaining game rules</li><li>Ensuring fair gameplay</li>",
     "w4-title":"Licensed eSports Referee Training", "w4-meta":"ESVÖ · 09/2024 · Vienna",
     "w4-list":"<li>Knowledge of various tournament formats</li><li>Ensuring fair gameplay</li><li>Coordinating participants</li>",
@@ -854,12 +927,21 @@ buttons.forEach(btn=>btn.addEventListener('click',()=>{buttons.forEach(b=>b.clas
     "eh2-title":"Participant and Volunteer — Muslimische Jugend Österreich", "eh2-meta":"12/2012 – Present",
     "eh2-list":"<li>Participated in and helped organize the \"Fasten Teilen Helfen\" project</li><li>Co-organized various activities (winter/summer trips, short and long trips, day trips, social gatherings, events)</li>",
     "s-lang":"<div class=\"badge\">German — Native</div><div class=\"badge\">Arabic — Native</div><div class=\"badge\">English — B2</div><div class=\"badge\">French — B1</div>",
-    "s-it":"<div class=\"badge\">Quantitative analysis: SPSS (advanced)</div><div class=\"badge\">STATA (basic)</div><div class=\"badge\">R / RStudio (basic)</div><div class=\"badge\">Qualitative methods: MAXQDA (advanced)</div><div class=\"badge\">Qualitative interviews</div><div class=\"badge\">Text analysis</div><div class=\"badge\">LimeSurvey</div><div class=\"badge\">Questionnaire design</div><div class=\"badge\">Data validation</div><div class=\"badge\">Systematic literature review</div><div class=\"badge\">Excel, Word &amp; PowerPoint (very good)</div><div class=\"badge\">Presentation design, photography &amp; videography</div><div class=\"badge\">Canva (basic)</div><div class=\"badge\">CapCut (basic; personal projects)</div>",
+    "s-it":"<div class=\"badge\">Quantitative analysis: SPSS (advanced)</div><div class=\"badge\">STATA (basic)</div><div class=\"badge\">R / RStudio (basic)</div><div class=\"badge\">Qualitative research: MAXQDA (advanced)</div><div class=\"badge\">Qualitative interviews (advanced)</div><div class=\"badge\">Text analysis</div><div class=\"badge\">LimeSurvey (basic)</div><div class=\"badge\">Questionnaire design (basic)</div><div class=\"badge\">Data validation (advanced)</div><div class=\"badge\">Systematic literature review</div><div class=\"badge\">Word processing, spreadsheets &amp; presentations (very good)</div><div class=\"badge\">AI tools for research and writing (advanced)</div><div class=\"badge\">Canva (basic, for presentations)</div><div class=\"badge\">CapCut (basic)</div><div class=\"badge\">Photography, filming and video editing (good)</div>",
+    "p1-title":"Grocery Shopping under Simulated Age-Related Changes", "p1-meta":"Empathic design study · FH Wiener Neustadt · 10/2026 – Present",
+    "p1-list":"<li>Own contribution: observed and documented a person wearing an age simulation suit</li>",
+    "p2-title":"Animal Crossing: Play Motives, Well-Being and Stress Management", "p2-meta":"Qualitative study · FH Wiener Neustadt · 09/2026 – Present",
+    "p2-list":"<li>Qualitative study on the play motives of young adults</li><li>Own contribution: conducted an interview</li>",
+    "p3-title":"Visual Communication of the Impact of Consumption on the Ocean", "p3-meta":"Research internship · University of Vienna · 10/2024 – 07/2025",
+    "p3-list":"<li>Analysis of Greenpeace Austria's visual language</li><li>Method: segment analysis according to Breckner</li>",
     "k-text":"I welcome inquiries about internships, working-student positions, or entry-level roles in administration, research, communication, or office-based work.",
     "k-mail":"josef.iebed@gmail.com", "k-tel":"+43 660 7560649", "k-ort":"Vienna, Austria"
   };
 
   let CONTENT_DE = {};
+  // Content revision: cloud data saved before this revision must not override the CV update.
+  const CONTENT_VERSION = 2;
+  const CV_UPDATED_KEYS = ['f-profil','f-fokus','f-linkedin','e1-title','e1-list','e2-title','e2-list','e3-title','e3-list','e4-title','e4-list','a1-meta','a1-list','a3-list','w1-title','w3-title','w3-meta','s-it'];
   let currentLang = 'de';
 
   const buttons = document.querySelectorAll('.nav-btn');
@@ -884,7 +966,7 @@ buttons.forEach(btn=>btn.addEventListener('click',()=>{buttons.forEach(b=>b.clas
   function collectData(){ captureCurrentContent(); return {...(currentLang === 'de' ? CONTENT_DE : CONTENT_EN)}; }
   function collectContentBundle(){
     captureCurrentContent();
-    return {de:{...CONTENT_DE}, en:{...CONTENT_EN}, profileImage:profileImageData};
+    return {version:CONTENT_VERSION, de:{...CONTENT_DE}, en:{...CONTENT_EN}, profileImage:profileImageData};
   }
   function restoreLegacyLocalData(){
     if(legacyLocalDataRestored) return;
@@ -906,6 +988,9 @@ buttons.forEach(btn=>btn.addEventListener('click',()=>{buttons.forEach(b=>b.clas
     const content = data?.content;
     if(content && typeof content === 'object'){
       hasRemoteContent = true;
+      if((content.version || 1) < CONTENT_VERSION){
+        ['de','en'].forEach(l => { if(content[l]) CV_UPDATED_KEYS.forEach(k => delete content[l][k]); });
+      }
       if(content.de && typeof content.de === 'object') Object.assign(CONTENT_DE, content.de);
       if(content.en && typeof content.en === 'object') Object.assign(CONTENT_EN, content.en);
       if(typeof content.profileImage === 'string' && content.profileImage.startsWith('data:image/jpeg;base64,')){
@@ -973,6 +1058,17 @@ buttons.forEach(btn=>btn.addEventListener('click',()=>{buttons.forEach(b=>b.clas
     document.getElementById('nav-ehrenamt').textContent = s.navEhrenamt;
     document.getElementById('nav-skills').textContent = s.navSkills;
     document.getElementById('nav-kontakt').textContent = s.navKontakt;
+    document.getElementById('nav-projekte').textContent = s.navProjekte;
+    document.getElementById('nav-downloads').textContent = s.navDownloads;
+    document.getElementById('pt-projekte').textContent = s.ptProjekte;
+    document.getElementById('pt-downloads').textContent = s.ptDownloads;
+    document.getElementById('brandSub').textContent = s.brandSub;
+    document.querySelector('#viewBtn .label').textContent = document.body.classList.contains('compact') ? s.viewFull : s.viewCompact;
+    document.getElementById('dlCvHeading').textContent = s.dlCv;
+    document.getElementById('dlOtherHeading').textContent = s.dlOther;
+    document.getElementById('dlCvUploadBtn').textContent = s.dlUploadCv;
+    document.getElementById('dlOtherUploadBtn').textContent = s.dlUploadOther;
+    if(typeof renderDownloads === 'function') renderDownloads();
     document.getElementById('pt-erfahrung').textContent = s.ptErfahrung;
     document.getElementById('pt-ausbildung').textContent = s.ptAusbildung;
     document.getElementById('pt-weiterbildung').textContent = s.ptWeiterbildung;
@@ -1254,6 +1350,83 @@ buttons.forEach(btn=>btn.addEventListener('click',()=>{buttons.forEach(b=>b.clas
   }
 
   updateLoginUI();
+  // Compact view
+  const VIEW_KEY = 'iebed_portfolio_view';
+  function setCompact(on){
+    document.body.classList.toggle('compact', on);
+    try{ localStorage.setItem(VIEW_KEY, on ? 'compact' : 'full'); }catch(e){}
+    document.querySelector('#viewBtn .label').textContent = on ? UI[currentLang].viewFull : UI[currentLang].viewCompact;
+  }
+  document.getElementById('viewBtn').addEventListener('click', () => setCompact(!document.body.classList.contains('compact')));
+  try{ if(localStorage.getItem(VIEW_KEY) === 'compact') setCompact(true); }catch(e){}
+
+  // Downloads (Supabase Storage bucket "portfolio-files": public read, owner write)
+  const DL_BUCKET = 'portfolio-files';
+  let dlFiles = {cv:[], other:[]};
+  let dlTargetFolder = 'cv';
+  function dlName(name){ return name.replace(/^\d{13}_/, ''); }
+  function renderDownloads(){
+    const s = UI[currentLang];
+    ['cv','other'].forEach(folder => {
+      const list = document.getElementById('dl-list-' + folder);
+      list.innerHTML = '';
+      if(!dlFiles[folder].length){ const li = document.createElement('li'); li.textContent = s.dlEmpty; li.style.color = 'var(--muted)'; list.appendChild(li); return; }
+      dlFiles[folder].forEach(f => {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = f.url; a.target = '_blank'; a.rel = 'noopener'; a.textContent = '📄 ' + dlName(f.name); a.setAttribute('download', dlName(f.name));
+        const del = document.createElement('button');
+        del.className = 'dl-del'; del.textContent = s.dlDelete;
+        del.addEventListener('click', () => deleteDownload(folder, f.name));
+        li.append(a, del); list.appendChild(li);
+      });
+    });
+  }
+  async function loadDownloads(){
+    try{
+      const client = await getSupabaseClient();
+      for(const folder of ['cv','other']){
+        const {data, error} = await client.storage.from(DL_BUCKET).list(folder, {sortBy:{column:'created_at', order:'desc'}});
+        if(error) throw error;
+        dlFiles[folder] = (data || []).filter(f => f.name && !f.name.startsWith('.')).map(f => ({
+          name:f.name, url:client.storage.from(DL_BUCKET).getPublicUrl(folder + '/' + f.name).data.publicUrl
+        }));
+      }
+    }catch(error){ console.error('Could not load downloads', error); }
+    renderDownloads();
+  }
+  async function deleteDownload(folder, name){
+    if(!isLoggedIn || !isEditing || !confirm(UI[currentLang].dlConfirm)) return;
+    try{
+      const client = await getSupabaseClient();
+      const {error} = await client.storage.from(DL_BUCKET).remove([folder + '/' + name]);
+      if(error) throw error;
+      showToast(UI[currentLang].dlDeleted); await loadDownloads();
+    }catch(error){ console.error(error); showToast(UI[currentLang].dlError); }
+  }
+  const dlFileInput = document.getElementById('dlFileInput');
+  document.querySelectorAll('[data-dl-folder]').forEach(btn => btn.addEventListener('click', () => {
+    if(!isLoggedIn || !isEditing) return;
+    dlTargetFolder = btn.dataset.dlFolder;
+    dlFileInput.accept = dlTargetFolder === 'cv' ? '.pdf,application/pdf' : '';
+    dlFileInput.click();
+  }));
+  dlFileInput.addEventListener('change', async event => {
+    const file = event.target.files?.[0];
+    event.target.value = '';
+    if(!file) return;
+    if(file.size > 20 * 1024 * 1024){ showToast(UI[currentLang].dlTooBig); return; }
+    try{
+      const client = await getSupabaseClient();
+      const safe = file.name.normalize('NFKD').replace(/[^\w.\-]+/g, '_');
+      const {error} = await client.storage.from(DL_BUCKET).upload(dlTargetFolder + '/' + Date.now() + '_' + safe, file, {contentType:file.type || 'application/octet-stream', upsert:false});
+      if(error) throw error;
+      showToast(UI[currentLang].dlUploaded); await loadDownloads();
+    }catch(error){ console.error(error); showToast(UI[currentLang].dlError); }
+  });
+  renderDownloads();
+  loadDownloads();
+
   loadRemoteData().catch(error => { console.error('Could not load public portfolio data', error); });
   initializeAuth();
 </script>
