@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio-Builder — Erstelle deine eigene Portfolio-Seite</title>
+<style>
+  :root{
+    --bg:#0f172a; --bg2:#111827; --card:#1e293b; --accent:#38bdf8; --accent2:#a78bfa;
+    --text:#e2e8f0; --muted:#94a3b8; --radius:16px; --danger:#f87171; --ok:#4ade80;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family:'Segoe UI', system-ui, -apple-system, sans-serif;
+    background:linear-gradient(160deg,var(--bg) 0%, var(--bg2) 100%);
+    color:var(--text); min-height:100vh; padding:40px 20px;
+  }
+  .wrap{max-width:900px; margin:0 auto;}
+  header{margin-bottom:32px;}
+  h1{font-size:2rem; margin-bottom:8px;}
+  header p{color:var(--muted); font-size:1rem; line-height:1.6;}
+  h2{font-size:1.3rem; margin:36px 0 16px; border-bottom:1px solid rgba(148,163,184,0.2); padding-bottom:10px;}
+  .card{background:var(--card); border-radius:var(--radius); padding:22px 24px; margin-bottom:16px; border:1px solid rgba(148,163,184,0.1);}
+  label{display:block; font-size:.82rem; color:var(--muted); margin-bottom:6px; margin-top:14px; font-weight:600;}
+  label:first-child{margin-top:0;}
+  input, textarea{
+    width:100%; padding:10px 12px; border-radius:8px; border:1px solid rgba(148,163,184,0.25);
+    background:var(--bg2); color:var(--text); font-size:.92rem; font-family:inherit;
+  }
+  textarea{resize:vertical; min-height:70px;}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  .entry{border:1px solid rgba(148,163,184,0.15); border-radius:12px; padding:16px; margin-bottom:14px; position:relative; background:rgba(15,23,42,0.4);}
+  .entry .remove{
+    position:absolute; top:10px; right:10px; background:rgba(248,113,113,0.15); color:var(--danger);
+    border:1px solid rgba(248,113,113,0.3); border-radius:8px; padding:5px 10px; font-size:.75rem; cursor:pointer;
+  }
+  .add-btn{
+    background:rgba(56,189,248,0.12); border:1px dashed rgba(56,189,248,0.4); color:var(--accent);
+    padding:10px 16px; border-radius:10px; cursor:pointer; font-size:.85rem; font-weight:600; width:100%;
+  }
+  .actions{display:flex; gap:12px; margin:36px 0; flex-wrap:wrap;}
+  .btn{border:none; border-radius:10px; padding:13px 26px; font-size:.95rem; font-weight:700; cursor:pointer;}
+  .btn-primary{background:linear-gradient(135deg, var(--accent), var(--accent2)); color:#0c1220;}
+  .btn-secondary{background:var(--card); color:var(--text); border:1px solid rgba(148,163,184,0.25);}
+  .hint{font-size:.8rem; color:var(--muted); margin-top:6px;}
+  .badge-preview{display:flex; flex-wrap:wrap; gap:8px; margin-top:8px;}
+  .badge-preview span{background:rgba(56,189,248,0.1); color:var(--accent); padding:5px 12px; border-radius:8px; font-size:.78rem; border:1px solid rgba(56,189,248,0.25);}
+  .toast{position:fixed; top:20px; right:20px; background:var(--ok); color:#052e16; padding:12px 20px; border-radius:10px; font-weight:600; font-size:.85rem; z-index:200; display:none; box-shadow:0 8px 24px rgba(0,0,0,0.3);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>🛠️ Portfolio-Builder</h1>
+    <p>Trag deine eigenen Daten ein und lade dir am Ende eine fertige, eigenständige Portfolio-Webseite herunter — im gleichen Design wie diese Vorlage. Keine Anmeldung, keine Registrierung nötig, alles läuft nur in deinem Browser.</p>
+  </header>
+
+  <div class="card">
+    <h2 style="margin-top:0;">👤 Profil</h2>
+    <label>Name</label>
+    <input id="b-name" placeholder="z. B. Anna Musterfrau">
+    <label>Kurzprofil (1–3 Sätze)</label>
+    <textarea id="b-profil" placeholder="z. B. Absolventin der Politikwissenschaft mit Erfahrung in..."></textarea>
+    <div class="grid2">
+      <div>
+        <label>Ort</label>
+        <input id="b-ort" placeholder="z. B. Wien, Österreich">
+        <label>E-Mail</label>
+        <input id="b-mail" placeholder="name@email.com">
+      </div>
+      <div>
+        <label>Telefon</label>
+        <input id="b-tel" placeholder="+43 ...">
+        <label>LinkedIn (optional)</label>
+        <input id="b-linkedin" placeholder="linkedin.com/in/...">
+      </div>
+    </div>
+  </div>
+
+  <h2>💼 Berufserfahrung</h2>
+  <div id="erfahrung-list"></div>
+  <button class="add-btn" onclick="addEntry('erfahrung-list', erfahrungTemplate)">+ Station hinzufügen</button>
+
+  <h2>🎓 Ausbildung</h2>
+  <div id="ausbildung-list"></div>
+  <button class="add-btn" onclick="addEntry('ausbildung-list', ausbildungTemplate)">+ Ausbildung hinzufügen</button>
+
+  <h2>🧩 Weiterbildung (optional)</h2>
+  <div id="weiterbildung-list"></div>
+  <button class="add-btn" onclick="addEntry('weiterbildung-list', weiterbildungTemplate)">+ Weiterbildung hinzufügen</button>
+
+  <h2>🛠️ Skills &amp; Sprachen</h2>
+  <div class="card">
+    <label>Sprachen (durch Komma getrennt)</label>
+    <input id="b-lang" placeholder="Deutsch, Englisch, Französisch">
+    <label>Fachliche Skills / Tools (durch Komma getrennt)</label>
+    <input id="b-skills" placeholder="Excel, Projektmanagement, Adobe Photoshop">
+  </div>
+
+  <h2>✉️ Kontakt-Text</h2>
+  <div class="card">
+    <label>Abschlusstext auf der Kontaktseite</label>
+    <textarea id="b-kontakttext" placeholder="z. B. Ich freue mich über Anfragen zu..."></textarea>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-primary" onclick="generatePortfolio()">⬇️ Portfolio-Seite generieren &amp; herunterladen</button>
+    <button class="btn btn-secondary" onclick="loadDemoData()">✨ Beispieldaten laden</button>
+  </div>
+  <p class="hint">Die generierte Datei ist eine eigenständige HTML-Datei — einfach im Browser öffnen oder z. B. via GitHub Pages, Netlify oder Vercel kostenlos veröffentlichen.</p>
+</div>
+
+<div class="toast" id="toast">Portfolio wird heruntergeladen ✓</div>
+
+<script>
+function erfahrungTemplate(){
+  return `<label>Position &amp; Arbeitgeber</label>
+  <input class="e-title" placeholder="z. B. Praktikant — Firma XY">
+  <label>Zeitraum &amp; Ort</label>
+  <input class="e-meta" placeholder="z. B. 01/2025 – 06/2025 · Wien">
+  <label>Aufgaben (eine pro Zeile)</label>
+  <textarea class="e-bullets" placeholder="Aufgabe 1&#10;Aufgabe 2&#10;Aufgabe 3"></textarea>`;
+}
+function ausbildungTemplate(){
+  return `<label>Abschluss / Studiengang</label>
+  <input class="e-title" placeholder="z. B. Bachelor of Arts, Soziologie">
+  <label>Institution, Zeitraum &amp; Ort</label>
+  <input class="e-meta" placeholder="z. B. Universität Wien · 10/2020 – 06/2024 · Wien">
+  <label>Details (eine pro Zeile, optional)</label>
+  <textarea class="e-bullets" placeholder="Schwerpunkt 1&#10;Schwerpunkt 2"></textarea>`;
+}
+function weiterbildungTemplate(){
+  return `<label>Titel der Weiterbildung</label>
+  <input class="e-title" placeholder="z. B. Workshop XY">
+  <label>Anbieter, Zeitraum &amp; Ort</label>
+  <input class="e-meta" placeholder="z. B. Anbieter · 03/2025 · Online">
+  <label>Details (eine pro Zeile, optional)</label>
+  <textarea class="e-bullets" placeholder="Inhalt 1&#10;Inhalt 2"></textarea>`;
+}
+
+function addEntry(listId, templateFn){
+  const list = document.getElementById(listId);
+  const div = document.createElement('div');
+  div.className = 'entry card';
+  div.innerHTML = `<button class="remove" onclick="this.parentElement.remove()">✕ Entfernen</button>` + templateFn();
+  list.appendChild(div);
+}
+
+addEntry('erfahrung-list', erfahrungTemplate);
+addEntry('ausbildung-list', ausbildungTemplate);
+
+function collectEntries(listId){
+  const entries = [];
+  document.querySelectorAll('#' + listId + ' .entry').forEach(div => {
+    const title = div.querySelector('.e-title').value.trim();
+    const meta = div.querySelector('.e-meta').value.trim();
+    const bullets = div.querySelector('.e-bullets').value.split('\n').map(b=>b.trim()).filter(Boolean);
+    if(title) entries.push({title, meta, bullets});
+  });
+  return entries;
+}
+
+function esc(str){
+  return (str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function loadDemoData(){
+  document.getElementById('b-name').value = 'Anna Musterfrau';
+  document.getElementById('b-profil').value = 'Politikwissenschafts-Absolventin mit Erfahrung in öffentlicher Verwaltung und Projektkoordination. Strukturiert, kommunikativ und interessiert an europäischen Themen.';
+  document.getElementById('b-ort').value = 'Wien, Österreich';
+  document.getElementById('b-mail').value = 'anna.musterfrau@email.com';
+  document.getElementById('b-tel').value = '+43 660 1234567';
+  document.getElementById('b-linkedin').value = 'linkedin.com/in/anna-musterfrau';
+  document.getElementById('b-lang').value = 'Deutsch, Englisch, Spanisch';
+  document.getElementById('b-skills').value = 'MS Office, Projektmanagement, Öffentlichkeitsarbeit';
+  document.getElementById('b-kontakttext').value = 'Ich freue mich über Anfragen zu Praktika oder Einstiegspositionen im öffentlichen Sektor.';
+}
+
+function generatePortfolio(){
+  const name = esc(document.getElementById('b-name').value || 'Dein Name');
+  const profil = esc(document.getElementById('b-profil').value);
+  const ort = esc(document.getElementById('b-ort').value);
+  const mail = esc(document.getElementById('b-mail').value);
+  const tel = esc(document.getElementById('b-tel').value);
+  const linkedin = esc(document.getElementById('b-linkedin').value);
+  const kontakttext = esc(document.getElementById('b-kontakttext').value);
+  const langs = document.getElementById('b-lang').value.split(',').map(s=>s.trim()).filter(Boolean);
+  const skills = document.getElementById('b-skills').value.split(',').map(s=>s.trim()).filter(Boolean);
+
+  const erfahrung = collectEntries('erfahrung-list');
+  const ausbildung = collectEntries('ausbildung-list');
+  const weiterbildung = collectEntries('weiterbildung-list');
+
+  function cardsHtml(entries){
+    return entries.map(e => `
+    <div class="card">
+      <h3>${esc(e.title)}</h3>
+      <div class="meta">${esc(e.meta)}</div>
+      ${e.bullets.length ? '<ul>' + e.bullets.map(b=>`<li>${esc(b)}</li>`).join('') + '</ul>' : ''}
+    </div>`).join('');
+  }
+
+  const pages = ['profil','erfahrung','ausbildung'];
+  if(weiterbildung.length) pages.push('weiterbildung');
+  pages.push('skills','kontakt');
+
+  const navLabels = {profil:'Profil', erfahrung:'Berufserfahrung', ausbildung:'Ausbildung', weiterbildung:'Weiterbildung', skills:'Skills', kontakt:'Kontakt'};
+  const navIcons = {profil:'👤', erfahrung:'💼', ausbildung:'🎓', weiterbildung:'🧩', skills:'🛠️', kontakt:'✉️'};
+
+  const html = `<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${name} — Portfolio</title>
+<style>
+  :root{--bg:#0f172a;--bg2:#111827;--card:#1e293b;--accent:#38bdf8;--accent2:#a78bfa;--text:#e2e8f0;--muted:#94a3b8;--radius:16px;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 100%);color:var(--text);min-height:100vh;display:flex;}
+  .sidebar{width:230px;background:rgba(15,23,42,0.9);border-right:1px solid rgba(148,163,184,0.15);padding:28px 18px;display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;}
+  .brand{font-size:1.15rem;font-weight:700;margin-bottom:24px;}
+  .nav-btn{background:none;border:none;color:var(--muted);text-align:left;padding:11px 14px;border-radius:10px;font-size:.92rem;cursor:pointer;display:flex;align-items:center;gap:10px;margin-bottom:4px;}
+  .nav-btn.active{background:linear-gradient(135deg,rgba(56,189,248,0.18),rgba(167,139,250,0.14));color:var(--accent);font-weight:600;}
+  main{margin-left:230px;flex:1;padding:48px 56px;max-width:980px;}
+  .page{display:none;}
+  .page.active{display:block;}
+  h1{font-size:2rem;margin-bottom:6px;}
+  h2.page-title{font-size:1.6rem;margin-bottom:26px;border-bottom:1px solid rgba(148,163,184,0.2);padding-bottom:12px;}
+  .lead{color:var(--muted);font-size:1.02rem;line-height:1.6;margin-bottom:18px;}
+  .contact-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:18px;}
+  .chip{background:var(--card);padding:8px 14px;border-radius:999px;font-size:.85rem;border:1px solid rgba(148,163,184,0.15);}
+  .card{background:var(--card);border-radius:var(--radius);padding:22px 24px;margin-bottom:18px;border:1px solid rgba(148,163,184,0.1);}
+  .card h3{font-size:1.08rem;margin-bottom:2px;}
+  .card .meta{color:var(--accent2);font-size:.85rem;margin-bottom:10px;font-weight:500;}
+  .card ul{margin-left:18px;color:var(--muted);font-size:.92rem;line-height:1.55;}
+  .badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px;}
+  .badge{background:rgba(56,189,248,0.1);color:var(--accent);padding:7px 14px;border-radius:10px;font-size:.85rem;font-weight:500;border:1px solid rgba(56,189,248,0.25);}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  @media (max-width:800px){.sidebar{width:70px;padding:20px 8px;}.brand,.nav-btn span.label{display:none;}main{margin-left:70px;padding:32px 20px;}.grid2{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="sidebar">
+  <div class="brand">${name}</div>
+  <nav>
+    ${pages.map((p,i)=>`<button class="nav-btn${i===0?' active':''}" data-page="${p}">${navIcons[p]} <span class="label">${navLabels[p]}</span></button>`).join('')}
+  </nav>
+</div>
+<main>
+  <section class="page active" id="profil">
+    <h1>${name}</h1>
+    <p class="lead">${profil}</p>
+    <div class="contact-row">
+      ${ort?`<div class="chip">📍 ${ort}</div>`:''}
+      ${mail?`<div class="chip">📧 <a href="mailto:${mail}" style="color:var(--accent);text-decoration:none;">${mail}</a></div>`:''}
+      ${tel?`<div class="chip">📞 ${tel}</div>`:''}
+      ${linkedin?`<div class="chip">🔗 <a href="https://${linkedin}" target="_blank" style="color:var(--accent);text-decoration:none;">${linkedin}</a></div>`:''}
+    </div>
+  </section>
+  <section class="page" id="erfahrung">
+    <h2 class="page-title">Berufserfahrung</h2>
+    ${cardsHtml(erfahrung) || '<p class="lead">Noch keine Einträge.</p>'}
+  </section>
+  <section class="page" id="ausbildung">
+    <h2 class="page-title">Ausbildung</h2>
+    ${cardsHtml(ausbildung) || '<p class="lead">Noch keine Einträge.</p>'}
+  </section>
+  ${weiterbildung.length ? `<section class="page" id="weiterbildung">
+    <h2 class="page-title">Weiterbildung</h2>
+    ${cardsHtml(weiterbildung)}
+  </section>` : ''}
+  <section class="page" id="skills">
+    <h2 class="page-title">Skills &amp; Sprachen</h2>
+    <div class="grid2">
+      <div class="card"><h3>Sprachen</h3><div class="badges">${langs.map(l=>`<div class="badge">${esc(l)}</div>`).join('')}</div></div>
+      <div class="card"><h3>Skills</h3><div class="badges">${skills.map(s=>`<div class="badge">${esc(s)}</div>`).join('')}</div></div>
+    </div>
+  </section>
+  <section class="page" id="kontakt">
+    <h2 class="page-title">Kontakt</h2>
+    <div class="card">
+      <p class="lead">${kontakttext}</p>
+      <div class="contact-row">
+        ${mail?`<div class="chip">📧 ${mail}</div>`:''}
+        ${tel?`<div class="chip">📞 ${tel}</div>`:''}
+        ${ort?`<div class="chip">📍 ${ort}</div>`:''}
+      </div>
+    </div>
+  </section>
+</main>
+<script>
+  const buttons = document.querySelectorAll('.nav-btn');
+  const pages = document.querySelectorAll('.page');
+  buttons.forEach(btn => btn.addEventListener('click', () => {
+    buttons.forEach(b=>b.classList.remove('active'));
+    pages.forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.page).classList.add('active');
+  }));
+</script>
+</body>
+</html>`;
+
+  const blob = new Blob([html], {type:'text/html'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = (document.getElementById('b-name').value || 'mein-portfolio').replace(/\s+/g,'_').toLowerCase() + '_portfolio.html';
+  a.click();
+  URL.revokeObjectURL(url);
+
+  const t = document.getElementById('toast');
+  t.style.display = 'block';
+  setTimeout(()=>{ t.style.display='none'; }, 2500);
+}
+</script>
+</body>
+</html>
