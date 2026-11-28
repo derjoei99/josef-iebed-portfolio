@@ -78,6 +78,8 @@
   .dl-list a{color:var(--text);text-decoration:none;word-break:break-word;}
   .dl-list a:hover{text-decoration:underline;}
   .badges{display:flex; flex-wrap:wrap; gap:10px; margin-top:8px;}
+  .skill-group{margin-top:14px;}
+  .skill-group h4{font-size:.8rem; font-weight:600; color:var(--muted); letter-spacing:.3px;}
   .badge{background:rgba(56,189,248,0.1); color:var(--accent); padding:7px 14px; border-radius:10px; font-size:.85rem; font-weight:500; border:1px solid rgba(56,189,248,0.25);}
   .grid2b{display:grid; grid-template-columns:1fr; gap:18px;}
 
@@ -303,22 +305,14 @@ html{-webkit-text-size-adjust:100%}button,a,select,input{touch-action:manipulati
       </div>
       <div class="card">
         <h3 id="itHeading">Methoden- und IT-Kenntnisse</h3>
-        <div class="badges" data-editable id="s-it">
-          <div class="badge">Quantitative Analyse: SPSS (fortgeschritten)</div>
-          <div class="badge">STATA (Grundkenntnisse)</div>
-          <div class="badge">R / RStudio (Grundkenntnisse)</div>
-          <div class="badge">Qualitative Forschung: MAXQDA (fortgeschritten)</div>
-          <div class="badge">Qualitative Interviews (fortgeschritten)</div>
-          <div class="badge">Textanalyse</div>
-          <div class="badge">LimeSurvey (Grundkenntnisse)</div>
-          <div class="badge">Fragebogenkonstruktion (Grundkenntnisse)</div>
-          <div class="badge">Datenvalidierung (fortgeschritten)</div>
-          <div class="badge">Systematische Literaturrecherche</div>
-          <div class="badge">Textverarbeitung, Tabellenkalkulation &amp; Präsentationen (sehr gut)</div>
-          <div class="badge">KI-Tools für Recherche und Textgestaltung (fortgeschritten)</div>
-          <div class="badge">Canva (Grundkenntnisse, für Präsentationen)</div>
-          <div class="badge">CapCut (Grundkenntnisse)</div>
-          <div class="badge">Fotografie, Videodreh und Videobearbeitung (gut)</div>
+        <div data-editable id="s-it">
+          <div class="skill-group"><h4>Quantitative Analyse</h4><div class="badges"><div class="badge">SPSS (fortgeschritten)</div><div class="badge">STATA (Grundkenntnisse)</div><div class="badge">R / RStudio (Grundkenntnisse)</div></div>
+</div>          <div class="skill-group"><h4>Qualitative Forschung</h4><div class="badges"><div class="badge">MAXQDA (fortgeschritten)</div><div class="badge">Qualitative Interviews (fortgeschritten)</div><div class="badge">Textanalyse</div></div>
+</div>          <div class="skill-group"><h4>Erhebung und Recherche</h4><div class="badges"><div class="badge">LimeSurvey (Grundkenntnisse)</div><div class="badge">Fragebogenkonstruktion (Grundkenntnisse)</div><div class="badge">Datenvalidierung (fortgeschritten)</div><div class="badge">Systematische Literaturrecherche</div></div>
+</div>          <div class="skill-group"><h4>Office-Anwendungen</h4><div class="badges"><div class="badge">Textverarbeitung (sehr gut)</div><div class="badge">Tabellenkalkulation (sehr gut)</div><div class="badge">Präsentationen (sehr gut)</div></div>
+</div>          <div class="skill-group"><h4>KI-Tools</h4><div class="badges"><div class="badge">Recherche und Textgestaltung (fortgeschritten)</div></div>
+</div>          <div class="skill-group"><h4>Mediengestaltung</h4><div class="badges"><div class="badge">Canva (Grundkenntnisse, für Präsentationen)</div><div class="badge">CapCut (Grundkenntnisse)</div><div class="badge">Fotografie, Videodreh und Videobearbeitung (gut)</div></div>
+</div>
         </div>
       </div>
     </div>
@@ -461,7 +455,7 @@ html{-webkit-text-size-adjust:100%}button,a,select,input{touch-action:manipulati
     "eh2-title":"Participant and Volunteer — Muslimische Jugend Österreich", "eh2-meta":"12/2012 – Present",
     "eh2-list":"<li>Participated in and helped organize the \"Fasten Teilen Helfen\" project</li><li>Co-organized various activities (winter/summer trips, short and long trips, day trips, social gatherings, events)</li>",
     "s-lang":"<div class=\"badge\">German — Native</div><div class=\"badge\">Arabic — Native</div><div class=\"badge\">English — B2</div><div class=\"badge\">French — B1</div>",
-    "s-it":"<div class=\"badge\">Quantitative analysis: SPSS (advanced)</div><div class=\"badge\">STATA (basic)</div><div class=\"badge\">R / RStudio (basic)</div><div class=\"badge\">Qualitative research: MAXQDA (advanced)</div><div class=\"badge\">Qualitative interviews (advanced)</div><div class=\"badge\">Text analysis</div><div class=\"badge\">LimeSurvey (basic)</div><div class=\"badge\">Questionnaire design (basic)</div><div class=\"badge\">Data validation (advanced)</div><div class=\"badge\">Systematic literature review</div><div class=\"badge\">Word processing, spreadsheets &amp; presentations (very good)</div><div class=\"badge\">AI tools for research and writing (advanced)</div><div class=\"badge\">Canva (basic, for presentations)</div><div class=\"badge\">CapCut (basic)</div><div class=\"badge\">Photography, filming and video editing (good)</div>",
+    "s-it":"<div class=\"skill-group\"><h4>Quantitative analysis</h4><div class=\"badges\"><div class=\"badge\">SPSS (advanced)</div><div class=\"badge\">STATA (basic)</div><div class=\"badge\">R / RStudio (basic)</div></div></div><div class=\"skill-group\"><h4>Qualitative research</h4><div class=\"badges\"><div class=\"badge\">MAXQDA (advanced)</div><div class=\"badge\">Qualitative interviews (advanced)</div><div class=\"badge\">Text analysis</div></div></div><div class=\"skill-group\"><h4>Data collection and research</h4><div class=\"badges\"><div class=\"badge\">LimeSurvey (basic)</div><div class=\"badge\">Questionnaire design (basic)</div><div class=\"badge\">Data validation (advanced)</div><div class=\"badge\">Systematic literature review</div></div></div><div class=\"skill-group\"><h4>Office applications</h4><div class=\"badges\"><div class=\"badge\">Word processing (very good)</div><div class=\"badge\">Spreadsheets (very good)</div><div class=\"badge\">Presentations (very good)</div></div></div><div class=\"skill-group\"><h4>AI tools</h4><div class=\"badges\"><div class=\"badge\">Research and writing (advanced)</div></div></div><div class=\"skill-group\"><h4>Media design</h4><div class=\"badges\"><div class=\"badge\">Canva (basic, for presentations)</div><div class=\"badge\">CapCut (basic)</div><div class=\"badge\">Photography, filming and video editing (good)</div></div></div>",
     "p1-title":"Grocery Shopping under Simulated Age-Related Changes", "p1-meta":"Empathic design study · University of Applied Sciences Wiener Neustadt (HWN Wieselburg) · 10/2026 – Present",
     "p1-list":"<li>Own contribution: observed and documented a person wearing an age simulation suit</li>",
     "p2-title":"Animal Crossing: Play Motives, Well-Being and Stress Management", "p2-meta":"Qualitative study · University of Applied Sciences Wiener Neustadt (HWN Wieselburg) · 09/2026 – Present",
