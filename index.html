@@ -3,12 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}if(!t)t='dark';document.documentElement.dataset.theme=t})();</script>
 <title>Josef Iebed — Portfolio</title>
 <style>
   :root{
     --bg:#0f172a; --bg2:#111827; --card:#1e293b; --accent:#38bdf8; --accent2:#a78bfa;
-    --text:#e2e8f0; --muted:#94a3b8; --radius:16px; --danger:#f87171; --ok:#4ade80; --warn:#fbbf24;
+    --text:#e2e8f0; --muted:#94a3b8; --radius:16px; --danger:#f87171; --ok:#4ade80; --warn:#fbbf24; --panel:rgba(15,23,42,0.92); --panel2:rgba(15,23,42,0.96);
   }
+  [data-theme=light]{ --bg:#f4f6fa; --bg2:#e8edf4; --card:#ffffff; --accent:#0369a1; --accent2:#6d28d9; --text:#1e293b; --muted:#506072; --danger:#b91c1c; --ok:#15803d; --warn:#b45309; --panel:rgba(255,255,255,0.94); --panel2:rgba(255,255,255,0.97); }
+  [data-theme=light] .card{ box-shadow:0 2px 10px rgba(30,41,59,0.08); }
+  [data-theme=light] .avatar{ box-shadow:0 3px 10px rgba(30,41,59,0.2); }
+  .theme-btn{ background:rgba(148,163,184,0.15); border:1px solid rgba(148,163,184,0.35); color:var(--text); padding:8px 12px; border-radius:10px; font-size:.78rem; cursor:pointer; font-weight:600; white-space:nowrap; }
+  .legal-link{ color:var(--accent); }
   *{box-sizing:border-box; margin:0; padding:0;}
   body{
     font-family:'Segoe UI', system-ui, -apple-system, sans-serif;
@@ -22,7 +28,7 @@
   .sidebar-overlay{ display:none; position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:25; }
   .sidebar-overlay.show{ display:block; }
   .sidebar{
-    width:230px; background:rgba(15,23,42,0.92); backdrop-filter:blur(10px);
+    width:230px; background:var(--panel); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
     border-right:1px solid rgba(148,163,184,0.15); padding:28px 18px;
     display:flex; flex-direction:column; position:fixed; top:0; left:0; bottom:0; z-index:30; overflow-y:auto;
   }
@@ -77,12 +83,12 @@
 
   .topright-actions{
     position:fixed; top:20px; right:20px; z-index:40; display:flex; flex-direction:row; align-items:center; gap:8px;
-    background:rgba(15,23,42,0.92); backdrop-filter:blur(10px); padding:8px 10px; border-radius:12px; border:1px solid rgba(148,163,184,0.15);
+    background:var(--panel); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); padding:8px 10px; border-radius:12px; border:1px solid rgba(148,163,184,0.15);
   }
-  @media (max-width:800px){
+  @media (max-width:700px){
     .mobile-topbar{
       display:flex; align-items:center; gap:10px; position:fixed; top:0; left:0; right:0; height:56px;
-      background:rgba(15,23,42,0.96); backdrop-filter:blur(10px); z-index:15; padding:0 12px;
+      background:var(--panel2); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); z-index:15; padding:0 12px;
       border-bottom:1px solid rgba(148,163,184,0.15);
     }
     .mobile-brand{font-weight:700; font-size:1rem;}
@@ -97,6 +103,16 @@
     .topright-actions{ top:64px; right:10px; padding:7px 8px; gap:6px; }
     .topright-actions .share-btn{padding:7px 9px; font-size:.74rem;}
   }
+
+@media (pointer:coarse){.theme-btn,.share-btn,.lang-btn,.view-btn,.nav-btn,.hamburger-btn,.tog,.btn,.button,summary{min-height:44px}.hamburger-btn{min-width:44px}input[type=checkbox]{width:24px;height:24px}}
+html{-webkit-text-size-adjust:100%}button,a,select,input{touch-action:manipulation}
+
+@media (min-width:1100px){
+  main{max-width:1320px;}
+  .cards-container{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:18px;align-items:start}
+  .cards-container .card{margin-bottom:0}
+  #downloads, #kontakt{max-width:980px}
+}
 </style>
 </head>
 <body>
@@ -108,6 +124,7 @@
 </div>
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
 <div class="topright-actions">
+  <button class="theme-btn" type="button" data-theme-toggle></button>
   <button class="share-btn" id="shareBtn">🔗 <span id="shareLabel">Profil teilen</span></button>
     </div>
 <div class="app">
@@ -137,7 +154,7 @@
     <p class="lead" data-editable id="f-profil">Masterstudent in Consumer Research &amp; Data Driven Marketing mit Bachelorabschluss in Soziologie (Universität Wien) und erster Forschungspraxis in Datenvalidierung und Textanalyse bei L&amp;R Sozialforschung. Kenntnisse in SPSS, STATA, RStudio, MAXQDA und LimeSurvey. Erfahrung in sorgfältiger Dokumentation und im Umgang mit unterschiedlichen Zielgruppen.</p>
     <div class="card">
       <h3 id="fokusHeading">Aktueller Fokus</h3>
-      <p class="lead" data-editable id="f-fokus" style="margin-top:8px;">Masterstudium <strong style="color:var(--text)">Consumer Research &amp; Data Driven Marketing (M.A.)</strong> an der FH Wiener Neustadt (Campus Wieselburg) seit 09/2026. Ziel ist der Berufseinstieg an der Schnittstelle von Research, Datenanalyse und Marketing, um Kundenbedürfnisse zu untersuchen und Erkenntnisse für die Praxis aufzubereiten.</p>
+      <p class="lead" data-editable id="f-fokus" style="margin-top:8px;">Masterstudium <strong style="color:var(--text)">Consumer Research &amp; Data Driven Marketing (M.A.)</strong> an der Hochschule Wiener Neustadt (HWN), Standort Wieselburg, seit 09/2026. Ziel ist der Berufseinstieg an der Schnittstelle von Research, Datenanalyse und Marketing, um Kundenbedürfnisse zu untersuchen und Erkenntnisse für die Praxis aufzubereiten.</p>
     </div>
     <div class="contact-row">
       <div class="chip">📍 <span data-editable id="f-ort">Wien, Österreich</span></div>
@@ -203,7 +220,7 @@
     <div class="cards-container" id="ausbildung-cards">
     <div class="card">
       <h3 data-editable id="a1-title">Consumer Research und Data Driven Marketing, M.A.</h3>
-      <div class="meta" data-editable id="a1-meta">FH Wiener Neustadt, Campus Wieselburg · 09/2026 – Aktuell</div>
+      <div class="meta" data-editable id="a1-meta">Hochschule Wiener Neustadt (HWN), Standort Wieselburg · 09/2026 – Aktuell</div>
       <ul data-editable id="a1-list">
         <li>Marketing &amp; Data Driven Management: strategisches und digitales Marketing, CRM</li>
         <li>Methodenkompetenz: quantitative/qualitative Forschungsmethoden, Data Science</li>
@@ -214,7 +231,7 @@
     <div class="card">
       <h3 data-editable id="a2-title">Soziologie, Master of Arts</h3>
       <div class="meta" data-editable id="a2-meta">Universität Wien · 03/2026 – 08/2026 · Wien</div>
-      <p class="lead" data-editable id="a2-desc" style="margin-bottom:8px;">Vorbereitender Übergang zum Master „Consumer Research &amp; Data Driven Marketing“ an der FH Wiener Neustadt.</p>
+      <p class="lead" data-editable id="a2-desc" style="margin-bottom:8px;">Vorbereitender Übergang zum Master „Consumer Research &amp; Data Driven Marketing“ an der Hochschule Wiener Neustadt (HWN).</p>
       <ul data-editable id="a2-list">
         <li>Wissenschaftliches Schreiben</li>
         <li>Quantitative und qualitative Methoden der empirischen Sozialforschung</li>
@@ -244,14 +261,14 @@
     <div class="cards-container" id="projekte-cards">
     <div class="card">
       <h3 data-editable id="p1-title">Lebensmitteleinkauf unter simulierten altersbedingten Veränderungen</h3>
-      <div class="meta" data-editable id="p1-meta">Empathic-Design-Studie · FH Wiener Neustadt · 10/2026 – Aktuell</div>
+      <div class="meta" data-editable id="p1-meta">Empathic-Design-Studie · University of Applied Sciences Wiener Neustadt (HWN) · 10/2026 – Aktuell</div>
       <ul data-editable id="p1-list">
         <li>Eigener Beitrag: Beobachtung und Dokumentation einer Person im Alterssimulationsanzug</li>
       </ul>
     </div>
     <div class="card">
       <h3 data-editable id="p2-title">Animal Crossing: Spielmotive, Wohlbefinden und Stressbewältigung</h3>
-      <div class="meta" data-editable id="p2-meta">Qualitative Studie · FH Wiener Neustadt · 09/2026 – Aktuell</div>
+      <div class="meta" data-editable id="p2-meta">Qualitative Studie · University of Applied Sciences Wiener Neustadt (HWN) · 09/2026 – Aktuell</div>
       <ul data-editable id="p2-list">
         <li>Qualitative Studie zu den Spielmotiven junger Erwachsener</li>
         <li>Eigener Beitrag: Durchführung eines Interviews</li>
@@ -387,7 +404,9 @@
         <div class="chip">📧 <span data-editable id="k-mail">josef.iebed@gmail.com</span></div>
         <div class="chip">📞 <span data-editable id="k-tel">+43 660 7560649</span></div>
         <div class="chip">📍 <span data-editable id="k-ort">Wien, Österreich</span></div>
-        <div class="chip">🔗 <a href="https://linkedin.com/in/josefiebedba" target="_blank">LinkedIn</a></div>
+        <div class="chip">🔗 <a href="https://linkedin.com/in/josefiebedba" target="_blank" rel="noopener">LinkedIn</a></div>
+        <div class="chip">📷 <a href="https://www.instagram.com/jiba.socialmindset99/" target="_blank" rel="noopener">jiba.socialmindset99</a></div>
+        <div class="chip">⚖️ <a href="impressum.html">Impressum</a></div>
       </div>
     </div>
   </section>
@@ -405,7 +424,7 @@
     const CONTENT_EN = {
     "f-name":"Josef Iebed",
     "f-profil":"Master's student in Consumer Research &amp; Data Driven Marketing with a bachelor's degree in Sociology (University of Vienna) and first research experience in data validation and text analysis at L&amp;R Sozialforschung. Skills in SPSS, STATA, RStudio, MAXQDA, and LimeSurvey. Experienced in careful documentation and in working with diverse target groups.",
-    "f-fokus":"Master's program <strong style=\"color:var(--text)\">Consumer Research &amp; Data Driven Marketing (M.A.)</strong> at FH Wiener Neustadt (Campus Wieselburg) since 09/2026. Aiming for a career start at the intersection of research, data analysis, and marketing, investigating customer needs and turning insights into practice.",
+    "f-fokus":"Master's program <strong style=\"color:var(--text)\">Consumer Research &amp; Data Driven Marketing (M.A.)</strong> at University of Applied Sciences Wiener Neustadt (HWN), Wieselburg campus, since 09/2026. Aiming for a career start at the intersection of research, data analysis, and marketing, investigating customer needs and turning insights into practice.",
     "f-ort":"Vienna, Austria", "f-mail":"josef.iebed@gmail.com", "f-tel":"+43 660 7560649", "f-linkedin":"linkedin.com/in/josefiebedba",
     "e1-title":"Research Assistant Intern — L&amp;R Sozialforschung GmbH", "e1-meta":"07/2026 · Vienna",
     "e1-desc":"Contributed to the research project \"Systematic Analysis of Workshop Reports of the 'Digital Überall' Initiative.\"",
@@ -416,10 +435,10 @@
     "e3-list":"<li>Accompanied prospective students to Sociology program courses</li><li>Provided informational materials upon request</li><li>Moderated Q&amp;A sessions on admission procedures, course content/structure, and personal experiences in the program</li>",
     "e4-title":"Temporary Election Staff (Elections Department) — Magistrat der Stadt Wien", "e4-meta":"08/2020 – 10/2020 · Vienna",
     "e4-list":"<li>Processed postal vote applications</li><li>Alphabetically sorted and dispatched ballot papers</li><li>Processed voting card applications</li><li>Counted returned ballot papers</li>",
-    "a1-title":"Consumer Research and Data Driven Marketing, M.A.", "a1-meta":"FH Wiener Neustadt, Campus Wieselburg · 09/2026 – Present",
+    "a1-title":"Consumer Research and Data Driven Marketing, M.A.", "a1-meta":"University of Applied Sciences Wiener Neustadt (HWN), Wieselburg campus · 09/2026 – Present",
     "a1-list":"<li>Marketing &amp; Data Driven Management: strategic and digital marketing, CRM</li><li>Methodological competence: quantitative/qualitative research methods, data science</li><li>Consumer psychology and behavior: behavioral economics, neuropsychology</li><li>Social skills, project management, and academic work (incl. master's thesis)</li>",
     "a2-title":"Sociology, Master of Arts", "a2-meta":"University of Vienna · 03/2026 – 08/2026 · Vienna",
-    "a2-desc":"Preparatory transition to the Master's program \"Consumer Research &amp; Data Driven Marketing\" at FH Wiener Neustadt.",
+    "a2-desc":"Preparatory transition to the Master's program \"Consumer Research &amp; Data Driven Marketing\" at University of Applied Sciences Wiener Neustadt (HWN).",
     "a2-list":"<li>Academic writing</li><li>Quantitative and qualitative methods of empirical social research</li><li>STATA and RStudio</li>",
     "a3-title":"Sociology, Bachelor of Arts", "a3-meta":"University of Vienna · 10/2018 – 02/2026 · Vienna",
     "a3-list":"<li>Core subjects: theories, methods, and fields of application of sociology</li><li>Supplementary subjects: public law, economics, business administration, communicative and social skills</li><li>Focus areas: sociology of consumption, urban sociology, methods and statistics, social inequality, interpretive qualitative social research</li><li>Extension curriculum (minor): history</li><li>Bachelor's thesis: \"Social Inequality in Access to Adaptive Controllers: Gaming for People with Physical Disabilities\" (systematic literature review + mixed methods; grade: good)</li>",
@@ -438,9 +457,9 @@
     "eh2-list":"<li>Participated in and helped organize the \"Fasten Teilen Helfen\" project</li><li>Co-organized various activities (winter/summer trips, short and long trips, day trips, social gatherings, events)</li>",
     "s-lang":"<div class=\"badge\">German — Native</div><div class=\"badge\">Arabic — Native</div><div class=\"badge\">English — B2</div><div class=\"badge\">French — B1</div>",
     "s-it":"<div class=\"badge\">Quantitative analysis: SPSS (advanced)</div><div class=\"badge\">STATA (basic)</div><div class=\"badge\">R / RStudio (basic)</div><div class=\"badge\">Qualitative research: MAXQDA (advanced)</div><div class=\"badge\">Qualitative interviews (advanced)</div><div class=\"badge\">Text analysis</div><div class=\"badge\">LimeSurvey (basic)</div><div class=\"badge\">Questionnaire design (basic)</div><div class=\"badge\">Data validation (advanced)</div><div class=\"badge\">Systematic literature review</div><div class=\"badge\">Word processing, spreadsheets &amp; presentations (very good)</div><div class=\"badge\">AI tools for research and writing (advanced)</div><div class=\"badge\">Canva (basic, for presentations)</div><div class=\"badge\">CapCut (basic)</div><div class=\"badge\">Photography, filming and video editing (good)</div>",
-    "p1-title":"Grocery Shopping under Simulated Age-Related Changes", "p1-meta":"Empathic design study · FH Wiener Neustadt · 10/2026 – Present",
+    "p1-title":"Grocery Shopping under Simulated Age-Related Changes", "p1-meta":"Empathic design study · University of Applied Sciences Wiener Neustadt (HWN) · 10/2026 – Present",
     "p1-list":"<li>Own contribution: observed and documented a person wearing an age simulation suit</li>",
-    "p2-title":"Animal Crossing: Play Motives, Well-Being and Stress Management", "p2-meta":"Qualitative study · FH Wiener Neustadt · 09/2026 – Present",
+    "p2-title":"Animal Crossing: Play Motives, Well-Being and Stress Management", "p2-meta":"Qualitative study · University of Applied Sciences Wiener Neustadt (HWN) · 09/2026 – Present",
     "p2-list":"<li>Qualitative study on the play motives of young adults</li><li>Own contribution: conducted an interview</li>",
     "p3-title":"Visual Communication of the Impact of Consumption on the Ocean", "p3-meta":"Research internship · University of Vienna · 10/2024 – 07/2025",
     "p3-list":"<li>Analysis of Greenpeace Austria's visual language</li><li>Method: segment analysis according to Breckner</li>",
@@ -592,5 +611,10 @@
   loadStaticFiles();
 </script>
 
+<script>
+(function(){var r=document.documentElement;document.querySelectorAll('[data-theme-toggle]').forEach(function(b){
+function show(){var d=r.dataset.theme==='dark';b.textContent=d?'🌙 Dunkel':'😮‍💨 Hell';b.setAttribute('aria-label',d?'Dunkler Modus aktiv, zu hell wechseln':'Heller Modus aktiv, zu dunkel wechseln');b.setAttribute('aria-pressed',String(d))}
+b.addEventListener('click',function(){r.dataset.theme=r.dataset.theme==='dark'?'light':'dark';try{localStorage.setItem('theme',r.dataset.theme)}catch(e){}show()});show()})})();
+</script>
 </body>
 </html>

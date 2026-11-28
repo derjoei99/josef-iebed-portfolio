@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Impressum · Josef Iebed – Portfolio</title>
+<meta name="robots" content="noindex">
+<script>(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}if(!t)t='dark';document.documentElement.dataset.theme=t})();</script>
+<style>
+:root{--bg:#f6f7f5;--card:#fff;--ink:#1d2730;--muted:#5b6670;--line:#dfe4e8;--head:#344857;--h:#344857;--link:#1F4E9E}
+[data-theme=dark]{--bg:#11181e;--card:#19232b;--ink:#e6ecf0;--muted:#a7b3bc;--line:#2c3944;--head:#0b1116;--h:#d3e2ee;--link:#8db8ff}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;transition:background .2s,color .2s}
+a{color:var(--link)}
+.top{background:var(--head);color:#fff}
+.top .in{max-width:1040px;margin:0 auto;padding:0 20px;height:56px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.top a.home{color:#fff;text-decoration:none;font-weight:650}
+.tog{font:inherit;font-size:14px;color:#fff;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:6px 14px;cursor:pointer;white-space:nowrap}
+.tog:hover{background:rgba(255,255,255,.2)}
+main{max-width:720px;margin:0 auto;padding:48px 20px 24px}
+h1{font-size:32px;margin:0 0 6px;color:var(--h)}
+h2{font-size:20px;margin:0 0 4px;color:var(--h)}
+.en{color:var(--muted);font-size:14px;margin:0 0 20px}
+dl{display:grid;grid-template-columns:170px 1fr;gap:10px 20px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px;margin:0 0 24px}
+dt{font-weight:600;color:var(--h)}dd{margin:0}
+p{color:var(--muted)}
+footer{border-top:1px solid var(--line);margin-top:20px}
+footer .in{max-width:1040px;margin:0 auto;padding:22px 20px 36px;color:var(--muted);font-size:14px}
+:focus-visible{outline:3px solid #f0b400;outline-offset:2px}
+@media (max-width:640px){dl{grid-template-columns:1fr;gap:2px}dd{margin-bottom:10px}h1{font-size:28px}}
+
+@media (pointer:coarse){.theme-btn,.share-btn,.lang-btn,.view-btn,.nav-btn,.hamburger-btn,.tog,.btn,.button,summary{min-height:44px}.hamburger-btn{min-width:44px}input[type=checkbox]{width:24px;height:24px}}
+html{-webkit-text-size-adjust:100%}button,a,select,input{touch-action:manipulation}
+</style>
+</head>
+<body>
+<header class="top"><div class="in"><a class="home" href="./">Josef Iebed – Portfolio</a><button class="tog" id="tog" type="button"></button></div></header>
+<main>
+  <h1>Impressum</h1>
+  <h2>Offenlegung gemäß § 25 Abs. 5 Mediengesetz</h2>
+  <p class="en">Legal notice according to the Austrian Media Act</p>
+  <dl>
+    <dt>Medieninhaber</dt><dd>Josef Iebed</dd>
+    <dt>Auch bekannt als</dt><dd><a href="https://www.instagram.com/jiba.socialmindset99/" rel="noopener" target="_blank">jiba.socialmindset99</a> (Instagram)</dd>
+    <dt>Wohnort</dt><dd>Wien, Österreich</dd>
+    <dt>Kontakt</dt><dd><a href="mailto:josef.iebed@gmail.com">josef.iebed@gmail.com</a></dd>
+    <dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/josefiebedba" rel="noopener" target="_blank">linkedin.com/in/josefiebedba</a></dd>
+    <dt>Inhalt der Website</dt><dd>Private Website ohne kommerzielle Zwecke. Sie stellt den beruflichen Werdegang und eigene Projekte vor.</dd>
+  </dl>
+  <p>Die Website wird über GitHub Pages (GitHub, Inc.) bereitgestellt.</p>
+  <p><a href="./">← Zurück</a></p>
+</main>
+<footer><div class="in">Josef Iebed – Portfolio · Impressum</div></footer>
+<script>
+(function(){var b=document.getElementById('tog'),r=document.documentElement;
+function show(){var d=r.dataset.theme==='dark';b.textContent=d?'🌙 Dunkel':'😮‍💨 Hell';b.setAttribute('aria-label',d?'Dunkler Modus aktiv, zu hell wechseln':'Heller Modus aktiv, zu dunkel wechseln');b.setAttribute('aria-pressed',String(d))}
+b.addEventListener('click',function(){r.dataset.theme=r.dataset.theme==='dark'?'light':'dark';try{localStorage.setItem('theme',r.dataset.theme)}catch(e){}show()});show()})();
+</script>
+</body>
+</html>
