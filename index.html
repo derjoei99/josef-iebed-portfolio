@@ -79,7 +79,7 @@
   .dl-list a:hover{text-decoration:underline;}
   .badges{display:flex; flex-wrap:wrap; gap:10px; margin-top:8px;}
   .badge{background:rgba(56,189,248,0.1); color:var(--accent); padding:7px 14px; border-radius:10px; font-size:.85rem; font-weight:500; border:1px solid rgba(56,189,248,0.25);}
-  .grid2b{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  .grid2b{display:grid; grid-template-columns:1fr; gap:18px;}
 
   .topright-actions{
     position:fixed; top:20px; right:20px; z-index:40; display:flex; flex-direction:row; align-items:center; gap:8px;
@@ -109,7 +109,7 @@ html{-webkit-text-size-adjust:100%}button,a,select,input{touch-action:manipulati
 
 @media (min-width:1100px){
   main{max-width:1320px;}
-  .cards-container{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:18px;align-items:start}
+  .cards-container{display:flex;flex-direction:column;gap:18px}
   .cards-container .card{margin-bottom:0}
   #downloads, #kontakt{max-width:980px}
 }
@@ -131,7 +131,7 @@ html{-webkit-text-size-adjust:100%}button,a,select,input{touch-action:manipulati
 <div class="sidebar" id="sidebarEl">
   <img class="avatar" id="avatarImg" src="assets/profile.jpg" alt="Josef Iebed">
   <div class="brand">Josef <span>Iebed</span></div>
-  <div class="brand-sub" id="brandSub">Research, Datenanalyse &amp; datenbasiertes Marketing</div>
+  <div class="brand-sub" id="brandSub">Juniorposition in Research, Datenanalyse und datenbasiertem Marketing</div>
   <button class="lang-btn" id="langBtn">🌐 <span class="label">English</span></button>
   <button class="view-btn" id="viewBtn">☰ <span class="label">Kompaktansicht</span></button>
   <nav>
@@ -476,12 +476,12 @@ html{-webkit-text-size-adjust:100%}button,a,select,input{touch-action:manipulati
   const UI = {
     de: {
       navProfil:'Profil', navErfahrung:'Berufserfahrung', navAusbildung:'Ausbildung', navProjekte:'Projekte', navWeiterbildung:'Weiterbildung', navEhrenamt:'Ehrenamt', navSkills:'Sprachen & Skills', navDownloads:'Downloads', navKontakt:'Kontakt',
-      ptProjekte:'Projekte', ptDownloads:'Downloads', brandSub:'Research, Datenanalyse & datenbasiertes Marketing', viewCompact:'Kompaktansicht', viewFull:'Ausführliche Ansicht', dlCv:'Lebenslauf', dlOther:'Weitere Dokumente', dlEmpty:'Derzeit keine Dateien.',
+      ptProjekte:'Projekte', ptDownloads:'Downloads', brandSub:'Juniorposition in Research, Datenanalyse und datenbasiertem Marketing', viewCompact:'Kompaktansicht', viewFull:'Ausführliche Ansicht', dlCv:'Lebenslauf', dlOther:'Weitere Dokumente', dlEmpty:'Derzeit keine Dateien.',
       ptErfahrung:'Berufserfahrung', ptAusbildung:'Ausbildung', ptWeiterbildung:'Weiterbildung und Workshops', ptEhrenamt:'Ehrenamt', ptSkills:'Sprachen & Skills', ptKontakt:'Kontakt', fokusHeading:'Aktueller Fokus', sucheHeading:'Wonach ich suche', impLink:'Impressum', langHeading:'Sprachen', itHeading:'Methoden- und IT-Kenntnisse', shareLabel:'Profil teilen', sharePrompt:'Link zum Profil kopieren:', toastShare:'Profil-Link kopiert ✓'
     },
     en: {
       navProfil:'Profile', navErfahrung:'Experience', navAusbildung:'Education', navProjekte:'Projects', navWeiterbildung:'Training', navEhrenamt:'Volunteering', navSkills:'Languages & Skills', navDownloads:'Downloads', navKontakt:'Contact',
-      ptProjekte:'Projects', ptDownloads:'Downloads', brandSub:'Research, Data Analysis & Data-Driven Marketing', viewCompact:'Compact view', viewFull:'Detailed view', dlCv:'CV', dlOther:'Other documents', dlEmpty:'No files yet.',
+      ptProjekte:'Projects', ptDownloads:'Downloads', brandSub:'Junior position in research, data analysis, and data-driven marketing', viewCompact:'Compact view', viewFull:'Detailed view', dlCv:'CV', dlOther:'Other documents', dlEmpty:'No files yet.',
       ptErfahrung:'Work Experience', ptAusbildung:'Education', ptWeiterbildung:'Further Training & Workshops', ptEhrenamt:'Volunteering', ptSkills:'Languages & Skills', ptKontakt:'Contact', fokusHeading:'Current Focus', sucheHeading:'What I am looking for', impLink:'Legal notice (Impressum)', langHeading:'Languages', itHeading:'Methods & IT Skills', shareLabel:'Share profile', sharePrompt:'Copy the profile link:', toastShare:'Profile link copied ✓'
     }
   };
@@ -583,7 +583,7 @@ html{-webkit-text-size-adjust:100%}button,a,select,input{touch-action:manipulati
         const li = document.createElement('li');
         const link = document.createElement('a');
         link.href = file.path;
-        link.textContent = '📄 ' + file.name;
+        link.textContent = '📄 ' + file.name.replace(/\.pdf$/i, '');
         link.setAttribute('download', file.name);
         li.appendChild(link);
         list.appendChild(li);
@@ -618,7 +618,8 @@ html{-webkit-text-size-adjust:100%}button,a,select,input{touch-action:manipulati
 
 <script>
 (function(){var r=document.documentElement;document.querySelectorAll('[data-theme-toggle]').forEach(function(b){
-function show(){var d=r.dataset.theme==='dark';b.textContent=d?'🌙 Dunkel':'😮‍💨 Hell';b.setAttribute('aria-label',d?'Dunkler Modus aktiv, zu hell wechseln':'Heller Modus aktiv, zu dunkel wechseln');b.setAttribute('aria-pressed',String(d))}
+function show(){var d=r.dataset.theme==='dark',en=(r.lang||'de').slice(0,2)==='en';b.textContent=d?(en?'🌙 Dark':'🌙 Dunkel'):(en?'😮‍💨 Light':'😮‍💨 Hell');b.setAttribute('aria-label',en?(d?'Dark mode active, switch to light':'Light mode active, switch to dark'):(d?'Dunkler Modus aktiv, zu hell wechseln':'Heller Modus aktiv, zu dunkel wechseln'));b.setAttribute('aria-pressed',String(d))}
+new MutationObserver(show).observe(r,{attributes:true,attributeFilter:['lang']});
 b.addEventListener('click',function(){r.dataset.theme=r.dataset.theme==='dark'?'light':'dark';try{localStorage.setItem('theme',r.dataset.theme)}catch(e){}show()});show()})})();
 </script>
 </body>
