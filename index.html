@@ -81,6 +81,12 @@
   .badges{display:flex; flex-wrap:wrap; gap:10px; margin-top:8px;}
   .skill-group{margin-top:14px;}
   .skill-group h4{font-size:.8rem; font-weight:600; color:var(--muted); letter-spacing:.3px;}
+  .ov-title{margin:26px 0 12px; font-size:1.05rem;}
+  .ov-item{background:var(--card); border-radius:var(--radius); padding:14px 20px; margin-bottom:10px; border:1px solid rgba(148,163,184,0.12);}
+  .ov-item a{color:var(--accent); font-weight:600; cursor:pointer; text-decoration:none;}
+  .ov-item ul{list-style:none; margin-top:6px;}
+  .ov-item li{font-size:.88rem; color:var(--muted); padding:2px 0;}
+  .ov-item li b{color:var(--text); font-weight:500;}
   .badge{background:rgba(56,189,248,0.1); color:var(--accent); padding:7px 14px; border-radius:10px; font-size:.85rem; font-weight:500; border:1px solid rgba(56,189,248,0.25);}
   .grid2b{display:grid; grid-template-columns:1fr; gap:18px;}
 
@@ -169,6 +175,7 @@ html{-webkit-text-size-adjust:100%}button,a,select,input{touch-action:manipulati
       <div class="chip">📞 <span data-editable id="f-tel">+43 660 7560649</span></div>
       <div class="chip">🔗 <a href="https://linkedin.com/in/josefiebedba" target="_blank" data-editable id="f-linkedin">linkedin.com/in/josefiebedba</a></div>
     </div>
+    <div id="overview"></div>
   </section>
 
   <section class="page" id="erfahrung">
@@ -504,6 +511,41 @@ html{-webkit-text-size-adjust:100%}button,a,select,input{touch-action:manipulati
   document.getElementById('hamburgerBtn')?.addEventListener('click', () => { sidebar?.classList.add('mobile-open'); sidebarOverlay?.classList.add('show'); });
   sidebarOverlay?.addEventListener('click', closeMobileMenu);
 
+  function renderOverview(){
+    const box = document.getElementById('overview');
+    if(!box) return;
+    box.replaceChildren();
+    const h = document.createElement('h3');
+    h.className = 'ov-title';
+    h.textContent = currentLang === 'de' ? 'Gesamtübersicht' : 'Overview';
+    box.appendChild(h);
+    ['erfahrung','ausbildung','projekte','weiterbildung','ehrenamt'].forEach(id => {
+      const page = document.getElementById(id);
+      const btn = document.querySelector('.nav-btn[data-page="' + id + '"]');
+      if(!page || !btn) return;
+      const item = document.createElement('div');
+      item.className = 'ov-item';
+      const a = document.createElement('a');
+      a.textContent = btn.textContent.trim().replace(/^\S+\s+(?=\S)/u, '') || id;
+      a.addEventListener('click', () => btn.click());
+      item.appendChild(a);
+      const ul = document.createElement('ul');
+      page.querySelectorAll('.card').forEach(card => {
+        const t = card.querySelector('h3');
+        if(!t) return;
+        const m = (card.querySelector('.meta')?.textContent || '').match(/\d{2}\/\d{4}(\s*–\s*[^·]+)?/);
+        const li = document.createElement('li');
+        const b = document.createElement('b');
+        b.textContent = t.textContent.trim();
+        li.appendChild(b);
+        if(m) li.append(' · ' + m[0].trim());
+        ul.appendChild(li);
+      });
+      item.appendChild(ul);
+      box.appendChild(item);
+    });
+  }
+
   function applyContent(lang){
     const dict = lang === 'de' ? CONTENT_DE : CONTENT_EN;
     Object.entries(dict).forEach(([id, value]) => {
@@ -517,6 +559,7 @@ html{-webkit-text-size-adjust:100%}button,a,select,input{touch-action:manipulati
       const value = (linkedin.textContent || '').trim().replace(/^https?:\/\//, '');
       linkedin.href = 'https://' + value;
     }
+    renderOverview();
   }
 
   function applyUIStrings(lang){
