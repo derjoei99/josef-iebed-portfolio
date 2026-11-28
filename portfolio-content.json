@@ -1,7 +1,6 @@
 {
   "version": 2,
   "de": {
-    "s-it": "\n          <div class=\"badge\">STATA</div>\n          <div class=\"badge\">R / RStudio</div>\n          <div class=\"badge\">SPSS</div>\n          <div class=\"badge\">MAXQDA</div>\n          <div class=\"badge\">LimeSurvey</div>\n          <div class=\"badge\">MS Office</div>\n        ",
     "f-ort": "Wien, Österreich",
     "f-tel": "+43 660 7560649",
     "k-ort": "Wien, Österreich",
@@ -58,7 +57,6 @@
     "eh2-title": "Teilnehmer und ehrenamtlicher Helfer — Muslimische Jugend Österreich"
   },
   "en": {
-    "s-it": "<div class=\"badge\">STATA</div><div class=\"badge\">R / RStudio</div><div class=\"badge\">SPSS</div><div class=\"badge\">MAXQDA</div><div class=\"badge\">LimeSurvey</div><div class=\"badge\">MS Office</div>",
     "f-ort": "Vienna, Austria",
     "f-tel": "+43 660 7560649",
     "k-ort": "Vienna, Austria",
